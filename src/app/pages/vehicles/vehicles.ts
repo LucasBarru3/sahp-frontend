@@ -13,6 +13,7 @@ import { LoaderComponent } from '../../components/loader/loader';
 })
 export class VehiclesComponent implements OnInit {
   editingVehicle: any = null;
+  addingVehicle: any = null;
   vehicles: any[] = [];
   classId!: number;
   imageOk = true;
@@ -27,6 +28,16 @@ export class VehiclesComponent implements OnInit {
       ...vehicle,
       image_url: vehicle.image_url || '',  // Si es null o undefined, ponemos ''
       follow_class: vehicle.follow_class || ''
+    };
+  }
+
+  startAdd() {
+    this.addingVehicle = {
+      name: '',
+      model: '',
+      image_url: '',
+      class_id: this.classId,
+      follow_class: ''
     };
   }
 
@@ -67,6 +78,19 @@ export class VehiclesComponent implements OnInit {
       follow_class: this.editingVehicle.follow_class
     }).subscribe(() => {
       this.editingVehicle = null;
+      this.loadVehicles();
+    });
+  }
+
+  addVehicle() {
+    this.vehicleService.create( {
+      name: this.addingVehicle.name,
+      model: this.addingVehicle.model,
+      image_url: this.addingVehicle.image_url,
+      class_id: this.addingVehicle.class_id,
+      follow_class: this.addingVehicle.follow_class
+    }).subscribe(() => {
+      this.addingVehicle = null;
       this.loadVehicles();
     });
   }

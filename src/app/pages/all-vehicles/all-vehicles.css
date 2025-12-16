@@ -2,6 +2,7 @@
   font-family: 'Orbitron', sans-serif;
   color: #3b3d8a;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .vehicles-grid {
@@ -231,4 +232,33 @@
 .add-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.filters-bar {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filters-bar input,
+.filters-bar select {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  background: #bce7fd;
+  font-weight: bold;
+  color: #3b3d8a;
+  outline: none;
+  min-width: 250px;
+}
+
+.filters-bar input::placeholder {
+  color: #3b3d8a;
+  opacity: 0.7;
+}
+
+.filters-bar select {
+  cursor: pointer;
 }

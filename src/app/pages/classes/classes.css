@@ -10,7 +10,6 @@
 /* ===================== */
 /* HERO / PORTADA */
 .hero {
-  background-image: url('https://i.imgur.com/wqt1qub.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
   color: #007cbf;
@@ -51,7 +50,6 @@
 /* ===================== */
 /* SECCIÓN DE CLASES */
 .classes-section {
-  background-color: #f4f4f4;
   padding: 50px 20px;
   text-align: center;
 }
@@ -114,6 +112,9 @@ footer {
   padding: 20px;
   text-align: center;
   margin-top: 50px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 /* ===================== */

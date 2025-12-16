@@ -1,15 +1,38 @@
 <h2 class="page-title">Todos los vehículos</h2>
 
+<div class="filters-bar">
+
+  <input
+    type="text"
+    placeholder="Buscar por nombre o modelo..."
+    [(ngModel)]="searchText"
+  />
+
+  <select [(ngModel)]="selectedClass">
+    <option value="">Todas las clases</option>
+    <option value="1">Clase B</option>
+    <option value="2">Clase A</option>
+    <option value="3">Clase S+</option>
+  </select>
+
+  <select [(ngModel)]="sortOrder">
+    <option value="az">Nombre A–Z</option>
+    <option value="za">Nombre Z–A</option>
+  </select>
+
+</div>
+
+
 <div *ngIf="loading" class="loader-container">
   <app-loader></app-loader>
 </div>
 
 <div class="vehicles-list">
-  <div *ngFor="let v of vehicles" class="vehicle-card">
+  <div *ngFor="let v of filteredVehicles" class="vehicle-card">
     <div class="img-container">
-      <span class="class-badge">
+      <a routerLink="/vehicles/{{v.class_id}}" routerLinkActive="active"><span class="class-badge">
         {{ v.class_id === 1 ? 'B' : v.class_id === 2 ? 'A' : 'S+' }}
-      </span>
+      </span></a>
       <span class="class-copy">
         <span (click)="copyModel(v.model)" class="material-symbols-outlined">
           copy_all

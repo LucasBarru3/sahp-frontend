@@ -1,4 +1,5 @@
-<h2 class="page-title">Vehículos de la clase {{ classId }}</h2>
+<main>
+<h2 class="page-title">Vehículos de la clase {{ classId === 1 ? 'B' : classId === 2 ? 'A' : 'S+' }}</h2>
 <div *ngIf="loading" class="loader-container">
   <app-loader></app-loader>
 </div>
@@ -63,4 +64,42 @@
   </div>
 </div>
 
-<button class="add-btn" (click)="createVehicle()">Añadir vehículo</button>
+<button class="add-btn" (click)="startAdd()">Añadir vehículo</button>
+
+<div *ngIf="addingVehicle" class="edit-form">
+  <h3>Añadir vehículo</h3>
+
+  <input type="text" [(ngModel)]="addingVehicle.name" placeholder="Nombre" />
+  <input type="text" [(ngModel)]="addingVehicle.model" placeholder="Modelo" />
+  <input type="text" [(ngModel)]="addingVehicle.image_url" placeholder="URL imagen" />
+
+  <div class="preview" *ngIf="addingVehicle.image_url">
+    <img
+      [src]="addingVehicle.image_url"
+      (load)="onImageLoad()"
+      (error)="onImageError()"
+    />
+    <p *ngIf="addingVehicle.image_url.startsWith('data:')" class="error-msg">
+      ❌ No se permiten imágenes en formato data URL
+    </p>
+    <p *ngIf="!imageOk" class="error-msg">
+      ❌ La imagen no carga o el enlace no es válido
+    </p>
+  </div>
+
+  <select name="class_id" id="class_id" [(ngModel)]="addingVehicle.class_id">
+    <option value="1">Clase B</option>
+    <option value="2">Clase A</option>
+    <option value="3">Clase S+</option>
+  </select>
+
+  <span>Se sigue con:</span>
+  <input type="text" name="follow_class" id="follow_class" [(ngModel)]="addingVehicle.follow_class" placeholder="Clase a seguir" />
+
+  <div class="form-buttons">
+    <button class="save-btn" (click)="addVehicle()" [disabled]="!imageOk || addingVehicle.image_url.startsWith('data:')">Guardar</button>
+    <button class="cancel-btn" (click)="addingVehicle = null">Cancelar</button>
+  </div>
+</div>
+
+</main>
