@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "",
+    "target": "https://sahp-backend.vercel.app",
     "secure": true,
     "changeOrigin": true,
     "logLevel": "debug"

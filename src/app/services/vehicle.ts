@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class VehicleService {
 
   // Cambia esta URL por la de tu backend en Vercel
-  private apiUrl = 'https://sahp-backend.vercel.app/api/vehicles';
+  private apiUrl = '/api/vehicles';
 
   constructor(private http: HttpClient) {}
 
