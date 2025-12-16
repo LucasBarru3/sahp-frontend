@@ -1,0 +1,229 @@
+/* Página */
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #3b3d8a;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Contenedor de vehículos */
+.vehicles-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Tarjetas */
+.vehicle-card {
+  background: #bce7fd;
+  border-radius: 15px;
+  width: 220px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.vehicle-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.img-container {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  border-bottom: 4px solid #457cbf;
+  position: relative; /* necesario para posicionar el badge */
+}
+
+.class-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: #457cbf;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.class-copy {
+  position: absolute;
+  cursor: pointer;
+  top: 8px;
+  right: 8px;
+  background-color: #457cbf;
+  color: #fff;
+  padding: 1px 3px;
+  border-radius: 5px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.vehicle-info {
+  padding: 10px;
+  text-align: center;
+}
+
+.vehicle-info h3 {
+  margin: 5px 0;
+  color: #3b3d8a;
+}
+
+.vehicle-info p {
+  margin: 0 0 10px;
+  color: #457cbf;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Botones de tarjetas */
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.edit-btn {
+  background-color: #457cbf;
+}
+
+.edit-btn:hover {
+  background-color: #3b3d8a;
+}
+
+.delete-btn {
+  background-color: #b89e49;
+}
+
+.delete-btn:hover {
+  background-color: #927a3a;
+}
+
+/* Formulario */
+.edit-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 15px;
+  background: #82d4bb;
+  border: 3px solid #457cbf;
+  max-width: 420px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.edit-form input {
+  display: block;
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #457cbf;
+  background: #bce7fd;
+  color: #003049;
+  font-weight: bold;
+}
+
+.preview img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 2px solid #457cbf;
+  margin-bottom: 10px;
+  transition: transform 0.3s;
+}
+
+.preview img:hover {
+  transform: scale(1.05);
+}
+
+.error-msg {
+  color: #b89e49;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.save-btn {
+  background-color: #457cbf;
+  border: none;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.save-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.cancel-btn {
+  background-color: #3b3d8a;
+  border: none;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-btn {
+  margin: 30px auto;
+  display: block;
+  padding: 12px 20px;
+  background-color: #457cbf;
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.add-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}

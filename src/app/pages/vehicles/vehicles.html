@@ -1,0 +1,68 @@
+<h2 class="page-title">Vehículos de la clase {{ classId }}</h2>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=copy_all" />
+<div *ngIf="loading" class="loader-container">
+  <app-loader></app-loader>
+</div>
+
+<div class="vehicles-list">
+  <div *ngFor="let v of vehicles" class="vehicle-card">
+    <div class="img-container">
+      <span class="class-badge">
+        {{ v.class_id === 1 ? 'B' : v.class_id === 2 ? 'A' : 'S+' }}
+      </span>
+      <span class="class-copy">
+        <span (click)="copyModel(v.model)" class="material-symbols-outlined">
+          copy_all
+        </span>
+      </span>
+      <img [src]="v.image_url" alt="{{ v.name }}" />
+    </div>
+    <div class="vehicle-info">
+      <h3>{{ v.name }}</h3>
+      <p>{{ v.follow_class }}</p>
+      <div class="buttons">
+        <button class="edit-btn" (click)="startEdit(v)">Editar</button>
+        <button class="delete-btn" (click)="deleteVehicle(v.id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="editingVehicle" class="edit-form">
+  <h3>Editar vehículo</h3>
+
+  <input type="text" [(ngModel)]="editingVehicle.name" placeholder="Nombre" />
+  <input type="text" [(ngModel)]="editingVehicle.model" placeholder="Modelo" />
+  <input type="text" [(ngModel)]="editingVehicle.image_url" placeholder="URL imagen" />
+
+  <div class="preview" *ngIf="editingVehicle.image_url">
+    <img
+      [src]="editingVehicle.image_url"
+      (load)="onImageLoad()"
+      (error)="onImageError()"
+    />
+    <p *ngIf="editingVehicle.image_url.startsWith('data:')" class="error-msg">
+      ❌ No se permiten imágenes en formato data URL
+    </p>
+    <p *ngIf="!imageOk" class="error-msg">
+      ❌ La imagen no carga o el enlace no es válido
+    </p>
+  </div>
+
+  <select name="class_id" id="class_id" [(ngModel)]="editingVehicle.class_id">
+    <option value="1">Clase B</option>
+    <option value="2">Clase A</option>
+    <option value="3">Clase S+</option>
+  </select>
+
+  <span>Se sigue con:</span>
+  <input type="text" name="follow_class" id="follow_class" [(ngModel)]="editingVehicle.follow_class" placeholder="Clase a seguir" />
+
+  <div class="form-buttons">
+    <button class="save-btn" (click)="editVehicle()" [disabled]="!imageOk || editingVehicle.image_url.startsWith('data:')">Guardar</button>
+    <button class="cancel-btn" (click)="editingVehicle = null">Cancelar</button>
+  </div>
+</div>
+
+<button class="add-btn" (click)="createVehicle()">Añadir vehículo</button>
