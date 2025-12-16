@@ -1,4 +1,5 @@
-<h2 class="page-title">Vehículos de la clase {{ classId }}</h2>
+<h2 class="page-title">Todos los vehículos</h2>
+
 <div *ngIf="loading" class="loader-container">
   <app-loader></app-loader>
 </div>
@@ -62,5 +63,3 @@
     <button class="cancel-btn" (click)="editingVehicle = null">Cancelar</button>
   </div>
 </div>
-
-<button class="add-btn" (click)="createVehicle()">Añadir vehículo</button>
