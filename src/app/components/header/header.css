@@ -24,6 +24,12 @@
   vertical-align: middle;
 }
 
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 nav a {
   color: #ddd;
   margin-left: 20px;
