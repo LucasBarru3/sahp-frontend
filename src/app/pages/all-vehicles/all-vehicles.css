@@ -3,6 +3,7 @@
   color: #3b3d8a;
   margin-bottom: 20px;
   text-align: center;
+  text-shadow: -0.5px -0.5px 0 #bce7fd, 0.5px -0.5px 0 #bce7fd, -0.5px 0.5px 0 #bce7fd, 0.5px 0.5px 0 #bce7fd;
 }
 
 .vehicles-grid {
