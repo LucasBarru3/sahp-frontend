@@ -94,7 +94,8 @@ export class AllVehiclesComponent implements OnInit {
     this.editingVehicle = {
       ...vehicle,
       image_url: vehicle.image_url || '',  // Si es null o undefined, ponemos ''
-      follow_class: vehicle.follow_class || ''
+      follow_class: vehicle.follow_class || '',
+      note: vehicle.note || ''
     };
   }
 
@@ -104,7 +105,8 @@ export class AllVehiclesComponent implements OnInit {
       model: this.editingVehicle.model,
       image_url: this.editingVehicle.image_url,
       class_id: this.editingVehicle.class_id,
-      follow_class: this.editingVehicle.follow_class
+      follow_class: this.editingVehicle.follow_class,
+      note: this.editingVehicle.note
     }).subscribe(() => {
       this.editingVehicle = null;
       this.loadVehicles();

@@ -1,35 +1,50 @@
-<!-- Portada -->
-<header class="hero">
-  <div class="hero-content">
-    <h1>Clases de Vehículos</h1>
-    <p>Aprende a conducir de forma segura y profesional con nuestros instructores certificados.</p>
-    <a routerLink="/vehicles-all" class="btn-hero">Ver todos los vehículos</a>
-  </div>
-</header>
-
-<!-- Sección de Clases -->
-<section class="classes-section">
-  <h2>Clases de vehículos</h2>
-<div *ngIf="loading" class="loader-container">
-  <app-loader></app-loader>
-</div>
-  <div class="classes-container">
-    <div class="class-card" *ngFor="let c of classes">
-      <h3>{{ c.name }}</h3>
-      <p>{{ c.description }}</p>
-
-      <p><span class="vehicle-count">
-        {{ c.vehicle_count }} vehículos
-      </span></p>
-
-      <a [routerLink]="['/vehicles', c.id]" class="btn">
-        Ver vehículos
+<main>
+  <!-- HERO / PORTADA -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Clases de Vehículos</h1>
+      <p>
+        Aprende a conducir de forma segura y profesional con nuestros
+        instructores certificados.
+      </p>
+      <a routerLink="/vehicles-all" class="btn-hero">
+        Ver todos los vehículos
       </a>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- Footer -->
-<footer>
-  <p>© 2025 AutoSchool. Todos los derechos reservados.</p>
-</footer>
+  <!-- SECCIÓN DE CLASES -->
+  <section class="classes-section">
+    <h2>Clases de vehículos</h2>
+
+    <div *ngIf="loading" class="loader-container">
+      <app-loader></app-loader>
+    </div>
+
+    <div class="classes-container">
+      <div class="class-card" *ngFor="let c of classes">
+        <h3>{{ c.name }}</h3>
+
+        <p class="class-description">
+          {{ c.description }}
+        </p>
+
+        <span class="vehicle-count">
+          {{ c.vehicle_count }} vehículos
+        </span>
+
+        <a
+          [routerLink]="['/vehicles', c.id]"
+          class="btn"
+        >
+          Ver vehículos
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 AutoSchool. Todos los derechos reservados.</p>
+  </footer>
+</main>

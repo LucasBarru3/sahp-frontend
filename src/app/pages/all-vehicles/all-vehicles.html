@@ -43,6 +43,7 @@
     <div class="vehicle-info">
       <h3>{{ v.name }}</h3>
       <p>{{ v.follow_class }}</p>
+      <p>Nota: {{ v.note }}</p>
       <div class="buttons">
         <button class="edit-btn" (click)="startEdit(v)">Editar</button>
         <button class="delete-btn" (click)="deleteVehicle(v.id)">Eliminar</button>
@@ -80,7 +81,7 @@
 
   <span>Se sigue con:</span>
   <input type="text" name="follow_class" id="follow_class" [(ngModel)]="editingVehicle.follow_class" placeholder="Clase a seguir" />
-
+  <input type="text" name="note" id="note" [(ngModel)]="editingVehicle.note" placeholder="Nota" />
   <div class="form-buttons">
     <button class="save-btn" (click)="editVehicle()" [disabled]="!imageOk || editingVehicle.image_url.startsWith('data:')">Guardar</button>
     <button class="cancel-btn" (click)="editingVehicle = null">Cancelar</button>

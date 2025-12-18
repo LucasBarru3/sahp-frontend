@@ -3,22 +3,48 @@
   <app-loader></app-loader>
 </div>
 
-<header class="hero">
+<header class="hero" [ngSwitch]="classId">
   <div class="hero-content">
-    <h2>Vehículos de la clase {{ classId === 1 ? 'B' : classId === 2 ? 'A' : 'S+' }}</h2>
-    <p>Vehículo de Carretera:</p>
-    <ul>
-      <li><strong>Victoria:</strong> Vehículo estándar. Sigue bien a todos los vehículos de esta sección. Cambia entre modo B y A según las exigencias del vehículo que perseguimos.</li>
-      <li><strong>Explorer:</strong> Vehículo ancho; se puede complicar en callejones porque no entra en muchas rutas estrechas.</li>
-      <li><strong>Dorado:</strong> Coche que solo se usará para vehículos que no se puedan seguir con los demás.</li>
-    </ul>
-    <p>Vehículo Offroad:</p>
-    <ul>
-      <li><strong>Terminus Overland:</strong> Perfecta para subir escaleras y muros pequeños. Va bien por el monte, pero le cuesta girar en curvas cerradas.</li>
-      <li><strong>Seminole Frontier:</strong> Mala en carretera, buena para montaña; sube cualquier montaña y le dan igual los arbustos.</li>
-      <li><strong>Bison:</strong> Clase C. Grande y robusta, sirve para bloquear callejones e ir por montaña. Algunos saltos no los hace bien; es como una pequeña ballenita, salta en vertical y se queda corta.</li>
-      <li><strong>Invictus:</strong></li>
-    </ul>
+    <h2>Vehículos de la clase {{ classLabel }}</h2>
+
+    <!-- CLASE B -->
+    <div *ngSwitchCase="1" class="texto">
+      <p>Vehículo de Carretera:</p>
+      <ul>
+        <li><strong>Victoria:</strong> Vehículo estándar. Sigue bien a todos los vehículos de esta sección. Cambiando de modo B y A según las exigencias del vehículo que perseguimos.</li>
+        <li><strong>Explorer:</strong> Vehículo ancho; Se puede complicar en callejones porque no entra en muchas rutas tiktok.</li>
+        <li><strong>Dorado:</strong> Coche que solo se usará para vehículos que no se puedan seguir con los demás.</li>
+      </ul>
+
+      <p>Vehículo Offroad:</p>
+      <ul>
+        <li><strong>Terminus Overland:</strong> Perfecta para subir escaleras y muros pequeños. Va bien por el monte. Le cuesta girar en curvas cerradas.  </li>
+        <li><strong>Seminole Frontier:</strong> Mala en carretera, buena para montaña; sube cualquier montaña y le dan igual los arbustos. </li>
+        <li><strong>Bison:</strong> Clase C. Grande y robusta, sirve para bloquear callejones e ir por montaña. Algunos saltos no los hace bien; es como una pequeña ballenita, salta en vertical y se queda corta. </li>
+        <li><strong>Invictus:</strong></li>
+      </ul>
+    </div>
+
+    <!-- CLASE A -->
+    <div *ngSwitchCase="2" class="texto">
+      <p>Vehículo de Carretera:</p>
+      <ul>
+        <li><strong>Taurus</strong></li>
+        <li><strong>Bufalo</strong></li>
+        <li><strong>Landstalker</strong></li>
+      </ul>
+
+      <p>Vehículo Offroad:</p>
+      <ul>
+        <li><strong>Terminus:</strong> Buena para monte.</li>
+      </ul>
+    </div>
+
+    <!-- CLASE S+ -->
+    <div *ngSwitchCase="3" class="texto">
+      <p>Próximamente 🚔🔥</p>
+    </div>
+
   </div>
 </header>
 
@@ -33,11 +59,12 @@
           copy_all
         </span>
       </span>
-      <img [src]="v.image_url" alt="{{ v.name }}" />
+      <img [src]="v.image_url" (click)="openImage(v.image_url)" class="clickable-img" alt="{{ v.name }}" />
     </div>
     <div class="vehicle-info">
       <h3>{{ v.name }}</h3>
       <p>Se sige con: {{ v.follow_class }}</p>
+      <p>Nota: {{ v.note }}</p>
       <div class="buttons">
         <button class="edit-btn" (click)="startEdit(v)">Editar</button>
         <button class="delete-btn" (click)="deleteVehicle(v.id)">Eliminar</button>
@@ -75,7 +102,7 @@
 
   <span>Se sigue con:</span>
   <input type="text" name="follow_class" id="follow_class" [(ngModel)]="editingVehicle.follow_class" placeholder="Clase a seguir" />
-
+  <input type="text" name="note" id="note" [(ngModel)]="editingVehicle.note" placeholder="Nota" />
   <div class="form-buttons">
     <button class="save-btn" (click)="editVehicle()" [disabled]="!imageOk || editingVehicle.image_url.startsWith('data:')">Guardar</button>
     <button class="cancel-btn" (click)="editingVehicle = null">Cancelar</button>
@@ -113,11 +140,16 @@
 
   <span>Se sigue con:</span>
   <input type="text" name="follow_class" id="follow_class" [(ngModel)]="addingVehicle.follow_class" placeholder="Clase a seguir" />
-
+  <input type="text" name="note" id="note" [(ngModel)]="addingVehicle.note" placeholder="Nota" />
   <div class="form-buttons">
     <button class="save-btn" (click)="addVehicle()" [disabled]="!imageOk || addingVehicle.image_url.startsWith('data:')">Guardar</button>
     <button class="cancel-btn" (click)="addingVehicle = null">Cancelar</button>
   </div>
+</div>
+
+<div class="image-modal" *ngIf="selectedImage" (click)="closeImage()">
+  <img [src]="selectedImage" (click)="$event.stopPropagation()" />
+  <span class="close-btn" (click)="closeImage()">✕</span>
 </div>
 
 </main>

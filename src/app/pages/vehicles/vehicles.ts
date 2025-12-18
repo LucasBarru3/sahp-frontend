@@ -27,8 +27,28 @@ export class VehiclesComponent implements OnInit {
     this.editingVehicle = {
       ...vehicle,
       image_url: vehicle.image_url || '',  // Si es null o undefined, ponemos ''
-      follow_class: vehicle.follow_class || ''
+      follow_class: vehicle.follow_class || '',
+      note: vehicle.note || ''
     };
+  }
+
+  get classLabel(): string {
+    switch (this.classId) {
+      case 1: return 'B';
+      case 2: return 'A';
+      case 3: return 'S+';
+      default: return '';
+    }
+  }
+
+  selectedImage: string | null = null;
+
+  openImage(url: string) {
+    this.selectedImage = url;
+  }
+
+  closeImage() {
+    this.selectedImage = null;
   }
 
   startAdd() {
@@ -37,7 +57,8 @@ export class VehiclesComponent implements OnInit {
       model: '',
       image_url: '',
       class_id: this.classId,
-      follow_class: ''
+      follow_class: '',
+      note: ''
     };
   }
 
@@ -65,7 +86,7 @@ export class VehiclesComponent implements OnInit {
   }
   
   createVehicle() {
-    const data = { name: 'Nuevo', model: 'ModeloX', image_url: '', class_id: this.classId, follow_class: '' };
+    const data = { name: 'Nuevo', model: 'ModeloX', image_url: '', class_id: this.classId, follow_class: '', note: '' };
     this.vehicleService.create(data).subscribe(() => this.loadVehicles());
   }
 
@@ -75,7 +96,8 @@ export class VehiclesComponent implements OnInit {
       model: this.editingVehicle.model,
       image_url: this.editingVehicle.image_url,
       class_id: this.editingVehicle.class_id,
-      follow_class: this.editingVehicle.follow_class
+      follow_class: this.editingVehicle.follow_class,
+      note: this.editingVehicle.note
     }).subscribe(() => {
       this.editingVehicle = null;
       this.loadVehicles();
@@ -88,7 +110,8 @@ export class VehiclesComponent implements OnInit {
       model: this.addingVehicle.model,
       image_url: this.addingVehicle.image_url,
       class_id: this.addingVehicle.class_id,
-      follow_class: this.addingVehicle.follow_class
+      follow_class: this.addingVehicle.follow_class,
+      note: this.addingVehicle.note
     }).subscribe(() => {
       this.addingVehicle = null;
       this.loadVehicles();
