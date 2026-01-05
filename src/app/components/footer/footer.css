@@ -1,0 +1,17 @@
+/* FOOTER */
+footer {
+  margin-top: auto;
+  background-color: #007cbf;
+  color: #bce7fd;
+  padding: clamp(16px, 2vw, 8px);
+  text-align: center;
+  font-size: clamp(0.8rem, 1vw, 1rem);
+
+  /* que se vea por encima de todo */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 9999;
+}

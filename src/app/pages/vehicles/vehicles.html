@@ -52,7 +52,7 @@
   <div *ngFor="let v of vehicles" class="vehicle-card">
     <div class="img-container">
       <span class="class-badge">
-        {{ v.class_id === 1 ? 'B' : v.class_id === 2 ? 'A' : 'S+' }}
+        {{ v.class_id === 1 ? 'B' : v.class_id === 2 ? 'A' : v.class_id === 3 ? 'S+' : 'C' }}
       </span>
       <span class="class-copy">
         <span (click)="copyModel(v.model)" class="material-symbols-outlined">

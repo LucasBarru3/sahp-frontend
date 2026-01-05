@@ -37,6 +37,7 @@ export class VehiclesComponent implements OnInit {
       case 1: return 'B';
       case 2: return 'A';
       case 3: return 'S+';
+      case 4: return 'C';
       default: return '';
     }
   }

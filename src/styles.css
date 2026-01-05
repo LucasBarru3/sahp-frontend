@@ -13,11 +13,14 @@ body{
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: 60vh;
-  overflow: auto; /* mantiene el scroll funcional */
-  scrollbar-width: none; /* Firefox */
+  overflow: auto;
+  scrollbar-width: none;
 }
 
-/* Chrome, Edge, Safari */
 body::-webkit-scrollbar {
   display: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }

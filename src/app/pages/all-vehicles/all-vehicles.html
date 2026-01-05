@@ -12,6 +12,7 @@
     <option value="">Todas las clases</option>
     <option value="1">Clase B</option>
     <option value="2">Clase A</option>
+    <option value="4">Clase C</option>
     <option value="3">Clase S+</option>
   </select>
 
@@ -31,7 +32,7 @@
   <div *ngFor="let v of filteredVehicles" class="vehicle-card">
     <div class="img-container">
       <a routerLink="/vehicles/{{v.class_id}}" routerLinkActive="active"><span class="class-badge">
-        {{ v.class_id === 1 ? 'B' : v.class_id === 2 ? 'A' : 'S+' }}
+        {{ v.class_id === 1 ? 'B' : v.class_id === 2 ? 'A' : v.class_id === 3 ? 'S+' : 'C' }}
       </span></a>
       <span class="class-copy">
         <span (click)="copyModel(v.model)" class="material-symbols-outlined">
@@ -77,6 +78,7 @@
     <option value="1">Clase B</option>
     <option value="2">Clase A</option>
     <option value="3">Clase S+</option>
+    <option value="4">Clase C</option>
   </select>
 
   <span>Se sigue con:</span>
