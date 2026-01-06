@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-header',
@@ -9,4 +10,26 @@ import { RouterModule } from '@angular/router';
   templateUrl: './header.html',
   styleUrls: ['./header.css']
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+    try {
+      const decoded: any = jwtDecode(token);
+      const currentTime = Math.floor(Date.now() / 1000);
+      if (decoded.exp && decoded.exp < currentTime) {
+        localStorage.removeItem('token'); // token expirado
+        return false;
+      }
+      return true; // token válido
+    } catch (err) {
+      console.error('Token inválido', err);
+      return false;
+    }
+  }
+  logout() {
+    localStorage.removeItem('token');
+    window.location.reload();
+  }
+  
+}

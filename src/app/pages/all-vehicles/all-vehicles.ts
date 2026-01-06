@@ -4,6 +4,7 @@ import { VehicleService } from '../../services/vehicle';
 import { LoaderComponent } from '../../components/loader/loader';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 @Component({
   selector: 'app-all-vehicles',
   standalone: true,
@@ -52,7 +53,25 @@ export class AllVehiclesComponent implements OnInit {
     });
   }
 
-  checkAdmin() {
+  checkAdmin(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+
+    try {
+      const decoded: any = jwtDecode(token);
+
+      // Comprueba si el token ha expirado
+      const now = Math.floor(Date.now() / 1000);
+      if (decoded.exp && decoded.exp < now) {
+        localStorage.removeItem('token'); // token expirado
+        return false;
+      }
+      this.isAdmin = true;
+      return true; // token válido
+    } catch (err) {
+      console.error('Token inválido', err);
+      return false;
+    }
   }
 
   applyFilters() {
