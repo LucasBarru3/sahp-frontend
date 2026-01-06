@@ -17,8 +17,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  margin-bottom: 60px;
   justify-content: center;
-  margin-bottom: 50px;
 }
 
 /* Tarjetas */

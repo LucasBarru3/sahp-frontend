@@ -20,10 +20,12 @@ export class AllVehiclesComponent implements OnInit {
   selectedClass = '';
   sortOrder = 'az';
   filteredVehicles: any[] = [];
+  isAdmin = false;
 
   constructor(private vehicleService: VehicleService) {}
 
   ngOnInit() {
+    this.checkAdmin();
     this.loadVehicles();
   }
 
@@ -48,6 +50,9 @@ export class AllVehiclesComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  checkAdmin() {
   }
 
   applyFilters() {

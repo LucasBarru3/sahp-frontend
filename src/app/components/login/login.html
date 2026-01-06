@@ -1,0 +1,14 @@
+<div class="login-container">
+  <h2>Login</h2>
+
+  <div *ngIf="error" class="error-msg">{{ error }}</div>
+
+  <input type="text" placeholder="Usuario" [(ngModel)]="username" />
+  <input type="password" placeholder="Contraseña" [(ngModel)]="password" />
+
+  <button (click)="login()" [disabled]="loading">
+    {{ loading ? 'Entrando...' : 'Entrar' }}
+  </button>
+
+  <p class="demo-info">Cuenta de prueba: testuser / 123456</p>
+</div>
