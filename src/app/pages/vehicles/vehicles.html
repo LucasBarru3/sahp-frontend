@@ -59,13 +59,13 @@
           copy_all
         </span>
       </span>
-      <img [src]="v.image_url" (click)="openImage(v.image_url)" class="clickable-img" alt="{{ v.name }}" />
+      <img [src]="v.image_url" onerror="this.onerror=null;this.src='https://i.imgur.com/5fXa2iY.png';" (click)="openImage(v.image_url)" class="clickable-img" alt="{{ v.name }}" />
     </div>
     <div class="vehicle-info">
       <h3>{{ v.name }}</h3>
       <p>Se sige con: {{ v.follow_class }}</p>
       <p>Nota: {{ v.note }}</p>
-      <div class="buttons">
+      <div class="buttons" *ngIf="isAdmin">
         <button class="edit-btn" (click)="startEdit(v)">Editar</button>
         <button class="delete-btn" (click)="deleteVehicle(v.id)">Eliminar</button>
       </div>
@@ -109,7 +109,7 @@
   </div>
 </div>
 
-<button class="add-btn" (click)="startAdd()">Añadir vehículo</button>
+<button class="add-btn" *ngIf="isAdmin" (click)="startAdd()">Añadir vehículo</button>
 
 <div *ngIf="addingVehicle" class="edit-form">
   <h3>Añadir vehículo</h3>

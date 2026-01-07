@@ -186,3 +186,92 @@ footer {
     font-size: 18px;
   }
 }
+
+/* Formulario */
+.edit-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 15px;
+  background: #82d4bb;
+  border: 3px solid #457cbf;
+  max-width: 420px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.edit-form input {
+  display: block;
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #457cbf;
+  background: #bce7fd;
+  color: #003049;
+  font-weight: bold;
+}
+
+.error-msg {
+  color: #b89e49;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.save-btn {
+  background-color: #457cbf;
+  border: none;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.save-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.cancel-btn {
+  background-color: #3b3d8a;
+  border: none;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-btn {
+  margin: 30px auto;
+  display: block;
+  padding: 12px 20px;
+  background-color: #457cbf;
+  border: none;
+  color: #fff;
+  margin-bottom: 60px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.add-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}

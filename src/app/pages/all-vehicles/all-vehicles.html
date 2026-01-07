@@ -39,7 +39,7 @@
           copy_all
         </span>
       </span>
-      <img [src]="v.image_url" alt="{{ v.name }}" />
+      <img [src]="v.image_url" onerror="this.onerror=null;this.src='https://i.imgur.com/5fXa2iY.png';" alt="{{ v.name }}" />
     </div>
     <div class="vehicle-info">
       <h3>{{ v.name }}</h3>

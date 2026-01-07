@@ -27,7 +27,22 @@
         </a>
       </div>
     </div>
+
+    <button class="add-btn" *ngIf="isAdmin" (click)="startAdd()">Añadir clase</button>
+
+    <div *ngIf="addingClass" class="edit-form">
+      <h3>Añadir clase</h3>
+
+      <input type="text" [(ngModel)]="addingClass.name" placeholder="Nombre" />
+      <input type="text" [(ngModel)]="addingClass.model" placeholder="Description" />
+
+      <div class="form-buttons">
+        <button class="save-btn" (click)="addClass()">Guardar</button>
+        <button class="cancel-btn" (click)="addingClass = null">Cancelar</button>
+      </div>
+    </div>
   </section>
+  
 
   <!-- FOOTER -->
   <footer>

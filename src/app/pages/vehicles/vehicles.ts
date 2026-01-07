@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { VehicleService } from '../../services/vehicle';
 import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from '../../components/loader/loader';
+import { jwtDecode } from 'jwt-decode';
 @Component({
   selector: 'app-vehicles',
   standalone: true,
@@ -18,6 +19,7 @@ export class VehiclesComponent implements OnInit {
   classId!: number;
   imageOk = true;
   loading = false;
+  isAdmin = false;
   constructor(
     private vehicleService: VehicleService,
     private route: ActivatedRoute
@@ -76,6 +78,7 @@ export class VehiclesComponent implements OnInit {
       this.classId = +params['classId'];
       this.loadVehicles();
     });
+    this.checkAdmin()
   }
 
   loadVehicles() {
@@ -84,6 +87,27 @@ export class VehiclesComponent implements OnInit {
       this.vehicles = data;
       this.loading = false;
     });
+  }
+
+  checkAdmin(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+
+    try {
+      const decoded: any = jwtDecode(token);
+
+      // Comprueba si el token ha expirado
+      const now = Math.floor(Date.now() / 1000);
+      if (decoded.exp && decoded.exp < now) {
+        localStorage.removeItem('token'); // token expirado
+        return false;
+      }
+      this.isAdmin = true;
+      return true; // token válido
+    } catch (err) {
+      console.error('Token inválido', err);
+      return false;
+    }
   }
   
   createVehicle() {
