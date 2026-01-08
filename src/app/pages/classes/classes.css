@@ -83,6 +83,7 @@ main {
 .classes-section {
   padding: clamp(40px, 6vw, 10px) clamp(20px, 6vw, 100px);
   text-align: center;
+  justify-content: center;
   max-width: 1800px;
   margin: 0 auto;
   width: 100%;
@@ -160,17 +161,6 @@ main {
 
 .btn:hover {
   background-color: #005f8a;
-}
-
-/* ===================== */
-/* FOOTER */
-footer {
-  margin-top: auto;
-  background-color: #007cbf;
-  color: #bce7fd;
-  padding: clamp(16px, 2vw, 30px);
-  text-align: center;
-  font-size: clamp(0.8rem, 1vw, 1rem);
 }
 
 /* ===================== */

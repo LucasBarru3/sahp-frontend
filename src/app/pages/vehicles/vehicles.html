@@ -94,14 +94,20 @@
     </p>
   </div>
 
-  <select name="class_id" id="class_id" [(ngModel)]="editingVehicle.class_id">
-    <option value="1">Clase B</option>
-    <option value="2">Clase A</option>
-    <option value="3">Clase S+</option>
-  </select>
+  <p>
+    Clase:
+    <select name="class_id" id="class_id" [(ngModel)]="editingVehicle.class_id">
+      <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
+    </select>
+  </p>
 
-  <span>Se sigue con:</span>
+  <div style="display: flex; align-items: center; gap: 10px;">
+  <label for="follow_class" style="white-space: nowrap;">
+    Se sigue con:
+  </label>
   <input type="text" name="follow_class" id="follow_class" [(ngModel)]="editingVehicle.follow_class" placeholder="Clase a seguir" />
+  </div>
+  
   <input type="text" name="note" id="note" [(ngModel)]="editingVehicle.note" placeholder="Nota" />
   <div class="form-buttons">
     <button class="save-btn" (click)="editVehicle()" [disabled]="!imageOk || editingVehicle.image_url.startsWith('data:')">Guardar</button>
@@ -132,14 +138,20 @@
     </p>
   </div>
 
-  <select name="class_id" id="class_id" [(ngModel)]="addingVehicle.class_id">
-    <option value="1">Clase B</option>
-    <option value="2">Clase A</option>
-    <option value="3">Clase S+</option>
-  </select>
+  <p>
+    Clase:
+    <select name="class_id" id="class_id" [(ngModel)]="addingVehicle.class_id">
+      <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
+    </select>
+  </p>
 
-  <span>Se sigue con:</span>
+  <div style="display: flex; align-items: center; gap: 10px;">
+  <label for="follow_class" style="white-space: nowrap;">
+    Se sigue con:
+  </label>
   <input type="text" name="follow_class" id="follow_class" [(ngModel)]="addingVehicle.follow_class" placeholder="Clase a seguir" />
+  </div>
+  
   <input type="text" name="note" id="note" [(ngModel)]="addingVehicle.note" placeholder="Nota" />
   <div class="form-buttons">
     <button class="save-btn" (click)="addVehicle()" [disabled]="!imageOk || addingVehicle.image_url.startsWith('data:')">Guardar</button>

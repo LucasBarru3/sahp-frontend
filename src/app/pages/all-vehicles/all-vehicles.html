@@ -8,12 +8,9 @@
     [(ngModel)]="searchText"
   />
 
-  <select [(ngModel)]="selectedClass">
+  <select   [(ngModel)]="selectedClass">
     <option value="">Todas las clases</option>
-    <option value="1">Clase B</option>
-    <option value="2">Clase A</option>
-    <option value="4">Clase C</option>
-    <option value="3">Clase S+</option>
+    <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
   </select>
 
   <select [(ngModel)]="sortOrder">
@@ -43,7 +40,7 @@
     </div>
     <div class="vehicle-info">
       <h3>{{ v.name }}</h3>
-      <p>{{ v.follow_class }}</p>
+      <p>Seguir en: {{ v.follow_class }}</p>
       <p>Nota: {{ v.note }}</p>
       <div class="buttons" *ngIf="isAdmin">
         <button class="edit-btn" (click)="startEdit(v)">Editar</button>
@@ -73,17 +70,29 @@
       ❌ La imagen no carga o el enlace no es válido
     </p>
   </div>
+  <p>
+    Clase:
+    <select name="class_id" id="class_id" [(ngModel)]="editingVehicle.class_id">
+      <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
+    </select>
+  </p>
+  
+  <div style="display: flex; align-items: center; gap: 10px;">
+  <label for="follow_class" style="white-space: nowrap;">
+    Se sigue con:
+  </label>
 
-  <select name="class_id" id="class_id" [(ngModel)]="editingVehicle.class_id">
-    <option value="1">Clase B</option>
-    <option value="2">Clase A</option>
-    <option value="3">Clase S+</option>
-    <option value="4">Clase C</option>
-  </select>
+  <input
+    type="text"
+    id="follow_class"
+    name="follow_class"
+    [(ngModel)]="editingVehicle.follow_class"
+    placeholder="Clase a seguir"
+    style="flex: 1;"
+  />
+  </div>
 
-  <span>Se sigue con:</span>
-  <input type="text" name="follow_class" id="follow_class" [(ngModel)]="editingVehicle.follow_class" placeholder="Clase a seguir" />
-  <input type="text" name="note" id="note" [(ngModel)]="editingVehicle.note" placeholder="Nota" />
+  <input style="height:30px;" type="text" name="note" id="note" [(ngModel)]="editingVehicle.note" placeholder="Nota" />
   <div class="form-buttons">
     <button class="save-btn" (click)="editVehicle()" [disabled]="!imageOk || editingVehicle.image_url.startsWith('data:')">Guardar</button>
     <button class="cancel-btn" (click)="editingVehicle = null">Cancelar</button>

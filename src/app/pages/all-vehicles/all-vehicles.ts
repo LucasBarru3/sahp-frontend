@@ -5,6 +5,7 @@ import { LoaderComponent } from '../../components/loader/loader';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { ClassService } from '../../services/class';
 @Component({
   selector: 'app-all-vehicles',
   standalone: true,
@@ -22,12 +23,20 @@ export class AllVehiclesComponent implements OnInit {
   sortOrder = 'az';
   filteredVehicles: any[] = [];
   isAdmin = false;
-
-  constructor(private vehicleService: VehicleService) {}
+  classes: any[] = [];
+  constructor(private vehicleService: VehicleService, private classService: ClassService) {}
 
   ngOnInit() {
     this.checkAdmin();
     this.loadVehicles();
+    this.classService.getAll().subscribe({
+      next: data => {
+        this.classes = data;
+      },
+      error: err => {
+        console.error('Error cargando clases:', err);
+      }
+    });
   }
 
   onImageLoad() {

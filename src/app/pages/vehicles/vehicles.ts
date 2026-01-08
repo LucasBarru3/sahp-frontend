@@ -5,6 +5,7 @@ import { VehicleService } from '../../services/vehicle';
 import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from '../../components/loader/loader';
 import { jwtDecode } from 'jwt-decode';
+import { ClassService } from '../../services/class';
 @Component({
   selector: 'app-vehicles',
   standalone: true,
@@ -20,9 +21,11 @@ export class VehiclesComponent implements OnInit {
   imageOk = true;
   loading = false;
   isAdmin = false;
+  classes: any[] = [];
   constructor(
     private vehicleService: VehicleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private classService: ClassService,
   ) {}
 
   startEdit(vehicle: any) {
@@ -79,6 +82,14 @@ export class VehiclesComponent implements OnInit {
       this.loadVehicles();
     });
     this.checkAdmin()
+    this.classService.getAll().subscribe({
+      next: data => {
+        this.classes = data;
+      },
+      error: err => {
+        console.error('Error cargando clases:', err);
+      }
+    });
   }
 
   loadVehicles() {
