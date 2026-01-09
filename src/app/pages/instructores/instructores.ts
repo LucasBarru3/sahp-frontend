@@ -22,6 +22,7 @@ export class InstructoresComponent implements OnInit {
 
   ngOnInit() {
     this.loadInstructors();
+    this.checkAdmin();
   }
 
   loadInstructors() {
@@ -36,7 +37,6 @@ export class InstructoresComponent implements OnInit {
         this.loading = false; // también dejamos de cargar si hay error
       }
     });
-    this.checkAdmin();
   }
 
   checkAdmin(): boolean {

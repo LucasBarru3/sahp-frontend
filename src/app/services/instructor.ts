@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class InstructorService {
 
   // Cambia esta URL por la de tu backend en Vercel
-  private apiUrl = '/api/instructors';
+  private apiUrl = 'https://sahp-backend.vercel.app/api/instructors';
 
   constructor(private http: HttpClient) {}
 
