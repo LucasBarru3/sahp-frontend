@@ -12,3 +12,8 @@ footer {
   width: 100%;
   z-index: 9999;
 }
+
+footer a {
+  color: #3b3d8a;
+  text-decoration: none;
+}

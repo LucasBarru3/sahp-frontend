@@ -30,6 +30,12 @@ main{
   text-shadow: -0.5px -0.5px 0 #bce7fd, 0.5px -0.5px 0 #bce7fd, -0.5px 0.5px 0 #bce7fd, 0.5px 0.5px 0 #bce7fd;
 }
 
+.texto ul{
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
 /* Contenedor de vehículos */
 .vehicles-list {
   display: flex;

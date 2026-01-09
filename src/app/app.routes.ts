@@ -4,9 +4,11 @@ import { ClassesComponent } from './pages/classes/classes';
 import { VehiclesComponent } from './pages/vehicles/vehicles';
 import { AllVehiclesComponent } from './pages/all-vehicles/all-vehicles';
 import { LoginComponent } from './components/login/login';
+import { InstructoresComponent } from './pages/instructores/instructores';
 export const routes: Routes = [
 { path: '', component: Inicio },
 { path: 'classes', component: ClassesComponent },
+{ path: 'instructors', component: InstructoresComponent },
 { path: 'vehicles/:classId', component: VehiclesComponent },
 { path: 'vehicles-all', component: AllVehiclesComponent },
 { path: 'login', component: LoginComponent },

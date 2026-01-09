@@ -1,0 +1,285 @@
+/* ===================== */
+/* RESET */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===================== */
+/* HERO */
+.hero {
+  min-height: clamp(320px, 45vh, 700px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: #007cbf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(20px, 4vw, 80px);
+}
+
+.hero-content {
+  max-width: 1200px;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 4rem);
+  margin-bottom: 1rem;
+  text-shadow:
+    -1px -1px 0 #bce7fd,
+     1px -1px 0 #bce7fd,
+    -1px  1px 0 #bce7fd,
+     1px  1px 0 #bce7fd;
+}
+
+.hero p {
+  font-size: clamp(1rem, 1.5vw, 1.6rem);
+  margin-bottom: 2rem;
+  text-shadow:
+    -0.5px -0.5px 0 #bce7fd,
+     0.5px -0.5px 0 #bce7fd,
+    -0.5px  0.5px 0 #bce7fd,
+     0.5px  0.5px 0 #bce7fd;
+}
+
+.btn-hero {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #bce7fd;
+  color: #007cbf;
+  padding: clamp(10px, 1.2vw, 16px) clamp(20px, 2vw, 36px);
+  border-radius: 12px;
+  font-weight: bold;
+  border: 2px solid #007cbf;
+  transition: all 0.3s ease;
+}
+
+.btn-hero:hover {
+  background-color: #007cbf;
+  color: #bce7fd;
+}
+
+/* ===================== */
+/* ===================== */
+.classes-section {
+  padding: clamp(40px, 6vw, 100px) clamp(20px, 6vw, 100px);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.classes-section h2 {
+  font-size: clamp(2rem, 3vw, 3.5rem);
+  margin-bottom: clamp(30px, 4vw, 80px);
+  color: #007cbf;
+  text-shadow:
+    -0.5px -0.5px 0 #bce7fd,
+     0.5px -0.5px 0 #bce7fd,
+    -0.5px  0.5px 0 #bce7fd,
+     0.5px  0.5px 0 #bce7fd;
+}
+
+/* ===================== */
+/* GRID RESPONSIVE */
+.classes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(20px, 2vw, 40px);
+}
+
+/* ===================== */
+/* TARJETA */
+.class-card {
+  background-color: #bce7fd;
+  padding: clamp(20px, 2vw, 35px);
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.class-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.22);
+}
+
+/* ===================== */
+/* FOTO */
+.instructor-photo {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 4px solid #007cbf;
+  background-color: #fff;
+}
+
+/* ===================== */
+/* TEXTO */
+.class-card h3 {
+  font-size: clamp(1.3rem, 1.6vw, 1.9rem);
+  color: #007cbf;
+  margin-bottom: 0.5rem;
+}
+
+.class-description {
+  font-size: clamp(0.95rem, 1.1vw, 1.15rem);
+  color: #333;
+  margin-bottom: 0.6rem;
+  line-height: 1.4;
+}
+
+/* ===================== */
+/* ID */
+.vehicle-count {
+  margin-top: auto;
+  font-size: 0.85rem;
+  color: #005a8d;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+
+/* BOTÓN */
+.btn {
+  margin-top: auto;
+  text-decoration: none;
+  background-color: #007cbf;
+  color: #bce7fd;
+  padding: clamp(8px, 1vw, 14px) clamp(16px, 2vw, 26px);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #005f8a;
+}
+
+/* ===================== */
+/* BREAKPOINTS EXTRA GRANDES */
+@media (min-width: 2560px) {
+  .classes-section {
+    max-width: 2200px;
+  }
+}
+
+@media (min-width: 3840px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* Formulario */
+.edit-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 15px;
+  background: #82d4bb;
+  border: 3px solid #457cbf;
+  max-width: 420px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.edit-form input {
+  display: block;
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #457cbf;
+  background: #bce7fd;
+  color: #003049;
+  font-weight: bold;
+}
+
+.error-msg {
+  color: #b89e49;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.save-btn {
+  background-color: #457cbf;
+  border: none;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.save-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.cancel-btn {
+  background-color: #3b3d8a;
+  border: none;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-btn {
+  margin: 30px auto;
+  display: block;
+  padding: 12px 20px;
+  background-color: #457cbf;
+  border: none;
+  color: #fff;
+  margin-bottom: 60px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.add-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}

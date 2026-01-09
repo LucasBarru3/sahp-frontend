@@ -1,0 +1,58 @@
+<main>
+  <!-- SECCIÓN DE INSTRUCTORES -->
+  <section class="classes-section">
+    <h2>Instructores</h2>
+    <p>Total de instructores {{ instructors.length }}</p>
+
+    <div *ngIf="loading" class="loader-container">
+      <app-loader></app-loader>
+    </div>
+
+    <div class="classes-container">
+      <div class="class-card" *ngFor="let i of instructors">
+        <img
+          [src]="i.foto"
+          alt="Foto de {{ i.nombre }}"
+          class="instructor-photo"
+        />
+
+        <h3>{{ i.nombre }}</h3>
+
+        <p class="class-description">{{ i.apellidos }}</p>
+        <p class="class-description">{{ i.rango_sahp }}</p>
+        <p class="class-description">
+          <strong>Nacimiento:</strong> {{ i.fecha_nacimiento | date:'d \'de\' MMMM \'de\' yyyy':'':'es' }}
+        </p>
+        <p class="class-description">
+          <strong>Teléfono:</strong> {{ i.telefono }}
+        </p>
+
+        <span class="vehicle-count">
+          ID: {{ i.id_instructor }}
+        </span>
+
+        <button class="delete-btn" (click)="deleteInstructor(i.id_instructor)" *ngIf="isAdmin">
+          Eliminar
+        </button>
+      </div>
+    </div>
+
+
+    <button class="add-btn" *ngIf="isAdmin" (click)="startAdd()">Añadir instructor</button>
+
+    <div *ngIf="addingInstructor" class="edit-form">
+      <h3>Añadir instructor</h3>
+
+      <input type="text" [(ngModel)]="addingInstructor.nombre" placeholder="Nombre" />
+      <input type="text" [(ngModel)]="addingInstructor.apellidos" placeholder="Apellidos" />
+      <input type="text" [(ngModel)]="addingInstructor.rango_sahp" placeholder="Rango SAHP" />
+      <input type="date" [(ngModel)]="addingInstructor.fecha_nacimiento" />
+      <input type="text" [(ngModel)]="addingInstructor.telefono" placeholder="Teléfono" />
+      <input type="text" [(ngModel)]="addingInstructor.foto" placeholder="Foto URL" />
+      <div class="form-buttons">
+        <button class="save-btn" (click)="addInstructor()">Guardar</button>
+        <button class="cancel-btn" (click)="addingInstructor = null">Cancelar</button>
+      </div>
+    </div>
+  </section>
+</main>
