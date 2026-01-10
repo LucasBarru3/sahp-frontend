@@ -1,110 +1,163 @@
-# 🏍️ SAHP – Sistema de Gestión de Instructores
+# SAHP Management System
 
-Aplicación web desarrollada con **Angular** y un **backend serverless en Node.js**, orientada a la gestión de instructores del SAHP.  
-Incluye listado, creación, edición inline y eliminación de instructores, con control de permisos mediante **JWT**.
+Sistema web completo para la gestión interna de **San Andreas Highway Patrol (SAHP)**.  
+Incluye gestión de **vehículos**, **clases**, **instructores** y **autenticación**, con frontend en Angular y backend en Node.js desplegado en Vercel.
 
 ---
 
-## 🚀 Tecnologías utilizadas
+## 🚓 Funcionalidades
+
+### 🔐 Autenticación
+- Login con usuario y contraseña
+- Contraseñas cifradas con **bcrypt**
+- Autenticación mediante **JWT**
+- Persistencia de sesión con `localStorage`
+- Detección de token expirado
+
+### 🚗 Vehículos
+- Listado completo de vehículos
+- Filtros por nombre y clase
+- Ordenación A–Z / Z–A
+- Copiar modelo al portapapeles
+- CRUD completo (admin)
+- Edición inline (sin popups)
+
+### 🏷️ Clases
+- Visualización de clases (B, A, S+)
+- Relación con vehículos
+- Conteo dinámico
+
+### 👮 Instructores
+- Listado de instructores
+- Foto, rango, teléfono y fecha de nacimiento
+- Conteo total
+- Crear, editar y eliminar instructores (admin)
+- Edición inline en la propia tarjeta
+
+### 🛡️ Seguridad
+- Rutas protegidas
+- Acciones sensibles solo para administradores
+- Validación backend
+
+---
+
+## 🧱 Tecnologías
 
 ### Frontend
-- Angular (standalone components)
-- TypeScript
-- HTML5 / CSS3
-- FormsModule (ngModel)
-- jwt-decode
-- Google Material Icons (local)
-- Desplegado en Vercel
+- **Angular 18**
+- Standalone Components
+- Angular Router
+- HttpClient
+- FormsModule
+- JWT Decode
+- CSS moderno (Grid, Flex, clamp)
+- Google Material Icons (instalados localmente)
 
 ### Backend
-- Node.js
-- API serverless (Vercel Functions)
+- **Node.js**
+- API Serverless (Vercel)
 - MySQL
+- JWT
+- bcryptjs
 - CORS configurado manualmente
-- CRUD completo de instructores
 
 ---
 
 ## 📂 Estructura del proyecto
 
+### Frontend
 ```
-/src
- ├── app
- │   ├── components
- │   ├── pages
- │   │   └── instructores
- │   ├── services
- │   └── app.routes.ts
- │
- └── assets
-     └── icons
+sahp-frontend/
+├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   │   ├── vehicles/
+│   │   │   ├── classes/
+│   │   │   ├── instructors/
+│   │   │   └── login/
+│   │   ├── services/
+│   │   └── guards/
+│   ├── assets/
+│   └── styles.css
 ```
 
----
-
-## ✨ Funcionalidades
-
-- 📋 Listado de instructores
-- ➕ Crear instructor
-- ✏️ Edición inline (sin popups)
-- ❌ Eliminación con confirmación
-- 🔐 Control de permisos con JWT
-- ⏳ Loader durante peticiones
-- 📱 Diseño responsive
-
----
-
-## 🔐 Autenticación
-
-- Token JWT almacenado en `localStorage`
-- Validación de expiración
-- Acciones protegidas para administradores
-
----
-
-## 🧑‍🏫 Modelo Instructor
-
-```ts
-{
-  state_id: number;
-  nombre: string;
-  apellidos: string;
-  rango_sahp: string;
-  fecha_nacimiento: string;
-  telefono: string;
-  foto: string;
-}
+### Backend
+```
+sahp-backend/
+├── api/
+│   ├── auth.js
+│   ├── vehicles.js
+│   ├── classes.js
+│   └── instructors.js
+├── db.js
+└── vercel.json
 ```
 
 ---
 
-## 🔌 Endpoints
+## 🔧 Instalación local
 
-- GET    /api/instructors
-- POST   /api/instructors
-- PUT    /api/instructors?state_id=ID
-- DELETE /api/instructors?state_id=ID
+### Backend
+```bash
+npm install
+vercel dev
+```
 
----
+Variables de entorno:
+```
+DB_HOST=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+JWT_SECRET=
+```
 
-## 🛠️ Instalación
-
+### Frontend
 ```bash
 npm install
 ng serve
 ```
 
-App disponible en:
-http://localhost:4200
+---
+
+## 🚀 Deploy
+
+- **Frontend**: Vercel
+- **Backend**: Vercel (Serverless Functions)
+- **Base de datos**: MySQL externo
 
 ---
 
-## 👨‍💻 Autor
+## 🧪 Cuenta de prueba
 
-Lucas – Proyecto educativo / práctico
+```
+Usuario: admin
+Contraseña: admin123
+```
 
 ---
 
-## 📄 Licencia
+## 📌 Notas importantes
 
-MIT
+- El backend usa `req.query` para DELETE y PUT (Vercel)
+- Fechas se normalizan a formato `yyyy-MM-dd` para inputs type="date"
+- No se usan CDNs externos para iconos
+
+---
+
+## 📸 Capturas
+*(Añadir capturas aquí)*
+
+---
+
+## 👤 Autor
+
+Proyecto desarrollado por **Lucas**  
+Rol: Desarrollador Web
+
+---
+
+## 📝 Licencia
+
+Proyecto privado – uso educativo / interno
