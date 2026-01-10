@@ -147,8 +147,12 @@ Contraseña: admin123
 ---
 
 ## 📸 Capturas
-*(Añadir capturas aquí)*
-
+https://i.imgur.com/qs5Z2XN.jpeg
+https://i.imgur.com/avmSwqJ.jpeg
+https://i.imgur.com/2VOJsRo.jpeg
+https://i.imgur.com/uMBqYTr.jpeg
+https://i.imgur.com/suO4yOr.jpeg
+https://i.imgur.com/PcN55vI.jpeg
 ---
 
 ## 👤 Autor
