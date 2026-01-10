@@ -1,40 +1,63 @@
 <main>
   <!-- SECCIÓN DE INSTRUCTORES -->
   <section class="classes-section">
-    <h2>Instructores</h2>
-    <p>Total de instructores {{ instructors.length }}</p>
+    <h1>Instructores</h1>
+    <p>Total de instructores {{ totalInstructors }}</p>
 
     <div *ngIf="loading" class="loader-container">
       <app-loader></app-loader>
     </div>
 
     <div class="classes-container">
-      <div class="class-card" *ngFor="let i of instructors">
-        <img
-          [src]="i.foto"
-          alt="Foto de {{ i.nombre }}"
-          class="instructor-photo"
-        />
+      <article class="class-card" *ngFor="let i of instructors">
 
-        <h3>{{ i.nombre }}</h3>
+        <!-- ===== MODO VISTA ===== -->
+        <ng-container *ngIf="editingInstructor?.state_id !== i.state_id">
 
-        <p class="class-description">{{ i.apellidos }}</p>
-        <p class="class-description">{{ i.rango_sahp }}</p>
-        <p class="class-description">
-          <strong>Nacimiento:</strong> {{ i.fecha_nacimiento | date:'d \'de\' MMMM \'de\' yyyy':'':'es' }}
-        </p>
-        <p class="class-description">
-          <strong>Teléfono:</strong> {{ i.telefono }}
-        </p>
+          <span class="rank-badge">{{ i.rango_sahp }}</span>
 
-        <span class="vehicle-count">
-          ID: {{ i.id_instructor }}
-        </span>
+          <div class="photo-wrapper">
+            <img [src]="i.foto" class="instructor-photo" />
+          </div>
 
-        <button class="delete-btn" (click)="deleteInstructor(i.id_instructor)" *ngIf="isAdmin">
-          Eliminar
-        </button>
-      </div>
+          <h3 class="instructor-name">
+            {{ i.nombre }} {{ i.apellidos }}
+          </h3>
+
+          <div class="info">
+            <p><strong><i class="material-icons">calendar_today</i> Nacimiento</strong><br>{{ i.fecha_nacimiento | date:'longDate':'':'es' }}</p>
+            <p><strong><i class="material-icons">call</i> Teléfono</strong><br>{{ i.telefono }}</p>
+          </div>
+
+          <div class="card-footer">
+            <span class="vehicle-count"><i class="material-icons">badge</i> STATE ID #{{ i.state_id }}</span>
+
+            <div class="actions" *ngIf="isAdmin">
+              <button class="edit-btn" (click)="startEdit(i)">Editar</button>
+              <button class="delete-btn" (click)="deleteInstructor(i.state_id)">Eliminar</button>
+            </div>
+          </div>
+
+        </ng-container>
+
+        <!-- ===== MODO EDICIÓN ===== -->
+        <ng-container *ngIf="editingInstructor?.state_id === i.state_id">
+
+          <input [(ngModel)]="editingInstructor.nombre" placeholder="Nombre" />
+          <input [(ngModel)]="editingInstructor.apellidos" placeholder="Apellidos" />
+          <input [(ngModel)]="editingInstructor.rango_sahp" placeholder="Rango" />
+          <input type="date" [(ngModel)]="editingInstructor.fecha_nacimiento" />
+          <input [(ngModel)]="editingInstructor.telefono" placeholder="Teléfono" />
+          <input [(ngModel)]="editingInstructor.foto" placeholder="URL foto" />
+
+          <div class="edit-actions">
+            <button class="save-btn" (click)="saveEdit()">Guardar</button>
+            <button class="cancel-btn" (click)="cancelEdit()">Cancelar</button>
+          </div>
+
+        </ng-container>
+
+      </article>
     </div>
 
 

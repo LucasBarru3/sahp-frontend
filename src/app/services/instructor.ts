@@ -22,14 +22,27 @@ export class InstructorService {
     return this.http.post(this.apiUrl, data);
   }
 
-  // Actualizar instructor existente
-  update(id: number, data: { nombre: string, apellidos: string, rango_sahp?: string, fecha_nacimiento?: string, telefono?: string, foto?: string }): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, data);
+  // Actualizar instructor
+  update(
+    id: number,
+    data: {
+      nombre: string;
+      apellidos: string;
+      rango_sahp?: string;
+      fecha_nacimiento?: string;
+      telefono?: string;
+      foto?: string;
+    }
+  ): Observable<any> {
+    return this.http.put(
+      `${this.apiUrl}?state_id=${id}`,
+      data
+    );
   }
 
   // Eliminar clase
   delete(id: number) {
     // En serverless se pasa por query string
-    return this.http.delete(`${this.apiUrl}?id_instructor=${id}`);
+    return this.http.delete(`${this.apiUrl}?state_id=${id}`);
   }
 }

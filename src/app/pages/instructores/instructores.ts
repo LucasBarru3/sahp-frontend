@@ -18,6 +18,7 @@ export class InstructoresComponent implements OnInit {
   loading = false;
   addingInstructor: any = null;
   isAdmin = false;
+  totalInstructors: number = 0;
   constructor(private instructorService: InstructorService) {}
 
   ngOnInit() {
@@ -30,6 +31,9 @@ export class InstructoresComponent implements OnInit {
     this.instructorService.getAll().subscribe({
       next: (data) => {
         this.instructors = data;
+        if (data.length > 0) {
+        this.totalInstructors = data[0].instructor_count;
+        }
         this.loading = false; // dejamos de cargar
       },
       error: (err) => {
@@ -91,6 +95,35 @@ export class InstructoresComponent implements OnInit {
     }
 
     this.instructorService.delete(id).subscribe(() => {
+      this.loadInstructors();
+    });
+  }
+
+  editingInstructor: any = null;
+
+  startEdit(instructor: any) {
+    this.editingInstructor = {
+      ...instructor,
+      fecha_nacimiento: instructor.fecha_nacimiento
+        ? instructor.fecha_nacimiento.substring(0, 10)
+        : ''
+    };
+  }
+
+  cancelEdit() {
+    this.editingInstructor = null;
+  }
+
+  saveEdit() {
+    this.instructorService.update(this.editingInstructor.state_id, {
+      nombre: this.editingInstructor.nombre,
+      apellidos: this.editingInstructor.apellidos,
+      rango_sahp: this.editingInstructor.rango_sahp,
+      fecha_nacimiento: this.editingInstructor.fecha_nacimiento,
+      telefono: this.editingInstructor.telefono,
+      foto: this.editingInstructor.foto
+    }).subscribe(() => {
+      this.editingInstructor = null;
       this.loadInstructors();
     });
   }

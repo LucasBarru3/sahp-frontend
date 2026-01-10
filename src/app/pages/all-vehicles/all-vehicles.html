@@ -32,9 +32,9 @@
         {{ v.class_id === 1 ? 'B' : v.class_id === 2 ? 'A' : v.class_id === 3 ? 'S+' : 'C' }}
       </span></a>
       <span class="class-copy">
-        <span (click)="copyModel(v.model)" class="material-symbols-outlined">
+        <i (click)="copyModel(v.model)" class="material-icons" title="Copiar modelo al portapapeles">
           copy_all
-        </span>
+        </i>
       </span>
       <img [src]="v.image_url" onerror="this.onerror=null;this.src='https://i.imgur.com/5fXa2iY.png';" alt="{{ v.name }}" />
     </div>
