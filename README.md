@@ -147,13 +147,16 @@ Contraseña: admin123
 ---
 
 ## 📸 Capturas
-https://i.imgur.com/qs5Z2XN.jpeg
-https://i.imgur.com/avmSwqJ.jpeg
-https://i.imgur.com/2VOJsRo.jpeg
-https://i.imgur.com/uMBqYTr.jpeg
-https://i.imgur.com/suO4yOr.jpeg
-https://i.imgur.com/PcN55vI.jpeg
+
+![Captura 1](https://i.imgur.com/qs5Z2XN.jpeg)
+![Captura 2](https://i.imgur.com/avmSwqJ.jpeg)
+![Captura 3](https://i.imgur.com/2VOJsRo.jpeg)
+![Captura 4](https://i.imgur.com/uMBqYTr.jpeg)
+![Captura 5](https://i.imgur.com/suO4yOr.jpeg)
+![Captura 6](https://i.imgur.com/PcN55vI.jpeg)
+
 ---
+
 
 ## 👤 Autor
 
