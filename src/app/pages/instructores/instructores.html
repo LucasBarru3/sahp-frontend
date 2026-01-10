@@ -30,7 +30,7 @@
           </div>
 
           <div class="card-footer">
-            <span class="vehicle-count"><i class="material-icons">badge</i> STATE ID #{{ i.state_id }}</span>
+            <span class="vehicle-count"><i class="material-icons">badge</i> STATE ID #{{ i.state_id }} / Nº Placa: {{i.num_placa}}</span>
 
             <div class="actions" *ngIf="isAdmin">
               <button class="edit-btn" (click)="startEdit(i)">Editar</button>
@@ -46,6 +46,7 @@
           <input [(ngModel)]="editingInstructor.nombre" placeholder="Nombre" />
           <input [(ngModel)]="editingInstructor.apellidos" placeholder="Apellidos" />
           <input [(ngModel)]="editingInstructor.rango_sahp" placeholder="Rango" />
+          <input [(ngModel)]="editingInstructor.num_placa" placeholder="Nº Placa" />
           <input type="date" [(ngModel)]="editingInstructor.fecha_nacimiento" />
           <input [(ngModel)]="editingInstructor.telefono" placeholder="Teléfono" />
           <input [(ngModel)]="editingInstructor.foto" placeholder="URL foto" />

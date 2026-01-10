@@ -71,7 +71,8 @@ export class InstructoresComponent implements OnInit {
         rango_sahp: '',
         fecha_nacimiento: '',
         telefono: '',
-        foto: ''
+        foto: '',
+        num_placa: ''
     };
   }
 
@@ -82,7 +83,8 @@ export class InstructoresComponent implements OnInit {
       rango_sahp: this.addingInstructor.rango_sahp,
       fecha_nacimiento: this.addingInstructor.fecha_nacimiento,
       telefono: this.addingInstructor.telefono,
-      foto: this.addingInstructor.foto
+      foto: this.addingInstructor.foto,
+      num_placa: this.addingInstructor.num_placa
     }).subscribe(() => {
       this.addingInstructor = null;
       this.loadInstructors();
@@ -121,7 +123,8 @@ export class InstructoresComponent implements OnInit {
       rango_sahp: this.editingInstructor.rango_sahp,
       fecha_nacimiento: this.editingInstructor.fecha_nacimiento,
       telefono: this.editingInstructor.telefono,
-      foto: this.editingInstructor.foto
+      foto: this.editingInstructor.foto,
+      num_placa: this.editingInstructor.num_placa
     }).subscribe(() => {
       this.editingInstructor = null;
       this.loadInstructors();
