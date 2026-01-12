@@ -10,6 +10,7 @@
 
     <div class="classes-container">
       <article class="class-card" *ngFor="let i of instructors">
+        <span class="background-filter"></span>
 
         <!-- ===== MODO VISTA ===== -->
         <ng-container *ngIf="editingInstructor?.state_id !== i.state_id">
@@ -30,12 +31,25 @@
           </div>
 
           <div class="card-footer">
-            <span class="vehicle-count"><i class="material-icons">badge</i> STATE ID #{{ i.state_id }} / Nº Placa: {{i.num_placa}}</span>
+            <span class="vehicle-count"><i class="material-icons">badge</i> <div class="docs"><span>STATE ID #{{ i.state_id }}</span><span>Nº Placa: {{i.num_placa}}</span></div></span>
 
             <div class="actions" *ngIf="isAdmin">
-              <button class="edit-btn" (click)="startEdit(i)">Editar</button>
-              <button class="delete-btn" (click)="deleteInstructor(i.state_id)">Eliminar</button>
+              <button class="edit-btn" (click)="startEdit(i)"><i class="material-icons">edit</i></button>
+              <button class="delete-btn" (click)="askDelete(i.state_id)"><i class="material-icons">delete</i></button>
             </div>
+          </div>
+
+          <div class="confirm-delete" *ngIf="confirmDeleteId === i.state_id">
+            <i class="material-icons">delete</i>
+            <p>Estas seguro de que quieres eliminar a {{ i.nombre }} {{ i.apellidos }}?</p>
+
+            <button class="danger" (click)="confirmDelete(i.state_id)">
+              Sí, eliminar
+            </button>
+
+            <button class="cancel" (click)="cancelDelete()">
+              Cancelar
+            </button>
           </div>
 
         </ng-container>
@@ -73,10 +87,12 @@
       <input type="date" [(ngModel)]="addingInstructor.fecha_nacimiento" />
       <input type="text" [(ngModel)]="addingInstructor.telefono" placeholder="Teléfono" />
       <input type="text" [(ngModel)]="addingInstructor.foto" placeholder="Foto URL" />
+      <input type="text" [(ngModel)]="addingInstructor.num_placa" placeholder="Nº Placa" />
       <div class="form-buttons">
         <button class="save-btn" (click)="addInstructor()">Guardar</button>
         <button class="cancel-btn" (click)="addingInstructor = null">Cancelar</button>
       </div>
     </div>
+
   </section>
 </main>

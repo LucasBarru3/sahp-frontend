@@ -82,7 +82,7 @@ main {
   text-align: center;
   margin-top: 10px;
   font-size: clamp(2rem, 4vw, 3rem);
-  color: #004d75;
+  color: #556B2F;
   margin-bottom: clamp(20px, 3vw, 40px);
 }
 
@@ -97,7 +97,9 @@ main {
 /* CARD */
 .class-card {
   position: relative;
-  background: linear-gradient(145deg, #cfefff, #bce7fd);
+  background-image: url('https://i.imgur.com/9chCwrN.jpeg');
+  background-size: cover;
+  background-position: center;
   padding: clamp(24px, 2.5vw, 40px);
   border-radius: 26px;
   box-shadow:
@@ -109,6 +111,18 @@ main {
   align-items: center;
   text-align: center;
   overflow: hidden;
+  animation: fadeUp 0.4s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .class-card::before {
@@ -163,7 +177,7 @@ main {
 /* NOMBRE */
 .instructor-name {
   font-size: clamp(1.3rem, 1.8vw, 2rem);
-  color: #004d75;
+  color: #556B2F;
   margin-bottom: 14px;
   font-weight: 800;
 }
@@ -179,7 +193,7 @@ main {
 }
 .info p {
   font-size: clamp(0.95rem, 1.1vw, 1.1rem);
-  color: #333;
+  color: #007cbf;
   margin-bottom: 10px;
   line-height: 1.5;
 }
@@ -361,6 +375,12 @@ main {
   margin-top: 10px;
 }
 
+.actions{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
 .edit-btn {
   background: #007cbf;
   color: #fff;
@@ -386,4 +406,44 @@ main {
   border: none;
   padding: 8px 14px;
   border-radius: 10px;
+}
+
+.confirm-delete {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff3f3;
+  border: 1px solid #ffbcbc;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.confirm-delete p {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #b30000;
+}
+
+.confirm-delete .danger {
+  background: #d32f2f;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.confirm-delete .cancel {
+  background: #ccc;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+.docs{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }

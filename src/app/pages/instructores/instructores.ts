@@ -92,11 +92,24 @@ export class InstructoresComponent implements OnInit {
   }
 
   deleteInstructor(id: number) {
-    if (!confirm('¿Seguro que quieres eliminar este instructor?')) {
-      return;
-    }
-
     this.instructorService.delete(id).subscribe(() => {
+      this.loadInstructors();
+    });
+  }
+
+  confirmDeleteId: number | null = null;
+
+  askDelete(id: number) {
+    this.confirmDeleteId = id;
+  }
+
+  cancelDelete() {
+    this.confirmDeleteId = null;
+  }
+
+  confirmDelete(id: number) {
+    this.instructorService.delete(id).subscribe(() => {
+      this.confirmDeleteId = null;
       this.loadInstructors();
     });
   }
