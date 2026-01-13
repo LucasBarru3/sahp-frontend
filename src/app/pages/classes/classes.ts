@@ -5,7 +5,8 @@ import { RouterModule } from '@angular/router';
 import { LoaderComponent } from '../../components/loader/loader';
 import { jwtDecode } from 'jwt-decode';
 import { FormsModule } from '@angular/forms';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdminService } from '../../services/admin';
 @Component({
   selector: 'app-classes',
   standalone: true,
@@ -18,7 +19,7 @@ export class ClassesComponent implements OnInit {
   loading = false;
   addingClass: any = null;
   isAdmin = false;
-  constructor(private classService: ClassService) {}
+  constructor(private classService: ClassService, private snackBar: MatSnackBar, private adminService: AdminService) {}
 
   ngOnInit() {
     this.loadClasses();
@@ -60,7 +61,11 @@ export class ClassesComponent implements OnInit {
       }
     }
 
-      startAdd() {
+    startAdd() {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para crear clases', 'Cerrar', { duration: 3000 });
+      return;
+    }
     this.addingClass = {
       name: '',
       description: '',
@@ -74,6 +79,18 @@ export class ClassesComponent implements OnInit {
     }).subscribe(() => {
       this.addingClass = null;
       this.loadClasses();
+      this.snackBar.open('Clase añadida con éxito', 'Cerrar', { duration: 3000 });
+    });
+  }
+
+  deleteClass(id: number) {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para borrar clases', 'Cerrar', { duration: 3000 });
+      return;
+    }
+    this.classService.delete(id).subscribe(() => {
+      this.loadClasses();
+      this.snackBar.open('Clase eliminada con éxito', 'Cerrar', { duration: 3000 });
     });
   }
 

@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header';
 import { FooterComponent } from './components/footer/footer';
 import { registerLocaleData } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import localeEs from '@angular/common/locales/es';
 
 // Registramos el locale español
@@ -10,7 +11,7 @@ registerLocaleData(localeEs);
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MatSnackBarModule],
   templateUrl: './app.html',
   styleUrls: ['./app.css'], // corregido: era styleUrl → styleUrls
   providers: [

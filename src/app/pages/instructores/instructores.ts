@@ -5,7 +5,8 @@ import { RouterModule } from '@angular/router';
 import { LoaderComponent } from '../../components/loader/loader';
 import { jwtDecode } from 'jwt-decode';
 import { FormsModule } from '@angular/forms';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdminService } from '../../services/admin';
 @Component({
   selector: 'app-instructores',
   standalone: true,
@@ -19,7 +20,7 @@ export class InstructoresComponent implements OnInit {
   addingInstructor: any = null;
   isAdmin = false;
   totalInstructors: number = 0;
-  constructor(private instructorService: InstructorService) {}
+  constructor(private instructorService: InstructorService, private snackBar: MatSnackBar, private adminService: AdminService) {}
 
   ngOnInit() {
     this.loadInstructors();
@@ -65,6 +66,10 @@ export class InstructoresComponent implements OnInit {
     }
 
   startAdd() {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para crear instructores', 'Cerrar', { duration: 3000 });
+      return;
+    }
     this.addingInstructor = {
         nombre: '',
         apellidos: '',
@@ -92,6 +97,10 @@ export class InstructoresComponent implements OnInit {
   }
 
   deleteInstructor(id: number) {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para borrar instructores', 'Cerrar', { duration: 3000 });
+      return;
+    }
     this.instructorService.delete(id).subscribe(() => {
       this.loadInstructors();
     });
@@ -100,6 +109,10 @@ export class InstructoresComponent implements OnInit {
   confirmDeleteId: number | null = null;
 
   askDelete(id: number) {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para borrar instructores', 'Cerrar', { duration: 3000 });
+      return;
+    }
     this.confirmDeleteId = id;
   }
 
@@ -117,6 +130,10 @@ export class InstructoresComponent implements OnInit {
   editingInstructor: any = null;
 
   startEdit(instructor: any) {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para editar instructores', 'Cerrar', { duration: 3000 });
+      return;
+    }
     this.editingInstructor = {
       ...instructor,
       fecha_nacimiento: instructor.fecha_nacimiento
@@ -143,4 +160,22 @@ export class InstructoresComponent implements OnInit {
       this.loadInstructors();
     });
   }
+
+  copyTel(tel: string) {
+    navigator.clipboard.writeText(tel).then(() => {
+    }).catch(err => console.error('Error copiando al portapapeles:', err));
+    this.snackBar.open(
+      'Número copiado al portapapeles',
+      'Cerrar',
+      {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        panelClass: ['snackbar-progress']
+      }
+    );
+  }
+
+
 }
+  

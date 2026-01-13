@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { ClassService } from '../../services/class';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdminService } from '../../services/admin';
 @Component({
   selector: 'app-all-vehicles',
   standalone: true,
@@ -24,7 +26,7 @@ export class AllVehiclesComponent implements OnInit {
   filteredVehicles: any[] = [];
   isAdmin = false;
   classes: any[] = [];
-  constructor(private vehicleService: VehicleService, private classService: ClassService) {}
+  constructor(private vehicleService: VehicleService, private classService: ClassService, private snackBar: MatSnackBar, private adminService: AdminService) {}
 
   ngOnInit() {
     this.checkAdmin();
@@ -117,13 +119,33 @@ export class AllVehiclesComponent implements OnInit {
   }
 
   deleteVehicle(id: number) {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para borrar vehículos', 'Cerrar', { duration: 3000 });
+      return;
+    }
     this.vehicleService.delete(id).subscribe({
-      next: () => this.loadVehicles(),
+      next: () => {
+        this.loadVehicles();
+        this.snackBar.open(
+          'Coche eliminado con éxito',
+          'Cerrar',
+          {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
+            panelClass: ['snackbar-progress']
+          }
+        );
+      },
       error: err => console.error('Error eliminando:', err)
     });
   }
 
   startEdit(vehicle: any) {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para editar vehículos', 'Cerrar', { duration: 3000 });
+      return;
+    }
     this.editingVehicle = {
       ...vehicle,
       image_url: vehicle.image_url || '',  // Si es null o undefined, ponemos ''
@@ -142,6 +164,16 @@ export class AllVehiclesComponent implements OnInit {
       note: this.editingVehicle.note
     }).subscribe(() => {
       this.editingVehicle = null;
+      this.snackBar.open(
+      'Vehiculo editado con éxito',
+      'Cerrar',
+      {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        panelClass: ['snackbar-progress']
+      }
+    );
       this.loadVehicles();
     });
   }
@@ -155,5 +187,15 @@ export class AllVehiclesComponent implements OnInit {
   copyModel(model: string) {
     navigator.clipboard.writeText(model).then(() => {
     }).catch(err => console.error('Error copiando al portapapeles:', err));
+    this.snackBar.open(
+      'Coche copiado al portapapeles',
+      'Cerrar',
+      {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        panelClass: ['snackbar-progress']
+      }
+    );
   }
 }

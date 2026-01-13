@@ -28,7 +28,7 @@ export class ClassService {
   }
 
   // Eliminar clase
-  delete(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  delete(id: number) {
+    return this.http.delete(`${this.apiUrl}?id=${id}`);
   }
 }

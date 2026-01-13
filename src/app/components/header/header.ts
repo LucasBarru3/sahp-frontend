@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +12,9 @@ import { jwtDecode } from 'jwt-decode';
   styleUrls: ['./header.css']
 })
 export class HeaderComponent {
+  constructor(
+    private snackBar: MatSnackBar
+  ) {}
   isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
     if (!token) return false;
@@ -29,7 +33,7 @@ export class HeaderComponent {
   }
   logout() {
     localStorage.removeItem('token');
-    window.location.reload();
+    this.snackBar.open('Sesión cerrada con éxito', 'Cerrar', { duration: 3000 });
   }
   
 }

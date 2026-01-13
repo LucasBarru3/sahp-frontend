@@ -177,6 +177,7 @@ main {
 /* NOMBRE */
 .instructor-name {
   font-size: clamp(1.3rem, 1.8vw, 2rem);
+  text-shadow: -0.5px -0.5px 0 #6ea2be, 0.5px -0.5px 0 #6ea2be, -0.5px 0.5px 0 #6ea2be, 0.5px 0.5px 0 #6ea2be;
   color: #556B2F;
   margin-bottom: 14px;
   font-weight: 800;
@@ -446,4 +447,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+#tel {
+  cursor: pointer;
 }

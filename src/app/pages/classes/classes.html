@@ -25,6 +25,15 @@
         >
           Ver vehículos
         </a>
+        <button 
+          class="delete-btn"
+          [disabled]="c.vehicle_count > 0"
+          title="No se puede borrar una clase con vehículos asignados"
+          *ngIf="isAdmin && c.vehicle_count === 0"
+          (click)="deleteClass(c.id)"
+        >
+          Eliminar clase
+        </button>
       </div>
     </div>
 

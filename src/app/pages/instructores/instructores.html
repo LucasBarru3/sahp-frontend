@@ -27,7 +27,7 @@
 
           <div class="info">
             <p><strong><i class="material-icons">calendar_today</i> Nacimiento</strong><br>{{ i.fecha_nacimiento | date:'longDate':'':'es' }}</p>
-            <p><strong><i class="material-icons">call</i> Teléfono</strong><br>{{ i.telefono }}</p>
+            <p id="tel" (click)="copyTel(i.telefono)"><strong><i class="material-icons" title="Copiar tlf al portapapeles">call</i> Teléfono</strong><br>{{ i.telefono }}</p>
           </div>
 
           <div class="card-footer">

@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from '../../components/loader/loader';
 import { jwtDecode } from 'jwt-decode';
 import { ClassService } from '../../services/class';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdminService } from '../../services/admin';
 @Component({
   selector: 'app-vehicles',
   standalone: true,
@@ -26,9 +28,15 @@ export class VehiclesComponent implements OnInit {
     private vehicleService: VehicleService,
     private route: ActivatedRoute,
     private classService: ClassService,
+    private snackBar: MatSnackBar,
+    private adminService: AdminService
   ) {}
 
   startEdit(vehicle: any) {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para editar vehículos', 'Cerrar', { duration: 3000 });
+      return;
+    }
     this.editingVehicle = {
       ...vehicle,
       image_url: vehicle.image_url || '',  // Si es null o undefined, ponemos ''
@@ -58,6 +66,10 @@ export class VehiclesComponent implements OnInit {
   }
 
   startAdd() {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para crear vehículos', 'Cerrar', { duration: 3000 });
+      return;
+    }
     this.addingVehicle = {
       name: '',
       model: '',
@@ -120,11 +132,6 @@ export class VehiclesComponent implements OnInit {
       return false;
     }
   }
-  
-  createVehicle() {
-    const data = { name: 'Nuevo', model: 'ModeloX', image_url: '', class_id: this.classId, follow_class: '', note: '' };
-    this.vehicleService.create(data).subscribe(() => this.loadVehicles());
-  }
 
   editVehicle() {
     this.vehicleService.update(this.editingVehicle.id, {
@@ -136,6 +143,7 @@ export class VehiclesComponent implements OnInit {
       note: this.editingVehicle.note
     }).subscribe(() => {
       this.editingVehicle = null;
+      this.snackBar.open('Vehículo actualizado con éxito', 'Cerrar', { duration: 3000 });
       this.loadVehicles();
     });
   }
@@ -151,12 +159,20 @@ export class VehiclesComponent implements OnInit {
     }).subscribe(() => {
       this.addingVehicle = null;
       this.loadVehicles();
+      this.snackBar.open('Vehículo añadido con éxito', 'Cerrar', { duration: 3000 });
     });
   }
 
   deleteVehicle(id: number) {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para borrar vehículos', 'Cerrar', { duration: 3000 });
+      return;
+    }
     this.vehicleService.delete(id).subscribe({
-      next: () => this.loadVehicles(),
+      next: () => {
+        this.loadVehicles();
+        this.snackBar.open('Vehículo eliminado con éxito', 'Cerrar', { duration: 3000 });
+      },
       error: err => console.error('Error eliminando:', err)
     });
   }
@@ -164,6 +180,7 @@ export class VehiclesComponent implements OnInit {
   copyModel(model: string) {
     navigator.clipboard.writeText(model).then(() => {
     }).catch(err => console.error('Error copiando al portapapeles:', err));
+    this.snackBar.open('Modelo copiado al portapapeles', 'Cerrar', { duration: 2000 });
   }
 
 }
