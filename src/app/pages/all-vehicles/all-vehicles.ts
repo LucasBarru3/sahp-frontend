@@ -8,6 +8,10 @@ import { jwtDecode } from 'jwt-decode';
 import { ClassService } from '../../services/class';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminService } from '../../services/admin';
+import { Subscription } from 'rxjs';
+import { SessionService } from '../../services/session';
+import { OnDestroy } from '@angular/core';
+
 @Component({
   selector: 'app-all-vehicles',
   standalone: true,
@@ -15,7 +19,7 @@ import { AdminService } from '../../services/admin';
   templateUrl: './all-vehicles.html',
   styleUrls: ['./all-vehicles.css']
 })
-export class AllVehiclesComponent implements OnInit {
+export class AllVehiclesComponent implements OnInit, OnDestroy {
   imageOk = true;
   vehicles: any[] = [];
   loading = false;
@@ -26,7 +30,8 @@ export class AllVehiclesComponent implements OnInit {
   filteredVehicles: any[] = [];
   isAdmin = false;
   classes: any[] = [];
-  constructor(private vehicleService: VehicleService, private classService: ClassService, private snackBar: MatSnackBar, private adminService: AdminService) {}
+  logoutSub!: Subscription;
+  constructor(private vehicleService: VehicleService, private classService: ClassService, private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService) {}
 
   ngOnInit() {
     this.checkAdmin();
@@ -38,6 +43,10 @@ export class AllVehiclesComponent implements OnInit {
       error: err => {
         console.error('Error cargando clases:', err);
       }
+    });
+    this.logoutSub = this.sessionService.logout$.subscribe(() => {
+      this.isAdmin = false;
+      this.loadVehicles();
     });
   }
 
@@ -197,5 +206,9 @@ export class AllVehiclesComponent implements OnInit {
         panelClass: ['snackbar-progress']
       }
     );
+  }
+  
+  ngOnDestroy() {
+    this.logoutSub?.unsubscribe();
   }
 }

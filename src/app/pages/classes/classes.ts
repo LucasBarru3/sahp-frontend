@@ -7,6 +7,9 @@ import { jwtDecode } from 'jwt-decode';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminService } from '../../services/admin';
+import { OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { SessionService } from '../../services/session';
 @Component({
   selector: 'app-classes',
   standalone: true,
@@ -14,15 +17,20 @@ import { AdminService } from '../../services/admin';
   templateUrl: './classes.html',
   styleUrls: ['./classes.css']
 })
-export class ClassesComponent implements OnInit {
+export class ClassesComponent implements OnInit, OnDestroy {
   classes: any[] = [];
   loading = false;
   addingClass: any = null;
   isAdmin = false;
-  constructor(private classService: ClassService, private snackBar: MatSnackBar, private adminService: AdminService) {}
+  logoutSub!: Subscription;
+  constructor(private classService: ClassService, private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService) {}
 
   ngOnInit() {
     this.loadClasses();
+    this.logoutSub = this.sessionService.logout$.subscribe(() => {
+      this.isAdmin = false;
+      this.loadClasses();
+    });
   }
 
   loadClasses() {
@@ -94,4 +102,7 @@ export class ClassesComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.logoutSub?.unsubscribe();
+  }
 }

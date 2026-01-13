@@ -129,15 +129,6 @@ ng serve
 
 ---
 
-## 🧪 Cuenta de prueba
-
-```
-Usuario: admin
-Contraseña: admin123
-```
-
----
-
 ## 📌 Notas importantes
 
 - El backend usa `req.query` para DELETE y PUT (Vercel)

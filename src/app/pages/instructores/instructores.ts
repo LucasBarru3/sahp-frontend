@@ -7,6 +7,10 @@ import { jwtDecode } from 'jwt-decode';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminService } from '../../services/admin';
+import { OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { SessionService } from '../../services/session';
+
 @Component({
   selector: 'app-instructores',
   standalone: true,
@@ -14,17 +18,23 @@ import { AdminService } from '../../services/admin';
   templateUrl: './instructores.html',
   styleUrls: ['./instructores.css']
 })
-export class InstructoresComponent implements OnInit {
+export class InstructoresComponent implements OnInit, OnDestroy {
   instructors: any[] = [];
   loading = false;
   addingInstructor: any = null;
   isAdmin = false;
   totalInstructors: number = 0;
-  constructor(private instructorService: InstructorService, private snackBar: MatSnackBar, private adminService: AdminService) {}
+  logoutSub!: Subscription;
+  constructor(private instructorService: InstructorService, private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService) {}
 
   ngOnInit() {
     this.loadInstructors();
     this.checkAdmin();
+
+    this.logoutSub = this.sessionService.logout$.subscribe(() => {
+      this.isAdmin = false;
+      this.loadInstructors();
+    });
   }
 
   loadInstructors() {
@@ -176,6 +186,8 @@ export class InstructoresComponent implements OnInit {
     );
   }
 
-
+  ngOnDestroy() {
+    this.logoutSub?.unsubscribe();
+  }
 }
   

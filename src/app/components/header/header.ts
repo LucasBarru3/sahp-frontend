@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SessionService } from '../../services/session';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class HeaderComponent {
   constructor(
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private sessionService: SessionService
   ) {}
   isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
@@ -33,6 +35,7 @@ export class HeaderComponent {
   }
   logout() {
     localStorage.removeItem('token');
+    this.sessionService.notifyLogout();
     this.snackBar.open('Sesión cerrada con éxito', 'Cerrar', { duration: 3000 });
   }
   
