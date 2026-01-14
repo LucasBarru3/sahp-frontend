@@ -62,7 +62,8 @@
     </div>
     <div class="vehicle-info">
       <h3>{{ v.name }}</h3>
-      <p>Se sige con: {{ v.follow_class }}</p>
+      <div class="margenes"><span>Seguir en-></span><span>{{ v.follow_class }}</span></div>
+      <div class="margenes"><span>Tuneado-></span><span>{{ v.tuned }}</span></div>
       <p>Nota: {{ v.note }}</p>
       <div class="buttons" *ngIf="isAdmin">
         <button class="edit-btn" (click)="startEdit(v)">Editar</button>
@@ -105,6 +106,13 @@
     Se sigue con:
   </label>
   <input type="text" name="follow_class" id="follow_class" [(ngModel)]="editingVehicle.follow_class" placeholder="Clase a seguir" />
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 10px;">
+  <label for="tuned" style="white-space: nowrap;">
+    Tuneado:
+  </label>
+  <input type="text" name="tuned" id="tuned" [(ngModel)]="editingVehicle.tuned" placeholder="Tuneado" />
   </div>
   
   <input type="text" name="note" id="note" [(ngModel)]="editingVehicle.note" placeholder="Nota" />
@@ -149,6 +157,13 @@
     Se sigue con:
   </label>
   <input type="text" name="follow_class" id="follow_class" [(ngModel)]="addingVehicle.follow_class" placeholder="Clase a seguir" />
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 10px;">
+  <label for="tuned" style="white-space: nowrap;">
+    Tuneado:
+  </label>
+  <input type="text" name="tuned" id="tuned" [(ngModel)]="addingVehicle.tuned" placeholder="Tuneado" />
   </div>
   
   <input type="text" name="note" id="note" [(ngModel)]="addingVehicle.note" placeholder="Nota" />

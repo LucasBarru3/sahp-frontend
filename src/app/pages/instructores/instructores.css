@@ -80,7 +80,7 @@ main {
 
 .classes-section h1{
   text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
   font-size: clamp(2rem, 4vw, 3rem);
   color: #556B2F;
   margin-bottom: clamp(20px, 3vw, 40px);

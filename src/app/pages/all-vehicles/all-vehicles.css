@@ -85,6 +85,7 @@
 
 .vehicle-info {
   padding: 10px;
+  width: 100%;
   text-align: center;
 }
 
@@ -94,7 +95,7 @@
 }
 
 .vehicle-info p {
-  margin: 0 0 10px;
+  margin: 0 0 1px;
   color: #457cbf;
 }
 
@@ -280,4 +281,18 @@
   .edit-form input{
     height: 20px;
   }
+}
+
+.margenes {
+  display: flex;
+  justify-content: space-between;
+}
+
+.margenes span:first-child {
+  font-weight: bold;
+  color: #3b3d8a;
+}
+
+.margenes span:last-child {
+  color: #457cbf;
 }

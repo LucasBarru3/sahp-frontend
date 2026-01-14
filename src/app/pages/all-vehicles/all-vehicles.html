@@ -40,7 +40,9 @@
     </div>
     <div class="vehicle-info">
       <h3>{{ v.name }}</h3>
-      <p>Seguir en: {{ v.follow_class }}</p>
+
+      <div class="margenes"><span>Seguir en-></span><span>{{ v.follow_class }}</span></div>
+      <div class="margenes"><span>Tuneado-></span><span>{{ v.tuned }}</span></div>
       <p>Nota: {{ v.note }}</p>
       <div class="buttons" *ngIf="isAdmin">
         <button class="edit-btn" (click)="startEdit(v)">Editar</button>
@@ -91,7 +93,20 @@
     style="flex: 1;"
   />
   </div>
+  <div style="display: flex; align-items: center; gap: 10px;">
+  <label for="tuned" style="white-space: nowrap;">
+    Tuneado:
+  </label>
 
+  <input
+    type="text"
+    id="tuned"
+    name="tuned"
+    [(ngModel)]="editingVehicle.tuned"
+    placeholder="Tuneado"
+    style="flex: 1;"
+  />
+  </div>
   <input style="height:30px;" type="text" name="note" id="note" [(ngModel)]="editingVehicle.note" placeholder="Nota" />
   <div class="form-buttons">
     <button class="save-btn" (click)="editVehicle()" [disabled]="!imageOk || editingVehicle.image_url.startsWith('data:')">Guardar</button>

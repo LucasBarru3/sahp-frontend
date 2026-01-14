@@ -46,6 +46,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       ...vehicle,
       image_url: vehicle.image_url || '',  // Si es null o undefined, ponemos ''
       follow_class: vehicle.follow_class || '',
+      tuned: vehicle.tuned || '',
       note: vehicle.note || ''
     };
   }
@@ -81,6 +82,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       image_url: '',
       class_id: this.classId,
       follow_class: '',
+      tuned: '',
       note: ''
     };
   }
@@ -149,6 +151,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       image_url: this.editingVehicle.image_url,
       class_id: this.editingVehicle.class_id,
       follow_class: this.editingVehicle.follow_class,
+      tuned: this.editingVehicle.tuned,
       note: this.editingVehicle.note
     }).subscribe(() => {
       this.editingVehicle = null;
@@ -164,6 +167,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       image_url: this.addingVehicle.image_url,
       class_id: this.addingVehicle.class_id,
       follow_class: this.addingVehicle.follow_class,
+      tuned: this.addingVehicle.tuned,
       note: this.addingVehicle.note
     }).subscribe(() => {
       this.addingVehicle = null;
