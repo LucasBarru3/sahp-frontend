@@ -29,7 +29,6 @@ export class HeaderComponent {
       }
       return true; // token válido
     } catch (err) {
-      console.error('Token inválido', err);
       return false;
     }
   }

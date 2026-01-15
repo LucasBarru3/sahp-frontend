@@ -64,7 +64,6 @@ export class ClassesComponent implements OnInit, OnDestroy {
         this.isAdmin = true;
         return true; // token válido
       } catch (err) {
-        console.error('Token inválido', err);
         return false;
       }
     }

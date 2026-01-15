@@ -139,7 +139,6 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       this.isAdmin = true;
       return true; // token válido
     } catch (err) {
-      console.error('Token inválido', err);
       return false;
     }
   }
