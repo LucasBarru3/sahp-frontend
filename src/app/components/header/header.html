@@ -13,6 +13,7 @@
   <nav>
     <a routerLink="classes" routerLinkActive="active">Clases</a>
     <a routerLink="instructors" routerLinkActive="active">Instructores</a>
+    <a routerLink="licenses" routerLinkActive="active">Licencias</a>
     <a routerLink="login" routerLinkActive="active" *ngIf="!isLoggedIn()">Login</a>
     <a style="cursor: pointer;" (click)="logout()" *ngIf="isLoggedIn()">Cerrar Sesión</a>
   </nav>

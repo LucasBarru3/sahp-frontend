@@ -212,4 +212,14 @@ export class AllVehiclesComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.logoutSub?.unsubscribe();
   }
+
+  selectedImage: string | null = null;
+
+  openImage(url: string) {
+    this.selectedImage = url;
+  }
+
+  closeImage() {
+    this.selectedImage = null;
+  }
 }

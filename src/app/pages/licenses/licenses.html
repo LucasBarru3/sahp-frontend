@@ -1,0 +1,58 @@
+<main class="licenses-page">
+  <h1>SAHP Licencias y Autorizaciones</h1>
+  <p class="subtitle">
+    Debajo se encuentran las licencias y autorizaciones emitidas por el San Andreas Highway Patrol (SAHP) para la operación de vehículos específicos en servicio policial.
+  </p>
+
+  <div class="licenses-container">
+    <article class="license-card" *ngFor="let l of licenses">
+
+      <!-- Imagen vehículo -->
+      <div class="vehicle-image">
+        <img [src]="l.image" [alt]="l.vehicle" />
+        <span class="vehicle-name">{{ l.vehicle }}</span>
+      </div>
+
+      <!-- Header -->
+      <div class="license-header">
+        <h2>{{ l.name }}</h2>
+        <span
+          class="status"
+          [class.active]="l.active"
+          [class.inactive]="!l.active"
+        >
+          {{ l.active ? 'ACTIVA' : 'INACTIVA' }}
+        <span
+          *ngIf="l.until"
+          [class.active]="l.active"
+          [class.inactive]="!l.active"
+        >
+          hasta : {{ l.until }}
+        </span>
+        </span>
+   
+      </div>
+
+      <p class="description">
+        {{ l.description }}
+      </p>
+
+      <div class="license-info">
+        <p><strong>Requerido para:</strong> {{ l.requiredFor }}</p>
+        <p><strong>Unidades exentas:</strong> {{ l.exempt }}</p>
+      </div>
+
+      <div class="notice">
+        Esta autorización aplica exclusivamente a la operación del vehículo.
+      </div>
+
+      <button
+        class="admin-toggle"
+        *ngIf="isAdmin"
+        (click)="toggleLicenseStatus(l)"
+        >
+        {{ l.active ? 'DESACTIVAR' : 'ACTIVAR' }}
+        </button>
+    </article>
+  </div>
+</main>

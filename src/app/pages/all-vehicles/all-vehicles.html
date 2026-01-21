@@ -36,7 +36,7 @@
           copy_all
         </i>
       </span>
-      <img [src]="v.image_url" onerror="this.onerror=null;this.src='https://i.imgur.com/5fXa2iY.png';" alt="{{ v.name }}" />
+      <img [src]="v.image_url" onerror="this.onerror=null;this.src='https://i.imgur.com/5fXa2iY.png';" (click)="openImage(v.image_url)" class="clickable-img" alt="{{ v.name }}" />
     </div>
     <div class="vehicle-info">
       <h3>{{ v.name }}</h3>
@@ -112,4 +112,8 @@
     <button class="save-btn" (click)="editVehicle()" [disabled]="!imageOk || editingVehicle.image_url.startsWith('data:')">Guardar</button>
     <button class="cancel-btn" (click)="editingVehicle = null">Cancelar</button>
   </div>
+</div>
+<div class="image-modal" *ngIf="selectedImage" (click)="closeImage()">
+  <img [src]="selectedImage" (click)="$event.stopPropagation()" />
+  <span class="close-btn" (click)="closeImage()">✕</span>
 </div>

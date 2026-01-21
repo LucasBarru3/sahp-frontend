@@ -1,0 +1,186 @@
+.licenses-page {
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+  color: #fff;
+}
+
+.subtitle {
+  opacity: 0.7;
+  margin-bottom: 30px;
+}
+
+.licenses-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 26px;
+}
+
+/* CARD */
+.license-card {
+  background: linear-gradient(145deg, #0b2c3f, #0f3f5c);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 12px 35px rgba(0,0,0,.45);
+  overflow: hidden;
+}
+/* =========================
+   GTA-STYLE HOVER EFFECT
+   ========================= */
+
+/* Card base animation */
+.license-card {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* Hover card */
+.license-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+}
+
+/* Image zoom + cinematic feel */
+.vehicle-image img {
+  transition:
+    transform 0.5s ease,
+    filter 0.5s ease;
+}
+
+.license-card:hover .vehicle-image img {
+  transform: scale(1.08);
+  filter: contrast(1.25) saturate(1.2);
+}
+
+/* Vehicle name glow */
+.vehicle-name {
+  transition:
+    background 0.35s ease,
+    letter-spacing 0.35s ease;
+}
+
+.license-card:hover .vehicle-name {
+  background: rgba(0, 0, 0, 0.8);
+  letter-spacing: 1.5px;
+}
+
+/* Subtle highlight line (Rockstar vibe) */
+.license-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.08),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.license-card:hover::after {
+  opacity: 1;
+}
+
+/* IMAGEN */
+.vehicle-image {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.vehicle-image img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  filter: contrast(1.1) saturate(1.05);
+}
+
+.vehicle-name {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  background: rgba(0,0,0,.6);
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+/* HEADER */
+.license-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.license-header h2 {
+  font-size: 1.15rem;
+}
+
+/* STATUS */
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.status.active {
+  background: #1e7f43;
+  color: #d7ffe7;
+}
+
+.status.inactive {
+  background: #7f1e1e;
+  color: #ffd7d7;
+}
+
+/* TEXTO */
+.description {
+  margin: 14px 0;
+  opacity: 0.9;
+}
+
+.license-info p {
+  margin: 4px 0;
+  font-size: 0.85rem;
+}
+
+.notice {
+  margin-top: 14px;
+  font-size: 0.7rem;
+  opacity: 0.6;
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 10px;
+}
+
+.admin-toggle {
+  margin-top: 14px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+  background: linear-gradient(145deg, #1c1c1c, #2a2a2a);
+  color: #fff;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.admin-toggle:hover {
+  background: linear-gradient(145deg, #2a2a2a, #3a3a3a);
+  transform: scale(1.02);
+}
+
+.admin-toggle:active {
+  transform: scale(0.97);
+}
