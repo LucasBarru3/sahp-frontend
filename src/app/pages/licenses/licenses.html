@@ -3,34 +3,25 @@
   <p class="subtitle">
     Debajo se encuentran las licencias y autorizaciones emitidas por el San Andreas Highway Patrol (SAHP) para la operación de vehículos específicos en servicio policial.
   </p>
+  <div *ngIf="loading" class="loader-container">
+    <app-loader></app-loader>
+  </div>
 
   <div class="licenses-container">
     <article class="license-card" *ngFor="let l of licenses">
 
       <!-- Imagen vehículo -->
       <div class="vehicle-image">
-        <img [src]="l.image" [alt]="l.vehicle" />
-        <span class="vehicle-name">{{ l.vehicle }}</span>
+        <img [src]="l.image_url" [alt]="l.vehicle" />
+        <span class="vehicle-name">{{ l.name }}</span>
       </div>
 
       <!-- Header -->
       <div class="license-header">
-        <h2>{{ l.name }}</h2>
-        <span
-          class="status"
-          [class.active]="l.active"
-          [class.inactive]="!l.active"
-        >
-          {{ l.active ? 'ACTIVA' : 'INACTIVA' }}
-        <span
-          *ngIf="l.until"
-          [class.active]="l.active"
-          [class.inactive]="!l.active"
-        >
-          hasta : {{ l.until }}
+        <h2>{{ l.title }}</h2>
+        <span class="status" [class.active]="l.active" [class.inactive]="!l.active">
+          {{ l.active ? 'ACTIVE' : 'INACTIVE' }}
         </span>
-        </span>
-   
       </div>
 
       <p class="description">
@@ -38,7 +29,7 @@
       </p>
 
       <div class="license-info">
-        <p><strong>Requerido para:</strong> {{ l.requiredFor }}</p>
+        <p><strong>Requerido para:</strong> {{ l.required }}</p>
         <p><strong>Unidades exentas:</strong> {{ l.exempt }}</p>
       </div>
 
@@ -46,13 +37,10 @@
         Esta autorización aplica exclusivamente a la operación del vehículo.
       </div>
 
-      <button
-        class="admin-toggle"
-        *ngIf="isAdmin"
-        (click)="toggleLicenseStatus(l)"
-        >
-        {{ l.active ? 'DESACTIVAR' : 'ACTIVAR' }}
-        </button>
+      <button class="toggle-status-btn" (click)="toggleLicenseStatus(l.id, l)">
+        Cambiar Estado de Licencia
+      </button>
+
     </article>
   </div>
 </main>
