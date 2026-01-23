@@ -24,6 +24,7 @@ export class LicensesComponent implements OnInit, OnDestroy {
   addingLicense: any = null;
   isAdmin = false;
   logoutSub!: Subscription;
+  modalLicense: boolean = false;
   constructor(private licenseService: LicenseService, private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService) {}
 
   ngOnInit() {
@@ -70,45 +71,62 @@ export class LicensesComponent implements OnInit, OnDestroy {
       }
     }
 
-  startAdd() {
-    if (this.adminService.checkAdmin() === false) {
-      this.snackBar.open('No tienes permisos para crear instructores', 'Cerrar', { duration: 3000 });
+  openCreateLicenseModal() {
+    if (!this.adminService.checkAdmin()) {
+      this.snackBar.open('No tienes permisos', 'Cerrar', { duration: 3000 });
       return;
     }
+
     this.addingLicense = {
-        nombre: '',
-        apellidos: '',
-        rango_sahp: '',
-        fecha_nacimiento: '',
-        telefono: '',
-        foto: '',
-        num_placa: ''
+      name: '',
+      image_url: '',
+      title: '',
+      description: '',
+      required: '',
+      exempt: '',
+      active: 1 // 👈 CLAVE
     };
+
+    this.modalLicense = true;
   }
 
   addLicense() {
-    // this.licenseService.create({
-    //   name: this.addingLicense.nombre,
-    //   apellidos: this.addingLicense.apellidos,
-    //   rango_sahp: this.addingLicense.rango_sahp,
-    //   fecha_nacimiento: this.addingLicense.fecha_nacimiento,
-    //   telefono: this.addingLicense.telefono,
-    //   foto: this.addingLicense.foto,
-    //   num_placa: this.addingLicense.num_placa
-    // }).subscribe(() => {
-    //   this.addingLicense = null;
-    //   this.loadLicenses();
-    // });
+    this.licenseService.create({
+      name: this.addingLicense.name,
+      image_url: this.addingLicense.image_url,
+      title: this.addingLicense.title,
+      description: this.addingLicense.description,
+      required: this.addingLicense.required,
+      exempt: this.addingLicense.exempt,
+      active: this.addingLicense.active ? 1 : 0
+    }).subscribe({
+      next: () => {
+        this.addingLicense = null;
+        this.modalLicense = false;
+        this.loadLicenses();
+
+        this.snackBar.open('Licencia creada correctamente ✅', 'Cerrar', {
+          duration: 3000
+        });
+      },
+      error: (err) => {
+        console.error(err);
+        this.snackBar.open('Error al crear la licencia ❌', 'Cerrar', {
+          duration: 4000,
+          panelClass: ['snackbar-error']
+        });
+      }
+    });
   }
 
-  deleteInstructor(id: number) {
-    // if (this.adminService.checkAdmin() === false) {
-    //   this.snackBar.open('No tienes permisos para borrar instructores', 'Cerrar', { duration: 3000 });
-    //   return;
-    // }
-    // this.instructorService.delete(id).subscribe(() => {
-    //   this.loadInstructors();
-    // });
+  deleteLicense(id: number) {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para borrar licencias', 'Cerrar', { duration: 3000 });
+      return;
+    }
+    this.licenseService.delete(id).subscribe(() => {
+      this.loadLicenses();
+    });
   }
 
   confirmDeleteId: number | null = null;
@@ -128,40 +146,6 @@ export class LicensesComponent implements OnInit, OnDestroy {
   confirmDelete(id: number) {
     // this.instructorService.delete(id).subscribe(() => {
     //   this.confirmDeleteId = null;
-    //   this.loadInstructors();
-    // });
-  }
-
-  editingInstructor: any = null;
-
-  startEdit(instructor: any) {
-    if (this.adminService.checkAdmin() === false) {
-      this.snackBar.open('No tienes permisos para editar instructores', 'Cerrar', { duration: 3000 });
-      return;
-    }
-    this.editingInstructor = {
-      ...instructor,
-      fecha_nacimiento: instructor.fecha_nacimiento
-        ? instructor.fecha_nacimiento.substring(0, 10)
-        : ''
-    };
-  }
-
-  cancelEdit() {
-    this.editingInstructor = null;
-  }
-
-  saveEdit() {
-    // this.instructorService.update(this.editingInstructor.state_id, {
-    //   nombre: this.editingInstructor.nombre,
-    //   apellidos: this.editingInstructor.apellidos,
-    //   rango_sahp: this.editingInstructor.rango_sahp,
-    //   fecha_nacimiento: this.editingInstructor.fecha_nacimiento,
-    //   telefono: this.editingInstructor.telefono,
-    //   foto: this.editingInstructor.foto,
-    //   num_placa: this.editingInstructor.num_placa
-    // }).subscribe(() => {
-    //   this.editingInstructor = null;
     //   this.loadInstructors();
     // });
   }

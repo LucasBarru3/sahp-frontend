@@ -3,8 +3,8 @@
 
   <div *ngIf="error" class="error-msg">{{ error }}</div>
 
-  <input type="text" placeholder="Usuario" [(ngModel)]="username" />
-  <input type="password" placeholder="Contraseña" [(ngModel)]="password" />
+  <input type="text" placeholder="Usuario" [(ngModel)]="username" (keydown.enter)="login()" />
+  <input type="password" placeholder="Contraseña" [(ngModel)]="password" (keydown.enter)="login()" />
 
   <button (click)="login()" [disabled]="loading">
     {{ loading ? 'Entrando...' : 'Entrar' }}

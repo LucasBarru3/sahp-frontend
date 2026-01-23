@@ -37,10 +37,35 @@
         Esta autorización aplica exclusivamente a la operación del vehículo.
       </div>
 
-      <button class="toggle-status-btn" (click)="toggleLicenseStatus(l.id, l)">
+      <button *ngIf="checkAdmin()" class="toggle-status-btn" (click)="toggleLicenseStatus(l.id, l)">
         Cambiar Estado de Licencia
+      </button>
+
+      <button *ngIf="checkAdmin()" class="delete-license-btn" (click)="deleteLicense(l.id)">
+        Eliminar Licencia
       </button>
 
     </article>
   </div>
+
+  <button *ngIf="checkAdmin()" class="create-license-btn" (click)="openCreateLicenseModal()">
+    Crear Nueva Licencia
+  </button>
+
+  <div *ngIf="this.modalLicense" class="add-form">
+    <h3>Añadir Licencia</h3>
+
+    <input type="text" [(ngModel)]="addingLicense.name" placeholder="Nombre" />
+    <input type="text" [(ngModel)]="addingLicense.title" placeholder="Título" />
+    <input type="text" [(ngModel)]="addingLicense.image_url" placeholder="URL de Imagen (opcional)" />
+    <input type="text" [(ngModel)]="addingLicense.description" placeholder="Descripción (opcional)" />
+    <input type="text" [(ngModel)]="addingLicense.required" placeholder="Requerido para (opcional)" />
+    <input type="text" [(ngModel)]="addingLicense.exempt" placeholder="Unidades exentas (opcional)" />
+    <div class="form-buttons">
+      <button class="save-btn" (click)="addLicense()">Guardar</button>
+      <button class="cancel-btn" (click)="modalLicense = false; addingLicense = null">Cancelar</button>
+
+    </div>
+  </div>
+
 </main>

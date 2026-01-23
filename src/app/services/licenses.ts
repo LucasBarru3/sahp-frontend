@@ -18,7 +18,7 @@ export class LicenseService {
   }
 
   // Crear una nueva licencia
-  create(data: { name: string, image_url: string, title?: string, description?: string, required?: string, exempt?: string, active?: string }): Observable<any> {
+  create(data: { name: string, image_url: string, title?: string, description?: string, required?: string, exempt?: string, active?: number }): Observable<any> {
     return this.http.post(this.apiUrl, data);
   }
 
