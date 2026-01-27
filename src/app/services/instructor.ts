@@ -18,7 +18,7 @@ export class InstructorService {
   }
 
   // Crear una nueva instructor
-  create(data: { nombre: string, apellidos: string, rango_sahp?: string, fecha_nacimiento?: string, telefono?: string, foto?: string, num_placa?: string }): Observable<any> {
+  create(data: { nombre: string, apellidos: string, rango_sahp?: string, state_id?: number, fecha_nacimiento?: string, telefono?: string, foto?: string, num_placa?: string }): Observable<any> {
     return this.http.post(this.apiUrl, data);
   }
 
@@ -29,6 +29,7 @@ export class InstructorService {
       nombre: string;
       apellidos: string;
       rango_sahp?: string;
+      state_id?: number;
       fecha_nacimiento?: string;
       telefono?: string;
       foto?: string;
