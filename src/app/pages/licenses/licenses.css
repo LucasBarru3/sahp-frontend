@@ -18,7 +18,7 @@
 
 /* CARD */
 .license-card {
-  background: linear-gradient(145deg, #0b2c3f, #0f3f5c);
+  background: linear-gradient(145deg, #1c1c1c, #0f3f5c);
   border-radius: 16px;
   padding: 22px;
   box-shadow: 0 12px 35px rgba(0,0,0,.45);
@@ -237,7 +237,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  background: linear-gradient(145deg, #0b2c3f, #0f3f5c);
+  background: linear-gradient(145deg, #1c1c1c, #0f3f5c);
   border-radius: 16px;
   padding: 22px;
   box-shadow: 0 12px 35px rgba(0,0,0,.45);

@@ -187,7 +187,7 @@ main {
   padding: 25px;
   border-radius: 15px;
   background: #82d4bb;
-  border: 3px solid #457cbf;
+  border: 3px solid #1c1c1c;
   max-width: 420px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
@@ -198,7 +198,7 @@ main {
   padding: 10px;
   width: 100%;
   border-radius: 8px;
-  border: 1px solid #457cbf;
+  border: 1px solid #1c1c1c;
   background: #bce7fd;
   color: #003049;
   font-weight: bold;
@@ -217,7 +217,7 @@ main {
 }
 
 .save-btn {
-  background-color: #457cbf;
+  background-color: #1c1c1c;
   border: none;
   color: #fff;
   padding: 10px 16px;
@@ -250,7 +250,7 @@ main {
   margin: 30px auto;
   display: block;
   padding: 12px 20px;
-  background-color: #457cbf;
+  background-color: #1c1c1c;
   border: none;
   color: #fff;
   margin-bottom: 60px;

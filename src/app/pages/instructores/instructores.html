@@ -55,12 +55,11 @@
 
         <!-- ===== MODO EDICIÓN ===== -->
         <ng-container *ngIf="editingInstructor?.state_id === i.state_id">
-
+          <h3>Editando instructor<br> STATE ID #{{ editingInstructor.state_id }}</h3>
           <input [(ngModel)]="editingInstructor.nombre" placeholder="Nombre" />
           <input [(ngModel)]="editingInstructor.apellidos" placeholder="Apellidos" />
           <input [(ngModel)]="editingInstructor.rango_sahp" placeholder="Rango" />
           <input [(ngModel)]="editingInstructor.num_placa" placeholder="Nº Placa" />
-          <input [(ngModel)]="editingInstructor.state_id" placeholder="STATE ID" />
           <input type="date" [(ngModel)]="editingInstructor.fecha_nacimiento" />
           <input [(ngModel)]="editingInstructor.telefono" placeholder="Teléfono" />
           <input [(ngModel)]="editingInstructor.foto" placeholder="URL foto" />

@@ -27,4 +27,39 @@ checkAdmin(): boolean {
         return false;
     }
 }
+
+  // Cambia esta URL por la de tu backend en Vercel
+  private apiUrl = 'https://sahp-backend.vercel.app/api/users';
+
+  constructor(private http: HttpClient) {}
+
+  // Obtener todas las instructores
+  getAll(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  // Crear una nueva instructor
+  create(data: {username: string, password: string,}): Observable<any> {
+    return this.http.post(this.apiUrl, data);
+  }
+
+  // Actualizar instructor
+  update(
+    id: number,
+    data: {
+      username: string;
+      password: string;
+    }
+  ): Observable<any> {
+    return this.http.put(
+      `${this.apiUrl}?id=${id}`,
+      data
+    );
+  }
+
+  // Eliminar clase
+  delete(id: number) {
+    // En serverless se pasa por query string
+    return this.http.delete(`${this.apiUrl}?id=${id}`);
+  }
 }

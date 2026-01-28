@@ -6,6 +6,7 @@ import { AllVehiclesComponent } from './pages/all-vehicles/all-vehicles';
 import { LoginComponent } from './components/login/login';
 import { InstructoresComponent } from './pages/instructores/instructores';
 import { LicensesComponent } from './pages/licenses/licenses';
+import { AdminComponent } from './pages/admin/admin';
 export const routes: Routes = [
 { path: '', component: Inicio },
 { path: 'classes', component: ClassesComponent },
@@ -13,5 +14,6 @@ export const routes: Routes = [
 { path: 'vehicles/:classId', component: VehiclesComponent },
 { path: 'vehicles-all', component: AllVehiclesComponent },
 { path: 'login', component: LoginComponent },
-{ path: 'licenses', component: LicensesComponent }
+{ path: 'licenses', component: LicensesComponent },
+{ path: 'admin', component: AdminComponent }
 ];

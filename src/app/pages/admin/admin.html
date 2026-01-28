@@ -1,0 +1,48 @@
+<section class="admin-panel">
+
+  <h2>Panel de Administración</h2>
+  <p class="subtitle">Gestión de usuarios del sistema</p>
+
+  <article class="user-card" *ngFor="let u of users">
+
+    <!-- MODO VISTA -->
+    <div *ngIf="editingUserId !== u.id" class="user-view">
+      <div>
+        <strong>{{ u.username }}</strong>
+        <span class="user-id">ID: {{ u.id }}</span>
+      </div>
+
+      <button class="edit-btn" (click)="startEdit(u)">
+        Editar
+      </button>
+    </div>
+
+    <!-- MODO EDICIÓN -->
+    <div *ngIf="editingUserId === u.id" class="user-edit">
+
+      <input
+        type="text"
+        [(ngModel)]="editingUser.username"
+        placeholder="Nuevo username"
+      />
+
+      <input
+        type="password"
+        [(ngModel)]="editingUser.password"
+        placeholder="Nueva contraseña (opcional)"
+      />
+
+      <div class="actions">
+        <button class="save-btn" (click)="saveEdit()">Guardar</button>
+        <button class="cancel-btn" (click)="cancelEdit()">Cancelar</button>
+      </div>
+
+      <p class="hint">
+        Si no escribes contraseña, se mantiene la actual
+      </p>
+
+    </div>
+
+  </article>
+
+</section>
