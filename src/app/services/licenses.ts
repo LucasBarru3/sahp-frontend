@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,14 +12,24 @@ export class LicenseService {
 
   constructor(private http: HttpClient) {}
 
+  // Método para obtener las cabeceras con el token
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+  }
+
   // Obtener todas las licencias
   getAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    const headers = this.getAuthHeaders();
+    return this.http.get<any[]>(this.apiUrl, { headers });
   }
 
   // Crear una nueva licencia
   create(data: { name: string, image_url: string, title?: string, description?: string, required?: string, exempt?: string, active?: number }): Observable<any> {
-    return this.http.post(this.apiUrl, data);
+    const headers = this.getAuthHeaders();
+    return this.http.post(this.apiUrl, data, { headers });
   }
 
   // Actualizar licencia
@@ -35,15 +45,14 @@ export class LicenseService {
       active?: boolean;
     }
   ): Observable<any> {
-    return this.http.put(
-      `${this.apiUrl}?id=${id}`,
-      data
-    );
+    const headers = this.getAuthHeaders();
+    return this.http.put(`${this.apiUrl}?id=${id}`, data, { headers });
   }
 
-  // Eliminar clase
-  delete(id: number) {
+  // Eliminar licencia
+  delete(id: number): Observable<any> {
+    const headers = this.getAuthHeaders();
     // En serverless se pasa por query string
-    return this.http.delete(`${this.apiUrl}?id=${id}`);
+    return this.http.delete(`${this.apiUrl}?id=${id}`, { headers });
   }
 }

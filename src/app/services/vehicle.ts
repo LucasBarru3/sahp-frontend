@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,27 +12,42 @@ export class VehicleService {
 
   constructor(private http: HttpClient) {}
 
+  // Método para obtener las cabeceras con el token
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+  }
+
   // Obtener todos los vehículos
   getAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    const headers = this.getAuthHeaders();
+    return this.http.get<any[]>(this.apiUrl, { headers });
   }
 
   // Obtener vehículos por clase
   getByClass(classId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}?classId=${classId}`);
+    const headers = this.getAuthHeaders();
+    return this.http.get<any[]>(`${this.apiUrl}?classId=${classId}`, { headers });
   }
 
-create(data: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, data);
+  // Crear un vehículo
+  create(data: any): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.post<any>(this.apiUrl, data, { headers });
   }
 
- update(id: number, data: any): Observable<any> {
+  // Actualizar un vehículo
+  update(id: number, data: any): Observable<any> {
+    const headers = this.getAuthHeaders();
     // agregamos id al body porque tu backend lo espera allí
-    return this.http.put<any>(this.apiUrl, { id, ...data });
+    return this.http.put<any>(this.apiUrl, { id, ...data }, { headers });
   }
 
+  // Eliminar un vehículo
   delete(id: number): Observable<any> {
-    return this.http.request('delete', this.apiUrl, { body: { id } });
+    const headers = this.getAuthHeaders();
+    return this.http.request('delete', this.apiUrl, { body: { id }, headers });
   }
-
 }

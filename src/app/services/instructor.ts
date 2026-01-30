@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,14 +12,24 @@ export class InstructorService {
 
   constructor(private http: HttpClient) {}
 
+  // Método para obtener las cabeceras con el token
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+  }
+
   // Obtener todas las instructores
   getAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    const headers = this.getAuthHeaders();
+    return this.http.get<any[]>(this.apiUrl, { headers });
   }
 
   // Crear una nueva instructor
   create(data: { nombre: string, apellidos: string, rango_sahp?: string, state_id?: number, fecha_nacimiento?: string, telefono?: string, foto?: string, num_placa?: string }): Observable<any> {
-    return this.http.post(this.apiUrl, data);
+    const headers = this.getAuthHeaders();
+    return this.http.post(this.apiUrl, data, { headers });
   }
 
   // Actualizar instructor
@@ -36,15 +46,15 @@ export class InstructorService {
       num_placa?: string;
     }
   ): Observable<any> {
-    return this.http.put(
-      `${this.apiUrl}?state_id=${id}`,
-      data
-    );
+    const headers = this.getAuthHeaders();
+    // Corrigiendo la URL: parece que quieres usar el id en la query string
+    return this.http.put(`${this.apiUrl}?state_id=${id}`, data, { headers });
   }
 
-  // Eliminar clase
-  delete(id: number) {
+  // Eliminar instructor
+  delete(id: number): Observable<any> {
+    const headers = this.getAuthHeaders();
     // En serverless se pasa por query string
-    return this.http.delete(`${this.apiUrl}?state_id=${id}`);
+    return this.http.delete(`${this.apiUrl}?state_id=${id}`, { headers });
   }
 }
