@@ -22,12 +22,14 @@ export class VehicleService {
 
   // Obtener todos los vehículos
   getAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    const headers = this.getAuthHeaders();
+    return this.http.get<any[]>(this.apiUrl, { headers });
   }
 
   // Obtener vehículos por clase
   getByClass(classId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}?classId=${classId}`);
+    const headers = this.getAuthHeaders();
+    return this.http.get<any[]>(`${this.apiUrl}?classId=${classId}`, { headers });
   }
 
   // Crear un vehículo
