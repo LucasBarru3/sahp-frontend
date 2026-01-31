@@ -1,12 +1,19 @@
 <header class="header">
   <div class="logo">
     <a routerLink="/" routerLinkActive="active">
-      <img src="https://sahp.infinityfreeapp.com/logo.png"
-     srcset="https://sahp.infinityfreeapp.com/logo.png 1200w, https://sahp.infinityfreeapp.com/logo-500x500.png 500w"
-     sizes="(max-width: 600px) 500px, 1000px"
-     alt="">
-
-      <span>San Andreas Highway Patrol</span>
+      <img
+        src="https://sahp.infinityfreeapp.com/logo.png"
+        srcset="
+          https://sahp.infinityfreeapp.com/logo.png 1200w,
+          https://sahp.infinityfreeapp.com/logo-500x500.png 500w
+        "
+        sizes="(max-width: 600px) 500px, 1000px"
+        alt="SAHP Logo"
+      />
+      <div class="logo-text">
+        <strong>San Andreas Highway Patrol</strong>
+        <span>Official Portal</span>
+      </div>
     </a>
   </div>
 
@@ -14,8 +21,21 @@
     <a routerLink="classes" routerLinkActive="active">Clases</a>
     <a routerLink="instructors" routerLinkActive="active">Instructores</a>
     <a routerLink="licenses" routerLinkActive="active">Licencias</a>
-    <a routerLink="admin" routerLinkActive="active" *ngIf="isLoggedIn()">Admin</a>
-    <a routerLink="login" routerLinkActive="active" *ngIf="!isLoggedIn()">Login</a>
-    <a style="cursor: pointer;" (click)="logout()" *ngIf="isLoggedIn()">Cerrar Sesión</a>
+
+    <a routerLink="admin" routerLinkActive="active" *ngIf="isLoggedIn()">
+      Admin
+    </a>
+
+    <a routerLink="login" routerLinkActive="active" *ngIf="!isLoggedIn()">
+      Login
+    </a>
+
+    <!-- USER INFO -->
+    <div class="user-box" *ngIf="isLoggedIn()">
+      <span class="user-name">
+        👮 {{ getUsername() }}
+      </span>
+      <button class="logout-btn" (click)="logout()">Salir</button>
+    </div>
   </nav>
 </header>

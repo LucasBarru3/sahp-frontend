@@ -12,7 +12,7 @@
         <span class="user-id">ID: {{ u.id }}</span>
       </div>
 
-      <button class="edit-btn" (click)="startEdit(u)">
+      <button *ngIf="checkAdmin()" class="edit-btn" (click)="startEdit(u)">
         Editar
       </button>
     </div>

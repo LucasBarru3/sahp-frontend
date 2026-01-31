@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoaderComponent } from '../../components/loader/loader';
 import { jwtDecode } from 'jwt-decode';
 import { FormsModule } from '@angular/forms';
@@ -24,15 +25,14 @@ export class AdminComponent implements OnInit, OnDestroy {
   isAdmin = false;
   logoutSub!: Subscription;
   editingUserId: number | null = null;
-  constructor( private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService) {}
+  constructor( private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService, private router: Router) {}
 
   ngOnInit() {
     this.loadUsers();
     this.checkAdmin();
 
     this.logoutSub = this.sessionService.logout$.subscribe(() => {
-      this.isAdmin = false;
-      this.loadUsers();
+      this.router.navigate(['/login']);
     });
   }
 

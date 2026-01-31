@@ -37,5 +37,15 @@ export class HeaderComponent {
     this.sessionService.notifyLogout();
     this.snackBar.open('Sesión cerrada con éxito', 'Cerrar', { duration: 3000 });
   }
-  
+  getUsername(): string | null {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+
+    try {
+      const decoded: any = jwtDecode(token);
+      return decoded.username || null;
+    } catch {
+      return null;
+    }
+  }
 }

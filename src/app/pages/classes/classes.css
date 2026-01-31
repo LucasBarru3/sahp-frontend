@@ -29,7 +29,7 @@ main {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  color: #007cbf;
+  color: #1c1c1c;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,14 +90,9 @@ main {
 }
 
 .classes-section h2 {
-  font-size: clamp(2rem, 3vw, 3.5rem);
   margin-bottom: clamp(30px, 4vw, 80px);
-  color: #007cbf;
-  text-shadow:
-    -0.5px -0.5px 0 #bce7fd,
-     0.5px -0.5px 0 #bce7fd,
-    -0.5px  0.5px 0 #bce7fd,
-     0.5px  0.5px 0 #bce7fd;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #1c1c1c;
 }
 
 /* GRID RESPONSIVE REAL */
@@ -127,7 +122,7 @@ main {
 
 .class-card h3 {
   font-size: clamp(1.2rem, 1.5vw, 1.8rem);
-  color: #007cbf;
+  color: #1c1c1c;
   margin-bottom: 0.8rem;
 }
 
@@ -145,14 +140,14 @@ main {
   border-radius: 999px;
   font-weight: bold;
   font-size: clamp(0.75rem, 1vw, 0.95rem);
-  color: #3b3d8a;
+  color: #272121;
 }
 
 /* BOTÓN */
 .btn {
   margin-top: auto;
   text-decoration: none;
-  background-color: #007cbf;
+  background-color: #1c1c1c;
   color: #bce7fd;
   padding: clamp(8px, 1vw, 14px) clamp(16px, 2vw, 26px);
   border-radius: 10px;
@@ -160,7 +155,7 @@ main {
 }
 
 .btn:hover {
-  background-color: #005f8a;
+  background-color: #414141;
 }
 
 /* ===================== */

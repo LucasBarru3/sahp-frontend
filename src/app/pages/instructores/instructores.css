@@ -82,7 +82,7 @@ main {
   text-align: center;
   margin-top: 20px;
   font-size: clamp(2rem, 4vw, 3rem);
-  color: #556B2F;
+  color: #1c1c1c;
   margin-bottom: clamp(20px, 3vw, 40px);
 }
 
@@ -178,7 +178,7 @@ main {
 .instructor-name {
   font-size: clamp(1.3rem, 1.8vw, 2rem);
   text-shadow: -0.5px -0.5px 0 #6ea2be, 0.5px -0.5px 0 #6ea2be, -0.5px 0.5px 0 #6ea2be, 0.5px 0.5px 0 #6ea2be;
-  color: #556B2F;
+  color: #1c1c1c;
   margin-bottom: 14px;
   font-weight: 800;
 }
