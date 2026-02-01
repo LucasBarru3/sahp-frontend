@@ -167,7 +167,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
       class_id: this.addingVehicle.class_id,
       follow_class: this.addingVehicle.follow_class,
       tuned: this.addingVehicle.tuned,
-      note: this.addingVehicle.note
+      note: this.addingVehicle.note,
     }).subscribe(() => {
       this.addingVehicle = null;
       this.loadVehicles();
