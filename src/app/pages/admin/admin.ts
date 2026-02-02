@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
-import { LoaderComponent } from '../../components/loader/loader';
+import { LogsService } from '../../services/logs';
 import { jwtDecode } from 'jwt-decode';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -25,7 +25,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   isAdmin = false;
   logoutSub!: Subscription;
   editingUserId: number | null = null;
-  constructor( private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService, private router: Router) {}
+  constructor( private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService, private router: Router, private logsService: LogsService) {}
 
   ngOnInit() {
     this.loadUsers();
@@ -49,7 +49,7 @@ export class AdminComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  
   checkAdmin(): boolean {
       const token = localStorage.getItem('token');
       if (!token) return false;

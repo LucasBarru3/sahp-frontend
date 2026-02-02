@@ -175,12 +175,12 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteVehicle(id: number) {
+  deleteVehicle(vehicle: any) {
     if (this.adminService.checkAdmin() === false) {
       this.snackBar.open('No tienes permisos para borrar vehículos', 'Cerrar', { duration: 3000 });
       return;
     }
-    this.vehicleService.delete(id).subscribe({
+    this.vehicleService.delete(vehicle).subscribe({
       next: () => {
         this.loadVehicles();
         this.snackBar.open('Vehículo eliminado con éxito', 'Cerrar', { duration: 3000 });

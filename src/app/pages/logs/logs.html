@@ -1,0 +1,22 @@
+<section class="admin-panel">
+
+  <h2>Panel de Administración</h2>
+  <p class="subtitle">Registro de logs del sistema</p>
+
+  <article class="user-card" *ngFor="let l of logs">
+
+    <!-- MODO VISTA -->
+    <div>
+      <div>
+        <h3>Id: {{ l.id }}</h3>
+        <h2>Tipo: {{ l.tipe }}</h2>
+        <h2>Acción: {{ l.action }}</h2>
+        <div *ngFor="let item of l.data | keyvalue">
+          <strong>{{ item.key }}:</strong> {{ item.value }}
+        </div>
+        <h2>Id usuario: {{ l.user_id }}</h2>
+      </div>
+    </div>
+  </article>
+
+</section>

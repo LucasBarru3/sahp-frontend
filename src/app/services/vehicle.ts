@@ -46,8 +46,8 @@ export class VehicleService {
   }
 
   // Eliminar un vehículo
-  delete(id: number): Observable<any> {
+  delete(vehicle: any): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.request('delete', this.apiUrl, { body: { id }, headers });
+    return this.http.request('delete', this.apiUrl, { body: { vehicle }, headers });
   }
 }

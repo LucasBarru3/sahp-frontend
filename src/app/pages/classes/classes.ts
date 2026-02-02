@@ -90,12 +90,12 @@ export class ClassesComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteClass(id: number) {
+  deleteClass(clase: any) {
     if (this.adminService.checkAdmin() === false) {
       this.snackBar.open('No tienes permisos para borrar clases', 'Cerrar', { duration: 3000 });
       return;
     }
-    this.classService.delete(id).subscribe(() => {
+    this.classService.delete(clase).subscribe(() => {
       this.loadClasses();
       this.snackBar.open('Clase eliminada con éxito', 'Cerrar', { duration: 3000 });
     });

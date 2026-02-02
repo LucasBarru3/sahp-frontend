@@ -37,8 +37,11 @@ export class ClassService {
   }
 
   // Eliminar clase
-  delete(id: number): Observable<any> {
+  delete(clase: any): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.delete(`${this.apiUrl}?id=${id}`, { headers });
+    return this.http.request('delete', this.apiUrl, {
+      headers,
+      body: clase,
+    });
   }
 }

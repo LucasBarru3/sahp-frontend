@@ -26,6 +26,10 @@
       Admin
     </a>
 
+    <a routerLink="logs" routerLinkActive="active" *ngIf="isLoggedIn()">
+      Logs
+    </a>
+
     <a routerLink="login" routerLinkActive="active" *ngIf="!isLoggedIn()">
       Login
     </a>
