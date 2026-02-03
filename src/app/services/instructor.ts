@@ -52,9 +52,24 @@ export class InstructorService {
   }
 
   // Eliminar instructor
-  delete(id: number): Observable<any> {
+  delete(
+    id: number,
+    data: {
+      nombre: string;
+      apellidos: string;
+      rango_sahp?: string;
+      state_id?: number;
+      fecha_nacimiento?: string;
+      telefono?: string;
+      foto?: string;
+      num_placa?: string;
+    }
+  ): Observable<any> {
     const headers = this.getAuthHeaders();
-    // En serverless se pasa por query string
-    return this.http.delete(`${this.apiUrl}?state_id=${id}`, { headers });
+
+    return this.http.delete(`${this.apiUrl}?state_id=${id}`, {
+      headers,
+      body: data
+    });
   }
 }

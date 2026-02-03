@@ -107,16 +107,6 @@ export class InstructoresComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteInstructor(id: number) {
-    if (this.adminService.checkAdmin() === false) {
-      this.snackBar.open('No tienes permisos para borrar instructores', 'Cerrar', { duration: 3000 });
-      return;
-    }
-    this.instructorService.delete(id).subscribe(() => {
-      this.loadInstructors();
-    });
-  }
-
   confirmDeleteId: number | null = null;
 
   askDelete(id: number) {
@@ -131,8 +121,8 @@ export class InstructoresComponent implements OnInit, OnDestroy {
     this.confirmDeleteId = null;
   }
 
-  confirmDelete(id: number) {
-    this.instructorService.delete(id).subscribe(() => {
+  confirmDelete(id: number, instructor: any) {
+    this.instructorService.delete(id, instructor).subscribe(() => {
       this.confirmDeleteId = null;
       this.loadInstructors();
     });
