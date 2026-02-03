@@ -52,24 +52,12 @@ export class InstructorService {
   }
 
   // Eliminar instructor
-  delete(
-    id: number,
-    data: {
-      nombre: string;
-      apellidos: string;
-      rango_sahp?: string;
-      state_id?: number;
-      fecha_nacimiento?: string;
-      telefono?: string;
-      foto?: string;
-      num_placa?: string;
-    }
-  ): Observable<any> {
+  delete(instructor: any): Observable<any> {
     const headers = this.getAuthHeaders();
 
-    return this.http.delete(`${this.apiUrl}?state_id=${id}`, {
+   return this.http.request('delete', this.apiUrl, {
       headers,
-      body: data
+      body: instructor,
     });
   }
 }

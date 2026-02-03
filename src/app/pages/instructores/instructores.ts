@@ -121,8 +121,8 @@ export class InstructoresComponent implements OnInit, OnDestroy {
     this.confirmDeleteId = null;
   }
 
-  confirmDelete(id: number, instructor: any) {
-    this.instructorService.delete(id, instructor).subscribe(() => {
+  confirmDelete(instructor: any) {
+    this.instructorService.delete(instructor).subscribe(() => {
       this.confirmDeleteId = null;
       this.loadInstructors();
     });
