@@ -48,7 +48,7 @@ export class AdminService {
   }
 
   // Cambia esta URL por la de tu backend en Vercel
-  private apiUrl = '/api/users';
+  private apiUrl = 'https://sahp-backend.vercel.app/api/users';
 
   constructor(private http: HttpClient) {}
 

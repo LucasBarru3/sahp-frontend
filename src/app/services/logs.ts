@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class LogsService {
 
   // Cambia esta URL por la de tu backend en Vercel
-  private apiUrl = '/api/logs';
+  private apiUrl = 'https://sahp-backend.vercel.app/api/logs';
 
   constructor(private http: HttpClient) {}
 

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class LicenseService {
 
   // Cambia esta URL por la de tu backend en Vercel
-  private apiUrl = '/api/licenses';
+  private apiUrl = 'https://sahp-backend.vercel.app/api/licenses';
 
   constructor(private http: HttpClient) {}
 
