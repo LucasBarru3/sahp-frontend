@@ -1,9 +1,10 @@
 .page-title {
   font-family: 'Orbitron', sans-serif;
-  color: #3b3d8a;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #1c1c1c;
+  margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
-  text-shadow: -0.5px -0.5px 0 #bce7fd, 0.5px -0.5px 0 #bce7fd, -0.5px 0.5px 0 #bce7fd, 0.5px 0.5px 0 #bce7fd;
 }
 
 .vehicles-grid {
@@ -258,7 +259,7 @@
 }
 
 .filters-bar input::placeholder {
-  color: #3b3d8a;
+  color: #1c1c1c;
   opacity: 0.7;
 }
 

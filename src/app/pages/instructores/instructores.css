@@ -161,7 +161,7 @@ main {
   margin-bottom: 18px;
   padding: 6px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #007cbf, #00a6ff);
+  background: linear-gradient(135deg, #d4af37, #b89e49);
 }
 
 .instructor-photo {
@@ -194,7 +194,7 @@ main {
 }
 .info p {
   font-size: clamp(0.95rem, 1.1vw, 1.1rem);
-  color: #007cbf;
+  color: #d4af37;
   margin-bottom: 10px;
   line-height: 1.5;
 }
@@ -384,7 +384,7 @@ main {
 }
 
 .edit-btn {
-  background: #007cbf;
+  background: #d4af37;
   color: #fff;
   border: none;
   cursor: pointer;
