@@ -8,6 +8,7 @@ import { InstructoresComponent } from './pages/instructores/instructores';
 import { LicensesComponent } from './pages/licenses/licenses';
 import { AdminComponent } from './pages/admin/admin';
 import { AdminGuard } from './guards/admin.guard';
+import { Admin2Guard } from './guards/admin2.guard';
 import { LogsComponent } from './pages/logs/logs';
 export const routes: Routes = [
 { path: '', component: Inicio },
@@ -17,6 +18,6 @@ export const routes: Routes = [
 { path: 'vehicles-all', component: AllVehiclesComponent },
 { path: 'login', component: LoginComponent },
 { path: 'licenses', component: LicensesComponent },
-{ path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
+{ path: 'admin', component: AdminComponent, canActivate: [Admin2Guard] },
 { path : 'logs', component: LogsComponent, canActivate: [AdminGuard] }
 ];

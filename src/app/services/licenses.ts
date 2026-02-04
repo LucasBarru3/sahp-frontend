@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class LicenseService {
 
   // Cambia esta URL por la de tu backend en Vercel
-  private apiUrl = 'https://sahp-backend.vercel.app/api/licenses';
+  private apiUrl = '/api/licenses';
 
   constructor(private http: HttpClient) {}
 
@@ -50,9 +50,12 @@ export class LicenseService {
   }
 
   // Eliminar licencia
-  delete(id: number): Observable<any> {
+  delete(license: any): Observable<any> {
     const headers = this.getAuthHeaders();
     // En serverless se pasa por query string
-    return this.http.delete(`${this.apiUrl}?id=${id}`, { headers });
+    return this.http.request('delete', this.apiUrl, {
+      headers,
+      body: license,
+    });
   }
 }

@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionService } from '../../services/session';
-
+import { AdminService } from '../../services/admin';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -15,7 +15,8 @@ import { SessionService } from '../../services/session';
 export class HeaderComponent {
   constructor(
     private snackBar: MatSnackBar,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private adminService: AdminService
   ) {}
   isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
@@ -31,6 +32,9 @@ export class HeaderComponent {
     } catch (err) {
       return false;
     }
+  }
+  isAdmin2(): boolean {
+    return this.adminService.checkAdmin2();
   }
   logout() {
     localStorage.removeItem('token');

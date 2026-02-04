@@ -1,22 +1,31 @@
 <section class="admin-panel">
 
   <h2>Panel de Administración</h2>
-  <p class="subtitle">Registro de logs del sistema</p>
+  <p class="subtitle">Registro de actividad del sistema</p>
 
-  <article class="user-card" *ngFor="let l of logs">
+  <article class="log-card" *ngFor="let l of logs">
 
-    <!-- MODO VISTA -->
-    <div>
-      <div>
-        <h3>Id: {{ l.id }}</h3>
-        <h2>Tipo: {{ l.tipe }}</h2>
-        <h2>Acción: {{ l.action }}</h2>
-        <div *ngFor="let item of l.data | keyvalue">
-          <strong>{{ item.key }}:</strong> {{ item.value }}
-        </div>
-        <h2>Id usuario: {{ l.user_id }}</h2>
-      </div>
+    <div class="log-header">
+      <span class="badge" [ngClass]="l.action">{{ l.action | uppercase }}</span>
+      <span class="entity">{{ l.tipe }}</span>
+      <span class="log-id">#{{ l.id }}</span>
     </div>
+
+    <div class="log-meta">
+      <span>👤 Usuario ID: {{ l.user_id }}</span>
+      <span>🕒 {{ l.created_at | date:'short' }}</span>
+    </div>
+
+    <details class="log-data">
+      <summary>Ver datos</summary>
+      <div class="data-grid">
+        <div *ngFor="let item of l.data | keyvalue">
+          <strong>{{ item.key }}</strong>
+          <span>{{ item.value }}</span>
+        </div>
+      </div>
+    </details>
+
   </article>
 
 </section>

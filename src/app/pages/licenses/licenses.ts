@@ -119,12 +119,12 @@ export class LicensesComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteLicense(id: number) {
+  deleteLicense(license: any) {
     if (this.adminService.checkAdmin() === false) {
       this.snackBar.open('No tienes permisos para borrar licencias', 'Cerrar', { duration: 3000 });
       return;
     }
-    this.licenseService.delete(id).subscribe(() => {
+    this.licenseService.delete(license).subscribe(() => {
       this.loadLicenses();
     });
   }
