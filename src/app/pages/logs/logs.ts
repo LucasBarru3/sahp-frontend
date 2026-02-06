@@ -24,6 +24,9 @@ export class LogsComponent implements OnInit, OnDestroy {
   addingUser: any = null;
   isAdmin = false;
   logoutSub!: Subscription;
+  filterText: string = '';
+  filterAction: string = '';
+  filterUserId: number | null = null;
   editingUserId: number | null = null;
   constructor( private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService, private router: Router, private logsService: LogsService) {}
 
@@ -69,6 +72,26 @@ export class LogsComponent implements OnInit, OnDestroy {
         return false;
       }
     }
+
+  filteredLogs() {
+    return this.logs.filter(l => {
+
+      // Texto libre
+      const textMatch =
+        !this.filterText ||
+        JSON.stringify(l).toLowerCase().includes(this.filterText.toLowerCase());
+
+      // Acción
+      const actionMatch =
+        !this.filterAction || l.action === this.filterAction;
+
+      // Usuario
+      const userMatch =
+        !this.filterUserId || l.user_id === this.filterUserId;
+
+      return textMatch && actionMatch && userMatch;
+    });
+  }
 
   ngOnDestroy() {
     this.logoutSub?.unsubscribe();

@@ -3,7 +3,28 @@
   <h2>Panel de Administración</h2>
   <p class="subtitle">Registro de actividad del sistema</p>
 
-  <article class="log-card" *ngFor="let l of logs">
+  <div class="filters">
+    <input
+      type="text"
+      placeholder="Buscar..."
+      [(ngModel)]="filterText"
+    />
+
+    <select [(ngModel)]="filterAction">
+      <option value="">Todas las acciones</option>
+      <option value="Creación">Creación</option>
+      <option value="Actualización">Actualización</option>
+      <option value="Eliminación">Eliminación</option>
+    </select>
+
+    <input
+      type="number"
+      placeholder="Usuario ID"
+      [(ngModel)]="filterUserId"
+    />
+  </div>
+
+  <article class="log-card" *ngFor="let l of filteredLogs()">
 
     <div class="log-header">
       <span class="badge" [ngClass]="l.action">{{ l.action | uppercase }}</span>

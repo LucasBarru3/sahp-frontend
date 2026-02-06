@@ -106,3 +106,30 @@
   color: #eee;
   word-break: break-word;
 }
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.filters input,
+.filters select {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  color: #eee;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.filters input::placeholder {
+  color: #777;
+}
+
+.filters input:focus,
+.filters select:focus {
+  outline: none;
+  border-color: #d4af37;
+}
