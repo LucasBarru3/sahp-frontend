@@ -12,7 +12,7 @@
 
 .licenses-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 26px;
 }
 
@@ -281,4 +281,9 @@
 
 .add-form button:active {
   transform: scale(0.97);
+}
+
+h1{
+  font-size: 1.8rem;
+  margin-bottom: 10px;
 }
