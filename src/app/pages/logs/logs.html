@@ -19,12 +19,16 @@
 
     <input
       type="number"
-      placeholder="Usuario ID"
+      placeholder="Admin ID"
       [(ngModel)]="filterUserId"
     />
   </div>
 
   <article class="log-card" *ngFor="let l of filteredLogs()">
+
+    <div *ngIf="loading" class="loader-container">
+      <app-loader></app-loader>
+    </div>
 
     <div class="log-header">
       <span class="badge" [ngClass]="l.action">{{ l.action | uppercase }}</span>
@@ -33,7 +37,7 @@
     </div>
 
     <div class="log-meta">
-      <span>👤 Usuario ID: {{ l.user_id }}</span>
+      <span>👤 Admin ID: {{ l.user_id }}</span>
       <span>🕒 {{ l.created_at | date:'short' }}</span>
     </div>
 

@@ -10,11 +10,12 @@ import { AdminService } from '../../services/admin';
 import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SessionService } from '../../services/session';
+import { LoaderComponent } from '../../components/loader/loader';
 
 @Component({
   selector: 'app-logs',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, LoaderComponent],
   templateUrl: './logs.html',
   styleUrls: ['./logs.css']
 })
