@@ -70,7 +70,7 @@
       <h3>{{ v.name }}</h3>
       <div class="margenes"><span>Seguir en-></span><span>{{ v.follow_class }}</span></div>
       <div class="margenes"><span>Tuneado-></span><span>{{ v.tuned }}</span></div>
-      <p>Nota: {{ v.note }}</p>
+      <p *ngIf="v.note">Nota: {{ v.note }}</p>
       <div class="buttons" *ngIf="isAdmin">
         <button class="edit-btn" (click)="startEdit(v)">Editar</button>
         <button class="delete-btn" (click)="deleteVehicle(v)">Eliminar</button>
