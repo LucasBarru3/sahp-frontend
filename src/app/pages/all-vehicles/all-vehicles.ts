@@ -24,8 +24,10 @@ export class AllVehiclesComponent implements OnInit, OnDestroy {
   vehicles: any[] = [];
   loading = false;
   editingVehicle: any = null;
+  addingVehicle: any = null;
   searchText = '';
   selectedClass = '';
+  classId!: number;
   sortOrder = 'az';
   filteredVehicles: any[] = [];
   isAdmin = false;
@@ -185,6 +187,39 @@ export class AllVehiclesComponent implements OnInit, OnDestroy {
       }
     );
       this.loadVehicles();
+    });
+  }
+
+  startAdd() {
+    if (this.adminService.checkAdmin() === false) {
+      this.snackBar.open('No tienes permisos para crear vehículos', 'Cerrar', { duration: 3000 });
+      return;
+    }
+    this.addingVehicle = {
+      name: '',
+      model: '',
+      image_url: '',
+      class_id: this.classId,
+      follow_class: '',
+      tuned: '',
+      note: ''
+    };
+  }
+
+
+  addVehicle() {
+    this.vehicleService.create( {
+      name: this.addingVehicle.name,
+      model: this.addingVehicle.model,
+      image_url: this.addingVehicle.image_url,
+      class_id: this.addingVehicle.class_id,
+      follow_class: this.addingVehicle.follow_class,
+      tuned: this.addingVehicle.tuned,
+      note: this.addingVehicle.note,
+    }).subscribe(() => {
+      this.addingVehicle = null;
+      this.loadVehicles();
+      this.snackBar.open('Vehículo añadido con éxito', 'Cerrar', { duration: 3000 });
     });
   }
 

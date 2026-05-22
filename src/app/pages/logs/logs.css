@@ -133,3 +133,37 @@
   outline: none;
   border-color: #d4af37;
 }
+
+.recover {
+  background: transparent;
+  border: 1px solid #3a3a3a;
+  color: #cfcfcf;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+  margin-top: 12px;
+}
+
+.recover:hover {
+  background: rgba(255,255,255,.04);
+  border-color: #555;
+  color: #fff;
+}
+
+.recover:active {
+  background: rgba(255,255,255,.07);
+}
+
+.recover:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.log-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}

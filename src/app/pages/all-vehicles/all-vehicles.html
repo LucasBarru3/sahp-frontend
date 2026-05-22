@@ -117,3 +117,54 @@
   <img [src]="selectedImage" (click)="$event.stopPropagation()" />
   <span class="close-btn" (click)="closeImage()">✕</span>
 </div>
+
+<button class="add-btn" *ngIf="isAdmin" (click)="startAdd()">Añadir vehículo</button>
+
+<div *ngIf="addingVehicle" class="edit-form">
+  <h3>Añadir vehículo</h3>
+
+  <input type="text" [(ngModel)]="addingVehicle.name" placeholder="Nombre" />
+  <input type="text" [(ngModel)]="addingVehicle.model" placeholder="Modelo" />
+  <input type="text" [(ngModel)]="addingVehicle.image_url" placeholder="URL imagen" />
+
+  <div class="preview" *ngIf="addingVehicle.image_url">
+    <img
+      [src]="addingVehicle.image_url"
+      (load)="onImageLoad()"
+      (error)="onImageError()"
+    />
+    <p *ngIf="addingVehicle.image_url.startsWith('data:')" class="error-msg">
+      ❌ No se permiten imágenes en formato data URL
+    </p>
+    <p *ngIf="!imageOk" class="error-msg">
+      ❌ La imagen no carga o el enlace no es válido
+    </p>
+  </div>
+
+  <p>
+    Clase:
+    <select name="class_id" id="class_id" [(ngModel)]="addingVehicle.class_id">
+      <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
+    </select>
+  </p>
+
+  <div style="display: flex; align-items: center; gap: 10px;">
+  <label for="follow_class" style="white-space: nowrap;">
+    Se sigue con:
+  </label>
+  <input type="text" name="follow_class" id="follow_class" [(ngModel)]="addingVehicle.follow_class" placeholder="Clase a seguir" />
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 10px;">
+  <label for="tuned" style="white-space: nowrap;">
+    Tuneado:
+  </label>
+  <input type="text" name="tuned" id="tuned" [(ngModel)]="addingVehicle.tuned" placeholder="Tuneado" />
+  </div>
+  
+  <input type="text" name="note" id="note" [(ngModel)]="addingVehicle.note" placeholder="Nota" />
+  <div class="form-buttons">
+    <button class="save-btn" (click)="addVehicle()" [disabled]="!imageOk || addingVehicle.image_url.startsWith('data:')">Guardar</button>
+    <button class="cancel-btn" (click)="addingVehicle = null">Cancelar</button>
+  </div>
+</div>

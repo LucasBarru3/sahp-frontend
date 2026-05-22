@@ -11,6 +11,7 @@ import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SessionService } from '../../services/session';
 import { LoaderComponent } from '../../components/loader/loader';
+import { VehicleService } from '../../services/vehicle';
 
 @Component({
   selector: 'app-logs',
@@ -29,7 +30,7 @@ export class LogsComponent implements OnInit, OnDestroy {
   filterAction: string = '';
   filterUserId: number | null = null;
   editingUserId: number | null = null;
-  constructor( private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService, private router: Router, private logsService: LogsService) {}
+  constructor( private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService, private router: Router, private logsService: LogsService, private vehicleService: VehicleService) {}
 
   ngOnInit() {
     this.loadLogs();
@@ -91,6 +92,34 @@ export class LogsComponent implements OnInit, OnDestroy {
         !this.filterUserId || l.user_id === this.filterUserId;
 
       return textMatch && actionMatch && userMatch;
+    });
+  }
+
+  isDelete(log: any, tipe: any): boolean {
+    return log === 'Eliminación' && tipe === 'Vehículo';
+  }
+
+  recover(data: any) {
+    this.vehicleService.create({
+      name: data.name,
+      model: data.model,
+      image_url: data.image_url,
+      class_id: data.class_id,
+      follow_class: data.follow_class,
+      tuned: data.tuned,
+      note: data.note,
+    }).subscribe({
+      next: () => {
+        this.snackBar.open('Vehículo recuperado con éxito', 'Cerrar', { duration: 3000 });
+      },
+
+      error: (err) => {
+        if (err.status === 409) {
+          this.snackBar.open('El vehículo ya existe', 'Cerrar', { duration: 3000 });
+        } else {
+          this.snackBar.open('Error al recuperar vehículo', 'Cerrar', { duration: 3000 });
+        }
+      }
     });
   }
 
