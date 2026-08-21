@@ -5,19 +5,37 @@ import { jwtDecode } from 'jwt-decode';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionService } from '../../services/session';
 import { AdminService } from '../../services/admin';
+import { LanguageService } from '../../services/language';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslatePipe],
   templateUrl: './header.html',
   styleUrls: ['./header.css']
 })
 export class HeaderComponent {
+  currentLanguage = 'es';
+  languageMenuOpen = false;
   constructor(
     private snackBar: MatSnackBar,
     private sessionService: SessionService,
-    private adminService: AdminService
-  ) {}
+    private adminService: AdminService,
+    private languageService: LanguageService
+  ) {
+    this.currentLanguage = this.languageService.getLanguage();
+  }
+  toggleLanguageMenu() {
+    this.languageMenuOpen = !this.languageMenuOpen;
+  }
+
+  changeLanguage(language: string) {
+    this.languageService.setLanguage(language);
+
+    this.currentLanguage = language;
+
+    this.languageMenuOpen = false;
+  }
   isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
     if (!token) return false;

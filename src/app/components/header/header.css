@@ -77,3 +77,68 @@ nav a:hover {
   background: #d4af37;
   color: #1c1c1c;
 }
+.language-selector {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.language-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.language-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.language-arrow {
+  margin-left: 5px;
+  font-size: 11px;
+}
+
+.language-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 140px;
+
+  background: #18181b;
+  border: 1px solid #2a2a2e;
+  border-radius: 8px;
+
+  padding: 5px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+
+  z-index: 1000;
+}
+
+.language-menu button {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: white;
+
+  text-align: left;
+
+  padding: 9px 10px;
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.language-menu button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.language-menu button.selected {
+  background: rgba(0, 255, 153, 0.12);
+  color: #00ff99;
+}

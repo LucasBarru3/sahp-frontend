@@ -18,9 +18,9 @@
   </div>
 
   <nav>
-    <a routerLink="classes" routerLinkActive="active">Clases</a>
-    <a routerLink="instructors" routerLinkActive="active">Instructores</a>
-    <a routerLink="licenses" routerLinkActive="active">Licencias</a>
+    <a routerLink="classes" routerLinkActive="active">{{ 'HEADER.CLASSES' | translate }}</a>
+    <a routerLink="instructors" routerLinkActive="active">{{ 'HEADER.INSTRUCTORS' | translate }}</a>
+    <a routerLink="licenses" routerLinkActive="active">{{ 'HEADER.LICENSES' | translate }}</a>
 
     <a routerLink="admin" routerLinkActive="active" *ngIf="isAdmin2()">
       Admin
@@ -33,6 +33,42 @@
     <a routerLink="login" routerLinkActive="active" *ngIf="!isLoggedIn()">
       Login
     </a>
+
+    <!-- SELECTOR DE IDIOMA -->
+  <div class="language-selector">
+
+    <button
+      class="language-btn"
+      type="button"
+      (click)="toggleLanguageMenu()">
+
+      {{ currentLanguage === 'es' ? '🇪🇸 ES' : '🇬🇧 EN' }}
+
+      <span class="language-arrow">▾</span>
+
+    </button>
+
+    <div
+      class="language-menu"
+      *ngIf="languageMenuOpen">
+
+      <button
+        type="button"
+        (click)="changeLanguage('es')"
+        [class.selected]="currentLanguage === 'es'">
+        🇪🇸 Español
+      </button>
+
+      <button
+        type="button"
+        (click)="changeLanguage('en')"
+        [class.selected]="currentLanguage === 'en'">
+        🇬🇧 English
+      </button>
+
+    </div>
+
+  </div>
 
     <!-- USER INFO -->
     <div class="user-box" *ngIf="isLoggedIn()">

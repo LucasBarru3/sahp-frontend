@@ -1,0 +1,12 @@
+{
+  "HEADER": {
+    "HOME": "Inicio",
+    "CLASSES": "Clases",
+    "INSTRUCTORS": "Instructores",
+    "LICENSES": "Licencias",
+    "ADMIN": "Admin",
+    "LOGS": "Logs",
+    "LOGIN": "Login",
+    "LOGOUT": "Salir"
+  }
+}
