@@ -8,5 +8,11 @@
     "LOGS": "Logs",
     "LOGIN": "Login",
     "LOGOUT": "Logout"
+  },
+  "HOME": {
+    "TITLE": "Tracking Guide",
+    "LINK": "here",
+    "TEXT": "This page is subject to modifications derived from possible changes in the assignment of patrol units or in the vehicle fleet. Its purpose is to serve as a reference guide for determining which vehicle should perform the tracking of each type of car.\nYou can approach any instructor or coordination to report any errors. or report",
+    "BUTTON": "View all vehicles"
   }
 }
