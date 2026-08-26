@@ -1,21 +1,21 @@
-<h2 class="page-title">Todos los vehículos</h2>
+<h2 class="page-title">{{ 'ALL_VEHICLES.TITLE' | translate }}</h2>
 
 <div class="filters-bar">
 
   <input
     type="text"
-    placeholder="Buscar por nombre o modelo..."
+    placeholder="{{ 'ALL_VEHICLES.FILTERS.SEARCH' | translate }}"
     [(ngModel)]="searchText"
   />
 
   <select   [(ngModel)]="selectedClass">
-    <option value="">Todas las clases</option>
+    <option value="">{{ 'ALL_VEHICLES.FILTERS.CLASS' | translate }}</option>
     <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
   </select>
 
   <select [(ngModel)]="sortOrder">
-    <option value="az">Nombre A–Z</option>
-    <option value="za">Nombre Z–A</option>
+    <option value="az">{{ 'ALL_VEHICLES.FILTERS.NAME' | translate }} A–Z</option>
+    <option value="za">{{ 'ALL_VEHICLES.FILTERS.NAME' | translate }} Z–A</option>
   </select>
 
 </div>
@@ -32,7 +32,7 @@
         {{ v.class_id === 1 ? 'B' : v.class_id === 2 ? 'A' : v.class_id === 3 ? 'S+' : 'C' }}
       </span></a>
       <span class="class-copy">
-        <i (click)="copyModel(v.model)" class="material-icons" title="Copiar modelo al portapapeles">
+        <i (click)="copyModel(v.model)" class="material-icons" title="{{ 'ALL_VEHICLES.COPY' | translate }}">
           copy_all
         </i>
       </span>
@@ -41,23 +41,23 @@
     <div class="vehicle-info">
       <h3>{{ v.name }}</h3>
 
-      <div class="margenes"><span>Seguir en-></span><span>{{ v.follow_class }}</span></div>
-      <div class="margenes"><span>Tuneado-></span><span>{{ v.tuned }}</span></div>
-      <p>Nota: {{ v.note }}</p>
+      <div class="margenes"><span>{{ 'ALL_VEHICLES.FOLLOW' | translate }}-></span><span>{{ v.follow_class }}</span></div>
+      <div *ngIf="v.tuned" class="margenes"><span>{{ 'ALL_VEHICLES.TUNED' | translate }}-></span><span>{{ v.tuned }}</span></div>
+      <p *ngIf="v.note">{{ 'ALL_VEHICLES.NOTE' | translate }}: {{ v.note }}</p>
       <div class="buttons" *ngIf="isAdmin">
-        <button class="edit-btn" (click)="startEdit(v)">Editar</button>
-        <button class="delete-btn" (click)="deleteVehicle(v.id)">Eliminar</button>
+        <button class="edit-btn" (click)="startEdit(v)">{{ 'ALL_VEHICLES.EDIT' | translate }}</button>
+        <button class="delete-btn" (click)="deleteVehicle(v.id)">{{ 'ALL_VEHICLES.DELETE' | translate }}</button>
       </div>
     </div>
   </div>
 </div>
 
 <div *ngIf="editingVehicle" class="edit-form">
-  <h3>Editar vehículo</h3>
+  <h3>{{ 'ALL_VEHICLES.EDITFORM.TITLE' | translate }}</h3>
 
-  <input type="text" [(ngModel)]="editingVehicle.name" placeholder="Nombre" />
-  <input type="text" [(ngModel)]="editingVehicle.model" placeholder="Modelo" />
-  <input type="text" [(ngModel)]="editingVehicle.image_url" placeholder="URL imagen" />
+  <input type="text" [(ngModel)]="editingVehicle.name" placeholder="{{ 'ALL_VEHICLES.EDITFORM.NAME' | translate }}" />
+  <input type="text" [(ngModel)]="editingVehicle.model" placeholder="{{ 'ALL_VEHICLES.EDITFORM.MODEL' | translate }}" />
+  <input type="text" [(ngModel)]="editingVehicle.image_url" placeholder="{{ 'ALL_VEHICLES.EDITFORM.IMAGE_URL' | translate }}" />
 
   <div class="preview" *ngIf="editingVehicle.image_url">
     <img
@@ -66,14 +66,14 @@
       (error)="onImageError()"
     />
     <p *ngIf="editingVehicle.image_url.startsWith('data:')" class="error-msg">
-      ❌ No se permiten imágenes en formato data URL
+      {{ 'ALL_VEHICLES.MESSAGE.DATAURL' | translate }}
     </p>
     <p *ngIf="!imageOk" class="error-msg">
-      ❌ La imagen no carga o el enlace no es válido
+      {{ 'ALL_VEHICLES.MESSAGE.IMAGEURL' | translate }}
     </p>
   </div>
   <p>
-    Clase:
+    {{ 'ALL_VEHICLES.EDITFORM.CLASS' | translate }}:
     <select name="class_id" id="class_id" [(ngModel)]="editingVehicle.class_id">
       <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
     </select>
@@ -81,7 +81,7 @@
   
   <div style="display: flex; align-items: center; gap: 10px;">
   <label for="follow_class" style="white-space: nowrap;">
-    Se sigue con:
+    {{ 'ALL_VEHICLES.EDITFORM.FOLLOW' | translate }}:
   </label>
 
   <input
@@ -89,13 +89,13 @@
     id="follow_class"
     name="follow_class"
     [(ngModel)]="editingVehicle.follow_class"
-    placeholder="Clase a seguir"
+    placeholder="{{ 'ALL_VEHICLES.EDITFORM.FOLLOW' | translate }}"
     style="flex: 1;"
   />
   </div>
   <div style="display: flex; align-items: center; gap: 10px;">
   <label for="tuned" style="white-space: nowrap;">
-    Tuneado:
+    {{ 'ALL_VEHICLES.EDITFORM.TUNED' | translate }}:
   </label>
 
   <input
@@ -103,14 +103,14 @@
     id="tuned"
     name="tuned"
     [(ngModel)]="editingVehicle.tuned"
-    placeholder="Tuneado"
+    placeholder="{{ 'ALL_VEHICLES.EDITFORM.TUNED' | translate }}"
     style="flex: 1;"
   />
   </div>
-  <input style="height:30px;" type="text" name="note" id="note" [(ngModel)]="editingVehicle.note" placeholder="Nota" />
+  <input style="height:30px;" type="text" name="note" id="note" [(ngModel)]="editingVehicle.note" placeholder="{{ 'ALL_VEHICLES.EDITFORM.NOTE' | translate }}" />
   <div class="form-buttons">
-    <button class="save-btn" (click)="editVehicle()" [disabled]="!imageOk || editingVehicle.image_url.startsWith('data:')">Guardar</button>
-    <button class="cancel-btn" (click)="editingVehicle = null">Cancelar</button>
+    <button class="save-btn" (click)="editVehicle()" [disabled]="!imageOk || editingVehicle.image_url.startsWith('data:')">{{ 'ALL_VEHICLES.EDITFORM.SAVE' | translate }}</button>
+    <button class="cancel-btn" (click)="editingVehicle = null">{{ 'ALL_VEHICLES.EDITFORM.CANCEL' | translate }}</button>
   </div>
 </div>
 <div class="image-modal" *ngIf="selectedImage" (click)="closeImage()">
@@ -118,14 +118,14 @@
   <span class="close-btn" (click)="closeImage()">✕</span>
 </div>
 
-<button class="add-btn" *ngIf="isAdmin" (click)="startAdd()">Añadir vehículo</button>
+<button class="add-btn" *ngIf="isAdmin" (click)="startAdd()">{{ 'ALL_VEHICLES.ADDFORM.TITLE' | translate }}</button>
 
 <div *ngIf="addingVehicle" class="edit-form">
-  <h3>Añadir vehículo</h3>
+  <h3>{{ 'ALL_VEHICLES.ADDFORM.TITLE' | translate }}</h3>
 
-  <input type="text" [(ngModel)]="addingVehicle.name" placeholder="Nombre" />
-  <input type="text" [(ngModel)]="addingVehicle.model" placeholder="Modelo" />
-  <input type="text" [(ngModel)]="addingVehicle.image_url" placeholder="URL imagen" />
+  <input type="text" [(ngModel)]="addingVehicle.name" placeholder="{{ 'ALL_VEHICLES.ADDFORM.NAME' | translate }}" />
+  <input type="text" [(ngModel)]="addingVehicle.model" placeholder="{{ 'ALL_VEHICLES.ADDFORM.MODEL' | translate }}" />
+  <input type="text" [(ngModel)]="addingVehicle.image_url" placeholder="{{ 'ALL_VEHICLES.ADDFORM.IMAGE_URL' | translate }}" />
 
   <div class="preview" *ngIf="addingVehicle.image_url">
     <img
@@ -134,15 +134,15 @@
       (error)="onImageError()"
     />
     <p *ngIf="addingVehicle.image_url.startsWith('data:')" class="error-msg">
-      ❌ No se permiten imágenes en formato data URL
+      {{ 'ALL_VEHICLES.MESSAGE.DATAURL' | translate }}
     </p>
     <p *ngIf="!imageOk" class="error-msg">
-      ❌ La imagen no carga o el enlace no es válido
+      {{ 'ALL_VEHICLES.MESSAGE.IMAGEURL' | translate }}
     </p>
   </div>
 
   <p>
-    Clase:
+    {{ 'ALL_VEHICLES.ADDFORM.CLASS' | translate }}:
     <select name="class_id" id="class_id" [(ngModel)]="addingVehicle.class_id">
       <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
     </select>
@@ -150,21 +150,21 @@
 
   <div style="display: flex; align-items: center; gap: 10px;">
   <label for="follow_class" style="white-space: nowrap;">
-    Se sigue con:
+    {{ 'ALL_VEHICLES.ADDFORM.FOLLOW' | translate }}:
   </label>
-  <input type="text" name="follow_class" id="follow_class" [(ngModel)]="addingVehicle.follow_class" placeholder="Clase a seguir" />
+  <input type="text" name="follow_class" id="follow_class" [(ngModel)]="addingVehicle.follow_class" placeholder="{{ 'ALL_VEHICLES.ADDFORM.FOLLOW' | translate }}" />
   </div>
 
   <div style="display: flex; align-items: center; gap: 10px;">
   <label for="tuned" style="white-space: nowrap;">
-    Tuneado:
+    {{ 'ALL_VEHICLES.ADDFORM.TUNED' | translate }}:
   </label>
-  <input type="text" name="tuned" id="tuned" [(ngModel)]="addingVehicle.tuned" placeholder="Tuneado" />
+  <input type="text" name="tuned" id="tuned" [(ngModel)]="addingVehicle.tuned" placeholder="{{ 'ALL_VEHICLES.ADDFORM.TUNED' | translate }}" />
   </div>
   
-  <input type="text" name="note" id="note" [(ngModel)]="addingVehicle.note" placeholder="Nota" />
+  <input type="text" name="note" id="note" [(ngModel)]="addingVehicle.note" placeholder="{{ 'ALL_VEHICLES.ADDFORM.NOTE' | translate }}" />
   <div class="form-buttons">
-    <button class="save-btn" (click)="addVehicle()" [disabled]="!imageOk || addingVehicle.image_url.startsWith('data:')">Guardar</button>
-    <button class="cancel-btn" (click)="addingVehicle = null">Cancelar</button>
+    <button class="save-btn" (click)="addVehicle()" [disabled]="!imageOk || addingVehicle.image_url.startsWith('data:')">{{ 'ALL_VEHICLES.ADDFORM.SAVE' | translate }}</button>
+    <button class="cancel-btn" (click)="addingVehicle = null">{{ 'ALL_VEHICLES.ADDFORM.CANCEL' | translate }}</button>
   </div>
 </div>

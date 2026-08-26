@@ -11,11 +11,12 @@ import { AdminService } from '../../services/admin';
 import { Subscription } from 'rxjs';
 import { SessionService } from '../../services/session';
 import { OnDestroy } from '@angular/core';
-
+import { TranslatePipe } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-all-vehicles',
   standalone: true,
-  imports: [CommonModule, LoaderComponent, FormsModule, RouterModule],
+  imports: [CommonModule, LoaderComponent, FormsModule, RouterModule, TranslatePipe],
   templateUrl: './all-vehicles.html',
   styleUrls: ['./all-vehicles.css']
 })
@@ -33,7 +34,7 @@ export class AllVehiclesComponent implements OnInit, OnDestroy {
   isAdmin = false;
   classes: any[] = [];
   logoutSub!: Subscription;
-  constructor(private vehicleService: VehicleService, private classService: ClassService, private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService) {}
+  constructor(private vehicleService: VehicleService, private classService: ClassService, private snackBar: MatSnackBar, private adminService: AdminService, private sessionService: SessionService, private translateService: TranslateService) {}
 
   ngOnInit() {
     this.checkAdmin();
@@ -130,15 +131,15 @@ export class AllVehiclesComponent implements OnInit, OnDestroy {
 
   deleteVehicle(id: number) {
     if (this.adminService.checkAdmin() === false) {
-      this.snackBar.open('No tienes permisos para borrar vehículos', 'Cerrar', { duration: 3000 });
+      this.snackBar.open(this.translateService.instant('ALL_VEHICLES.SNACKBAR.DELETE_ERROR'), this.translateService.instant('ALL_VEHICLES.SNACKBAR.CLOSE'), { duration: 3000 });
       return;
     }
     this.vehicleService.delete(id).subscribe({
       next: () => {
         this.loadVehicles();
         this.snackBar.open(
-          'Coche eliminado con éxito',
-          'Cerrar',
+          this.translateService.instant('ALL_VEHICLES.SNACKBAR.DELETE_SUCCESS'),
+          this.translateService.instant('ALL_VEHICLES.SNACKBAR.CLOSE'),
           {
             duration: 3000,
             horizontalPosition: 'center',
@@ -153,7 +154,7 @@ export class AllVehiclesComponent implements OnInit, OnDestroy {
 
   startEdit(vehicle: any) {
     if (this.adminService.checkAdmin() === false) {
-      this.snackBar.open('No tienes permisos para editar vehículos', 'Cerrar', { duration: 3000 });
+      this.snackBar.open(this.translateService.instant('ALL_VEHICLES.SNACKBAR.EDIT_ERROR'), this.translateService.instant('ALL_VEHICLES.SNACKBAR.CLOSE'), { duration: 3000 });
       return;
     }
     this.editingVehicle = {
@@ -177,8 +178,8 @@ export class AllVehiclesComponent implements OnInit, OnDestroy {
     }).subscribe(() => {
       this.editingVehicle = null;
       this.snackBar.open(
-      'Vehiculo editado con éxito',
-      'Cerrar',
+        this.translateService.instant('ALL_VEHICLES.SNACKBAR.EDIT_SUCCESS'),
+        this.translateService.instant('ALL_VEHICLES.SNACKBAR.CLOSE'),
       {
         duration: 3000,
         horizontalPosition: 'center',
@@ -192,7 +193,7 @@ export class AllVehiclesComponent implements OnInit, OnDestroy {
 
   startAdd() {
     if (this.adminService.checkAdmin() === false) {
-      this.snackBar.open('No tienes permisos para crear vehículos', 'Cerrar', { duration: 3000 });
+      this.snackBar.open(this.translateService.instant('ALL_VEHICLES.SNACKBAR.ADD_ERROR'), this.translateService.instant('ALL_VEHICLES.SNACKBAR.CLOSE'), { duration: 3000 });
       return;
     }
     this.addingVehicle = {
@@ -219,7 +220,7 @@ export class AllVehiclesComponent implements OnInit, OnDestroy {
     }).subscribe(() => {
       this.addingVehicle = null;
       this.loadVehicles();
-      this.snackBar.open('Vehículo añadido con éxito', 'Cerrar', { duration: 3000 });
+      this.snackBar.open(this.translateService.instant('ALL_VEHICLES.SNACKBAR.ADD_SUCCESS'), this.translateService.instant('ALL_VEHICLES.SNACKBAR.CLOSE'), { duration: 3000 });
     });
   }
 
@@ -231,10 +232,10 @@ export class AllVehiclesComponent implements OnInit, OnDestroy {
 
   copyModel(model: string) {
     navigator.clipboard.writeText(model).then(() => {
-    }).catch(err => console.error('Error copiando al portapapeles:', err));
+    }).catch(err => console.error(this.translateService.instant('ALL_VEHICLES.SNACKBAR.COPY_ERROR'), err));
     this.snackBar.open(
-      'Coche copiado al portapapeles',
-      'Cerrar',
+      this.translateService.instant('ALL_VEHICLES.SNACKBAR.COPY_SUCCESS'),
+      this.translateService.instant('ALL_VEHICLES.SNACKBAR.CLOSE'),
       {
         duration: 3000,
         horizontalPosition: 'center',

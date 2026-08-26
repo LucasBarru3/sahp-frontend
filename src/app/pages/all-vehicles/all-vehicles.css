@@ -27,6 +27,7 @@
   background: #1c1c1c;
   border-radius: 15px;
   width: 220px;
+  min-height: 260px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -88,6 +89,10 @@
   padding: 10px;
   width: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-sizing: border-box;
 }
 
 .vehicle-info h3 {
@@ -104,6 +109,8 @@
   display: flex;
   gap: 10px;
   justify-content: center;
+  margin-top: auto;
+  padding-top: 10px;
 }
 
 /* Botones de tarjetas */
@@ -123,15 +130,15 @@
 }
 
 .edit-btn:hover {
-  background-color: #3b3d8a;
+  background-color: #45477f;
 }
 
 .delete-btn {
-  background-color: #b89e49;
+  background-color: #d9534f;
 }
 
 .delete-btn:hover {
-  background-color: #927a3a;
+  background-color: #b52b27;
 }
 
 /* Formulario */

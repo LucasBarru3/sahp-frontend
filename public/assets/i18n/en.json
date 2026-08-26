@@ -14,5 +14,58 @@
     "LINK": "here",
     "TEXT": "This page is subject to modifications derived from possible changes in the assignment of patrol units or in the vehicle fleet. Its purpose is to serve as a reference guide for determining which vehicle should perform the tracking of each type of car.\nYou can approach any instructor or coordination to report any errors. or report",
     "BUTTON": "View all vehicles"
+  },
+  "ALL_VEHICLES": {
+    "TITLE": "All Vehicles",
+    "FILTERS": {
+      "SEARCH": "Search by name or model...",
+      "CLASS": "All classes",
+      "NAME": "Name"
+    },
+    "COPY": "Copy model to clipboard",
+    "FOLLOW": "Follow on",
+    "TUNED": "Tuned",
+    "NOTE": "Note",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "EDITFORM": {
+      "TITLE": "Edit Vehicle",
+      "NAME": "Name",
+      "MODEL": "Model",
+      "CLASS": "Class",
+      "IMAGE_URL": "Image URL",
+      "FOLLOW": "Follow on",
+      "TUNED": "Tuned",
+      "NOTE": "Note",
+      "SAVE": "Save",
+      "CANCEL": "Cancel"
+    },
+    "ADDFORM": {
+      "TITLE": "Add Vehicle",
+      "NAME": "Name",
+      "MODEL": "Model",
+      "CLASS": "Class",
+      "IMAGE_URL": "Image URL",
+      "FOLLOW": "Follow on",
+      "TUNED": "Tuned",
+      "NOTE": "Note",
+      "SAVE": "Save",
+      "CANCEL": "Cancel"
+    },
+    "MESSAGE" :{
+      "DATAURL" : "Data URLs are not allowed for images",
+      "IMAGEURL" : "The image failed to load or the link is invalid"
+    },
+    "SNACKBAR": {
+      "EDIT_SUCCESS": "Vehicle edited successfully",
+      "EDIT_ERROR": "You do not have permission to edit vehicles",
+      "ADD_SUCCESS": "Vehicle added successfully",
+      "ADD_ERROR": "Error adding vehicle",
+      "DELETE_SUCCESS": "Vehicle deleted successfully",
+      "DELETE_ERROR": "You do not have permission to delete vehicles",
+      "CLOSE": "Close",
+      "COPY_SUCCESS": "Model copied to clipboard",
+      "COPY_ERROR": "Error copying model to clipboard"
+    }
   }
 }
