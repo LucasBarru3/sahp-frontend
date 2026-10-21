@@ -10,10 +10,11 @@ import { AdminService } from '../../services/admin';
 import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SessionService } from '../../services/session';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-classes',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, LoaderComponent],
+  imports: [CommonModule, RouterModule, FormsModule, LoaderComponent, TranslatePipe],
   templateUrl: './classes.html',
   styleUrls: ['./classes.css']
 })

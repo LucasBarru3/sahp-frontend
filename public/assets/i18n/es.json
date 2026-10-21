@@ -67,5 +67,11 @@
       "COPY_SUCCESS": "Modelo copiado al portapapeles",
       "COPY_ERROR": "Error al copiar el modelo al portapapeles"
     }
+  },
+  "FOOTER": {
+    "TEXT": "Página web creada por"
+  },
+  "CLASSES": {
+    "TITLE": "Clases de vehículos"
   }
 }

@@ -67,5 +67,11 @@
       "COPY_SUCCESS": "Model copied to clipboard",
       "COPY_ERROR": "Error copying model to clipboard"
     }
+  },
+  "FOOTER": {
+    "TEXT": "Website created by"
+  },
+  "CLASSES": {
+    "TITLE": "Vehicles classes"
   }
 }
