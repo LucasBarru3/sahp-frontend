@@ -1,58 +1,252 @@
+/* ==========================================================
+   LOGIN · estilo "tactical" (azul marino + teal)
+   Reutiliza las variables globales de styles.css si existen.
+   ========================================================== */
+
+:host {
+  display: block;
+
+  --login-bg: var(--bg, #0a1419);
+  --login-surface: var(--surface, #0d1a21);
+  --login-border: var(--border, #1d2f38);
+  --login-text: var(--text, #e6eef0);
+  --login-muted: var(--text-muted, #8aa1a8);
+  --login-accent: var(--accent, #35c4bd);
+  --login-accent-2: var(--accent-strong, #2a9fa6);
+  --login-warn: var(--warn, #d9a441);
+  --login-ink: #04181b;
+
+  --login-mono: ui-monospace, 'JetBrains Mono', 'Cascadia Code',
+    Consolas, 'Courier New', monospace;
+
+  --login-sans: var(--font-body, 'Inter', Roboto, system-ui,
+    -apple-system, 'Segoe UI', sans-serif);
+
+  color: var(--login-text);
+  font-family: var(--login-sans);
+}
+
+/* ---------- Contenedor principal ---------- */
+
 .login-container {
+  box-sizing: border-box;
+  width: calc(100% - 32px);
   max-width: 400px;
   margin: 80px auto;
   padding: 30px;
-  border-radius: 12px;
-  background: #bce7fd;
-  border: 2px solid #1c1c1c;
+
+  background: rgba(13, 26, 33, 0.92);
+  border: 1px solid var(--login-border);
+  border-radius: 14px;
+
   text-align: center;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-  font-family: Arial, sans-serif;
+
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.4),
+    0 0 24px rgba(53, 196, 189, 0.03);
+
+  backdrop-filter: blur(6px);
 }
+
+/* ---------- Título ---------- */
 
 .login-container h2 {
-  margin-bottom: 20px;
-  color: #1c1c1c;
+  margin: 0 0 24px;
+
+  color: var(--login-text);
+
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
+
+/* ---------- Campos de entrada ---------- */
 
 .login-container input {
+  display: block;
+  box-sizing: border-box;
   width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
+
+  margin-bottom: 16px;
+  padding: 12px 14px;
+
+  background: var(--login-bg);
+  color: var(--login-text);
+
+  border: 1px solid var(--login-border);
   border-radius: 8px;
-  border: 1px solid #1c1c1c;
-  font-size: 1rem;
+
+  font-family: var(--login-sans);
+  font-size: 0.9rem;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
 }
+
+/* Texto de ayuda dentro de los campos */
+
+.login-container input::placeholder {
+  color: var(--login-muted);
+  opacity: 0.8;
+}
+
+/* Campo seleccionado */
+
+.login-container input:focus {
+  border-color: var(--login-accent);
+
+  box-shadow: 0 0 0 3px rgba(53, 196, 189, 0.15);
+}
+
+/* Autocompletado del navegador */
+
+.login-container input:-webkit-autofill,
+.login-container input:-webkit-autofill:hover,
+.login-container input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--login-text);
+  caret-color: var(--login-accent);
+
+  transition: background-color 9999s ease-in-out 0s;
+
+  border: 1px solid var(--login-border);
+}
+
+/* ---------- Botón de acceso ---------- */
 
 .login-container button {
+  box-sizing: border-box;
+  display: block;
   width: 100%;
-  padding: 12px;
-  border: none;
+
+  padding: 12px 16px;
+
+  background: var(--login-accent-2);
+  color: var(--login-ink);
+
+  border: 1px solid var(--login-accent);
   border-radius: 8px;
-  background-color: #1c1c1c;
-  color: #bce7fd;
-  font-weight: bold;
+
+  font-family: var(--login-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
   cursor: pointer;
-  transition: background 0.3s;
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    background 0.2s,
+    border-color 0.2s;
 }
+
+/* Hover */
 
 .login-container button:hover:not(:disabled) {
-  background-color: #3b3636;
+  background: var(--login-accent);
+  border-color: var(--login-accent);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 6px 20px rgba(53, 196, 189, 0.2);
 }
+
+/* Pulsación */
+
+.login-container button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Foco accesible con teclado */
+
+.login-container button:focus-visible {
+  outline: 2px solid var(--login-accent);
+  outline-offset: 4px;
+}
+
+/* Estado deshabilitado */
 
 .login-container button:disabled {
-  opacity: 0.6;
+  opacity: 0.4;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
+
+/* ---------- Mensajes de error ---------- */
 
 .error-msg {
-  color: #b89e49;
-  font-weight: bold;
-  margin-bottom: 15px;
+  margin: 0 0 16px;
+  padding: 10px 12px;
+
+  color: var(--login-warn);
+
+  background: rgba(217, 164, 65, 0.08);
+  border: 1px solid rgba(217, 164, 65, 0.3);
+  border-radius: 8px;
+
+  font-family: var(--login-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+
+  text-align: center;
 }
 
+/* ---------- Información de acceso de prueba ---------- */
+
 .demo-info {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #272121;
+  margin-top: 18px;
+  padding-top: 14px;
+
+  color: var(--login-muted);
+
+  border-top: 1px solid var(--login-border);
+
+  font-family: var(--login-mono);
+  font-size: 0.7rem;
+  line-height: 1.7;
+
+  text-align: left;
+}
+
+/* Destacar datos importantes dentro de la información demo */
+
+.demo-info strong {
+  color: var(--login-accent);
+  font-weight: 600;
+}
+
+/* Enlaces dentro del contenedor, si los hay */
+
+.login-container a {
+  color: var(--login-accent);
+  text-decoration: none;
+
+  transition: color 0.2s;
+}
+
+.login-container a:hover {
+  color: var(--login-text);
+  text-decoration: underline;
+}
+
+/* ---------- Adaptación a pantallas pequeñas ---------- */
+
+@media screen and (max-width: 480px) {
+  .login-container {
+    margin: 40px auto;
+    padding: 24px 20px;
+    border-radius: 12px;
+  }
+
+  .login-container h2 {
+    margin-bottom: 20px;
+  }
 }
