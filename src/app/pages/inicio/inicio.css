@@ -1,3 +1,24 @@
+/* ==========================================================
+   INICIO · estilo "tactical" (azul marino + teal)
+   Usa las variables de styles.css si existen; si no, aplica
+   los valores por defecto de la derecha (var(--x, #valor)).
+   ========================================================== */
+:host {
+  display: block;
+  --i-bg:        var(--bg, #0a1419);
+  --i-surface:   var(--surface, #0d1a21);
+  --i-border:    var(--border, #1d2f38);
+  --i-text:      var(--text, #e6eef0);
+  --i-muted:     var(--text-muted, #8aa1a8);
+  --i-accent:    var(--accent, #35c4bd);
+  --i-accent-2:  var(--accent-strong, #2a9fa6);
+  --i-ink:       #04181b;                      /* texto oscuro sobre teal */
+  --i-mono:      ui-monospace, 'JetBrains Mono', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  --i-sans:      var(--font-body, 'Inter', Roboto, system-ui, -apple-system, 'Segoe UI', sans-serif);
+  color: var(--i-text);
+  font-family: var(--i-sans);
+}
+
 /* ===================== */
 /* RESET */
 *,
@@ -12,10 +33,6 @@ html {
   font-size: 16px;
 }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
 main {
   min-height: 100vh;
   display: flex;
@@ -26,10 +43,7 @@ main {
 /* HERO */
 .hero {
   min-height: clamp(320px, 45vh, 700px);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  color: #1c1c1c;
+  color: var(--i-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,42 +51,79 @@ main {
   padding: clamp(20px, 4vw, 80px);
 }
 
+/* panel translúcido para que el texto se lea sobre el fondo */
 .hero-content {
-  max-width: 1200px;
+  max-width: 900px;
+  padding: clamp(24px, 4vw, 56px);
+  background: rgba(13, 26, 33, 0.78);
+  border: 1px solid var(--i-border);
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+/* pequeña línea de acento sobre el título (decorativa) */
+.hero-content::before {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin: 0 auto 22px;
+  background: var(--i-accent);
+  border-radius: 2px;
 }
 
 .hero h1 {
-  font-size: clamp(2rem, 4vw, 4rem);
-  margin-bottom: 32px;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--i-text);
+  margin-bottom: 24px;
 }
 
 .hero p {
-  font-size: clamp(1rem, 1.5vw, 1.6rem);
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--i-muted);
   margin-bottom: 2rem;
-  line-height: 1.2;
 }
 
+.hero p a {
+  color: var(--i-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(53, 196, 189, 0.4);
+  transition: text-decoration-color 0.2s;
+}
+
+.hero p a:hover {
+  text-decoration-color: var(--i-accent);
+}
+
+/* botón principal (como "Nueva operación") */
 .btn-hero {
   display: inline-block;
   text-decoration: none;
-  background-color: #bce7fd;
-  color: #1c1c1c;
-  padding: clamp(10px, 1.2vw, 16px) clamp(20px, 2vw, 36px);
-  border-radius: 12px;
-  font-weight: bold;
-  border: 2px solid #1c1c1c;
-  transition: all 0.3s ease;
+  background-color: var(--i-accent-2);
+  color: var(--i-ink);
+  padding: clamp(10px, 1.2vw, 14px) clamp(20px, 2vw, 32px);
+  border-radius: 8px;
+  font-weight: 600;
+  border: 1px solid var(--i-accent);
+  transition: background-color 0.25s, transform 0.25s, box-shadow 0.25s;
 }
 
 .btn-hero:hover {
-  background-color: #1c1c1c;
-  color: #bce7fd;
+  background-color: var(--i-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(231, 233, 233, 0.25);
 }
 
 /* ===================== */
 /* SECCIÓN CLASES */
 .classes-section {
-  padding: clamp(40px, 6vw, 10px) clamp(20px, 6vw, 100px);
+  padding: 40px clamp(20px, 6vw, 100px);
   text-align: center;
   max-width: 1800px;
   margin: 0 auto;
@@ -80,79 +131,88 @@ main {
 }
 
 .classes-section h2 {
-  font-size: clamp(2rem, 3vw, 3.5rem);
-  margin-bottom: clamp(30px, 4vw, 80px);
-  color: #1c1c1c;
-  text-shadow:
-    -0.2px -0.2px 0 #bce7fd,
-     0.2px -0.2px 0 #bce7fd,
-    -0.2px  0.2px 0 #bce7fd,
-     0.2px  0.2px 0 #bce7fd;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: clamp(30px, 4vw, 64px);
+  color: var(--i-text);
 }
 
 /* GRID RESPONSIVE REAL */
 .classes-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: clamp(15px, 2vw, 40px);
+  gap: clamp(15px, 2vw, 32px);
 }
 
 /* ===================== */
 /* TARJETA */
 .class-card {
-  background-color: #bce7fd;
-  padding: clamp(20px, 2vw, 40px);
-  border-radius: 18px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--i-surface);
+  border: 1px solid var(--i-border);
+  padding: clamp(20px, 2vw, 32px);
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .class-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-6px);
+  border-color: rgba(53, 196, 189, 0.45);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 24px rgba(53, 196, 189, 0.08);
 }
 
 .class-card h3 {
-  font-size: clamp(1.2rem, 1.5vw, 1.8rem);
-  color: #1c1c1c;
+  font-size: clamp(1.2rem, 1.5vw, 1.7rem);
+  font-weight: 700;
+  color: var(--i-text);
   margin-bottom: 0.8rem;
 }
 
 .class-description {
-  font-size: clamp(0.95rem, 1.1vw, 1.2rem);
-  color: #444;
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  line-height: 1.5;
+  color: var(--i-muted);
   margin-bottom: 1.2rem;
 }
 
 /* BADGE */
 .vehicle-count {
   margin-bottom: 1.5rem;
-  padding: 6px 14px;
-  background: rgba(0, 0, 0, 0.15);
+  padding: 5px 12px;
+  background: rgba(53, 196, 189, 0.1);
+  border: 1px solid rgba(53, 196, 189, 0.35);
   border-radius: 999px;
-  font-weight: bold;
-  font-size: clamp(0.75rem, 1vw, 0.95rem);
-  color: #3b3d8a;
+  font-family: var(--i-mono);
+  font-weight: 600;
+  font-size: clamp(0.68rem, 0.9vw, 0.78rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--i-accent);
 }
 
 /* BOTÓN */
 .btn {
   margin-top: auto;
   text-decoration: none;
-  background-color: #1c1c1c;
-  color: #bce7fd;
-  padding: clamp(8px, 1vw, 14px) clamp(16px, 2vw, 26px);
-  border-radius: 10px;
-  transition: background 0.3s ease;
+  background-color: transparent;
+  color: var(--i-accent);
+  border: 1px solid rgba(53, 196, 189, 0.45);
+  padding: clamp(8px, 1vw, 11px) clamp(16px, 2vw, 24px);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 .btn:hover {
-  background-color: #1c1c1c;
+  background-color: var(--i-accent);
+  border-color: var(--i-accent);
+  color: var(--i-ink);
 }
-
 
 /* ===================== */
 /* BREAKPOINTS EXTRA GRANDES */

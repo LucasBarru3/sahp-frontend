@@ -1,12 +1,43 @@
+/* ==========================================================
+   LICENCIAS · estilo "tactical" (azul marino + teal)
+   Usa las variables de styles.css si existen; si no, aplica
+   los valores por defecto de la derecha (var(--x, #valor)).
+   ========================================================== */
+:host {
+  display: block;
+  --l-bg:        var(--bg, #0a1419);
+  --l-surface:   var(--surface, #0d1a21);
+  --l-surface-2: var(--surface-2, #122229);
+  --l-border:    var(--border, #1d2f38);
+  --l-text:      var(--text, #e6eef0);
+  --l-muted:     var(--text-muted, #8aa1a8);
+  --l-accent:    var(--accent, #35c4bd);
+  --l-accent-2:  var(--accent-strong, #2a9fa6);
+  --l-ok:        var(--ok, #3fb68b);
+  --l-danger:    var(--danger, #e5534b);
+  --l-ink:       #04181b;                      /* texto oscuro sobre teal */
+  --l-mono:      ui-monospace, 'JetBrains Mono', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  --l-sans:      var(--font-body, 'Inter', Roboto, system-ui, -apple-system, 'Segoe UI', sans-serif);
+  font-family: var(--l-sans);
+}
+
 .licenses-page {
   padding: 40px;
   max-width: 1200px;
   margin: auto;
-  color: #fff;
+  color: var(--l-text);
+}
+
+h1 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
 }
 
 .subtitle {
-  opacity: 0.7;
+  color: var(--l-muted);
+  line-height: 1.5;
   margin-bottom: 30px;
 }
 
@@ -16,65 +47,35 @@
   gap: 26px;
 }
 
+/* ===================== */
 /* CARD */
 .license-card {
-  background: linear-gradient(145deg, #1c1c1c, #0f3f5c);
-  border-radius: 16px;
+  position: relative;
+  background: var(--l-surface);
+  border: 1px solid var(--l-border);
+  border-radius: 14px;
   padding: 22px;
-  box-shadow: 0 12px 35px rgba(0,0,0,.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   overflow: hidden;
-}
-/* =========================
-   GTA-STYLE HOVER EFFECT
-   ========================= */
-
-/* Card base animation */
-.license-card {
-  transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* Hover card */
 .license-card:hover {
-  transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+  transform: translateY(-6px);
+  border-color: rgba(53, 196, 189, 0.45);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 24px rgba(53, 196, 189, 0.08);
 }
 
-/* Image zoom + cinematic feel */
-.vehicle-image img {
-  transition:
-    transform 0.5s ease,
-    filter 0.5s ease;
-}
-
-.license-card:hover .vehicle-image img {
-  transform: scale(1.08);
-  filter: contrast(1.25) saturate(1.2);
-}
-
-/* Vehicle name glow */
-.vehicle-name {
-  transition:
-    background 0.35s ease,
-    letter-spacing 0.35s ease;
-}
-
-.license-card:hover .vehicle-name {
-  background: rgba(0, 0, 0, 0.8);
-  letter-spacing: 1.5px;
-}
-
-/* Subtle highlight line (Rockstar vibe) */
+/* línea de brillo al pasar el ratón */
 .license-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 16px;
+  border-radius: 14px;
   background: linear-gradient(
     120deg,
     transparent 30%,
-    rgba(255, 255, 255, 0.08),
+    rgba(53, 196, 189, 0.07),
     transparent 70%
   );
   opacity: 0;
@@ -86,204 +87,317 @@
   opacity: 1;
 }
 
+/* ===================== */
 /* IMAGEN */
 .vehicle-image {
   position: relative;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
+  border: 1px solid var(--l-border);
   margin-bottom: 18px;
 }
 
 .vehicle-image img {
+  display: block;
   width: 100%;
   height: 180px;
   object-fit: cover;
-  filter: contrast(1.1) saturate(1.05);
+  filter: contrast(1.05) saturate(1.05);
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.license-card:hover .vehicle-image img {
+  transform: scale(1.06);
+  filter: contrast(1.15) saturate(1.15);
+}
+
+/* degradado inferior para fundir la foto */
+.vehicle-image::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(to bottom, transparent, rgba(10, 20, 25, 0.75));
+  pointer-events: none;
 }
 
 .vehicle-name {
   position: absolute;
+  z-index: 2;
   bottom: 10px;
   left: 12px;
-  background: rgba(0,0,0,.6);
-  padding: 6px 12px;
-  border-radius: 14px;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
+  background: rgba(10, 20, 25, 0.8);
+  border: 1px solid rgba(53, 196, 189, 0.35);
+  color: var(--l-accent);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: var(--l-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  backdrop-filter: blur(4px);
+  transition: letter-spacing 0.35s ease, border-color 0.35s ease;
 }
 
+.license-card:hover .vehicle-name {
+  letter-spacing: 0.14em;
+  border-color: var(--l-accent);
+}
+
+/* ===================== */
 /* HEADER */
 .license-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .license-header h2 {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--l-text);
 }
 
 /* STATUS */
 .status {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  font-weight: bold;
-  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: var(--l-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
 }
 
 .status.active {
-  background: #1e7f43;
-  color: #d7ffe7;
+  background: rgba(63, 182, 139, 0.12);
+  border-color: rgba(63, 182, 139, 0.4);
+  color: var(--l-ok);
 }
 
 .status.inactive {
-  background: #7f1e1e;
-  color: #ffd7d7;
+  background: rgba(229, 83, 75, 0.12);
+  border-color: rgba(229, 83, 75, 0.4);
+  color: var(--l-danger);
 }
 
+/* ===================== */
 /* TEXTO */
 .description {
   margin: 14px 0;
-  opacity: 0.9;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--l-muted);
 }
 
 .license-info p {
-  margin: 4px 0;
+  margin: 6px 0;
   font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--l-text);
+}
+
+.license-info p strong {
+  display: block;
+  font-family: var(--l-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--l-muted);
+  margin-bottom: 2px;
 }
 
 .notice {
   margin-top: 14px;
-  font-size: 0.7rem;
-  opacity: 0.6;
-  border-top: 1px solid rgba(255,255,255,.1);
+  font-family: var(--l-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  color: var(--l-muted);
+  border-top: 1px solid var(--l-border);
   padding-top: 10px;
+}
+
+/* ===================== */
+/* BOTONES DE LA TARJETA */
+.admin-toggle,
+.toggle-status-btn,
+.delete-license-btn {
+  width: 100%;
+  padding: 9px 10px;
+  background: transparent;
+  border-radius: 8px;
+  font-family: var(--l-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.admin-toggle:active,
+.toggle-status-btn:active,
+.delete-license-btn:active {
+  transform: scale(0.98);
 }
 
 .admin-toggle {
   margin-top: 14px;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  font-size: 0.7rem;
-  font-weight: bold;
-  letter-spacing: 1.2px;
-  cursor: pointer;
-  background: linear-gradient(145deg, #1c1c1c, #2a2a2a);
-  color: #fff;
-  transition: background 0.3s ease, transform 0.2s ease;
+  color: var(--l-text);
+  border: 1px solid var(--l-border);
 }
 
 .admin-toggle:hover {
-  background: linear-gradient(145deg, #2a2a2a, #3a3a3a);
-  transform: scale(1.02);
-}
-
-.admin-toggle:active {
-  transform: scale(0.97);
+  background: var(--l-surface-2);
 }
 
 .toggle-status-btn {
   margin-top: 14px;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  letter-spacing: 1.2px;
-  cursor: pointer;
-  background: linear-gradient(145deg, #004080, #0066cc);
-  color: #fff;
-  transition: background 0.3s ease, transform 0.2s ease;
+  color: var(--l-accent);
+  border: 1px solid rgba(53, 196, 189, 0.45);
 }
 
-.delete-license-btn{
+.toggle-status-btn:hover {
+  background: rgba(53, 196, 189, 0.14);
+  border-color: var(--l-accent);
+}
+
+.delete-license-btn {
   margin-top: 8px;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  letter-spacing: 1.2px;
-  cursor: pointer;
-  background: linear-gradient(145deg, #800000, #cc0000);
-  color: #fff;
-  transition: background 0.3s ease, transform 0.2s ease;
+  color: var(--l-danger);
+  border: 1px solid rgba(229, 83, 75, 0.45);
 }
 
-.create-license-btn{
+.delete-license-btn:hover {
+  background: rgba(229, 83, 75, 0.14);
+  border-color: var(--l-danger);
+}
+
+/* BOTÓN PRINCIPAL "Crear licencia" */
+.create-license-btn {
   width: 100%;
   margin-top: 20px;
   padding: 12px 20px;
-  border: none;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: bold;
-  letter-spacing: 1.2px;
+  background: var(--l-accent-2);
+  border: 1px solid var(--l-accent);
+  border-radius: 8px;
+  color: var(--l-ink);
+  font-family: var(--l-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
-  background: linear-gradient(145deg, #006600, #00cc00);
-  color: #fff;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.add-form{
+.create-license-btn:hover {
+  background: var(--l-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(53, 196, 189, 0.25);
+}
+
+/* ===================== */
+/* FORMULARIO "AÑADIR" (modal con fondo atenuado) */
+.add-form {
   display: block;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
-  background: linear-gradient(145deg, #1c1c1c, #0f3f5c);
-  border-radius: 16px;
-  padding: 22px;
-  box-shadow: 0 12px 35px rgba(0,0,0,.45);
-  margin-top: 20px;
+  z-index: 1000;
+  width: min(92vw, 400px);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--l-surface);
+  border: 1px solid var(--l-border);
+  border-radius: 14px;
+  padding: 24px;
+  color: var(--l-text);
+  /* el "100vmax" oscurece todo lo de detrás sin tocar el HTML */
+  box-shadow: 0 0 0 100vmax rgba(4, 9, 12, 0.72), 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
-.add-form h3{
-  margin-bottom: 15px;
+.add-form h3 {
+  margin-bottom: 18px;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-.add-form input, .add-form textarea {
+.add-form input,
+.add-form textarea {
+  display: block;
   width: 100%;
-  padding: 10px;
+  padding: 10px 12px;
   margin-bottom: 12px;
-  border: none;
+  border: 1px solid var(--l-border);
   border-radius: 8px;
-  background: #1a1a1a;
-  color: #fff;
+  background: var(--l-bg);
+  color: var(--l-text);
+  font-family: var(--l-sans);
   font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.add-form input::placeholder,
+.add-form textarea::placeholder {
+  color: var(--l-muted);
+  opacity: 0.8;
+}
+
+.add-form input:focus,
+.add-form textarea:focus {
+  border-color: var(--l-accent);
+  box-shadow: 0 0 0 3px rgba(53, 196, 189, 0.15);
+}
+
+.form-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
 }
 
 .add-form button {
-  width: 100%;
-  margin-top: 5px;
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
+  flex: 1;
+  padding: 11px;
+  border-radius: 8px;
   font-size: 0.85rem;
-  font-weight: bold;
-  letter-spacing: 1.2px;
+  font-weight: 600;
   cursor: pointer;
-  background: linear-gradient(145deg, #004080, #0066cc);
-  color: #fff;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.add-form button:hover {
-  background: linear-gradient(145deg, #0066cc, #0080ff);
-  transform: scale(1.02);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .add-form button:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
-h1{
-  font-size: 1.8rem;
-  margin-bottom: 10px;
+.add-form .save-btn {
+  background: var(--l-accent-2);
+  border: 1px solid var(--l-accent);
+  color: var(--l-ink);
+}
+
+.add-form .save-btn:hover {
+  background: var(--l-accent);
+}
+
+.add-form .cancel-btn {
+  background: transparent;
+  border: 1px solid var(--l-border);
+  color: var(--l-muted);
+}
+
+.add-form .cancel-btn:hover {
+  border-color: var(--l-muted);
+  color: var(--l-text);
+}
+
+@media (max-width: 600px) {
+  .licenses-page {
+    padding: 24px 16px;
+  }
 }

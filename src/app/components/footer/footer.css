@@ -1,19 +1,53 @@
+/* ==========================================================
+   FOOTER · estilo "tactical" (azul marino + teal)
+   Usa las variables de styles.css si existen; si no, aplica
+   los valores por defecto de la derecha (var(--x, #valor)).
+   ========================================================== */
+:host {
+  display: block;
+  --f-border:  var(--border, #1d2f38);
+  --f-muted:   var(--text-muted, #8aa1a8);
+  --f-text:    var(--text, #e6eef0);
+  --f-accent:  var(--accent, #35c4bd);
+  --f-mono:    ui-monospace, 'JetBrains Mono', 'Cascadia Code', Consolas, 'Courier New', monospace;
+}
+
 /* FOOTER */
 footer {
   margin-top: auto;
-  background-color: #1c1c1c;
-  color: #bce7fd;
-  padding: clamp(16px, 2vw, 8px);
-  text-align: center;
-  font-size: clamp(0.8rem, 1vw, 1rem);
-  left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
-  z-index: 9999;
+  background-color: rgba(13, 26, 33, 0.92);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--f-border);
+  color: var(--f-muted);
+  padding: 16px;
+  text-align: center;
+  font-family: var(--f-mono);
+  font-size: clamp(0.72rem, 0.9vw, 0.85rem);
+  letter-spacing: 0.05em;
+}
+
+/* punto teal decorativo, como el de "versión local" de la captura */
+footer p::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 10px;
+  vertical-align: middle;
+  border-radius: 50%;
+  background: var(--f-accent);
+  box-shadow: 0 0 8px rgba(53, 196, 189, 0.7);
 }
 
 footer a {
-  color: #3b3d8a;
+  color: var(--f-accent);
   text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: var(--f-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

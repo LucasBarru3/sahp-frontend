@@ -1,20 +1,58 @@
+/* ==========================================================
+   ADMIN · estilo "tactical" (azul marino + teal)
+   Usa las variables de styles.css si existen; si no, aplica
+   los valores por defecto de la derecha (var(--x, #valor)).
+   ========================================================== */
+:host {
+  display: block;
+  --a-bg:       var(--bg, #0a1419);
+  --a-surface:  var(--surface, #0d1a21);
+  --a-border:   var(--border, #1d2f38);
+  --a-text:     var(--text, #e6eef0);
+  --a-muted:    var(--text-muted, #8aa1a8);
+  --a-accent:   var(--accent, #35c4bd);
+  --a-accent-2: var(--accent-strong, #2a9fa6);
+  --a-ink:      #04181b;                       /* texto oscuro sobre teal */
+  --a-mono:     ui-monospace, 'JetBrains Mono', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  --a-sans:     var(--font-body, 'Inter', Roboto, system-ui, -apple-system, 'Segoe UI', sans-serif);
+  font-family: var(--a-sans);
+}
+
 .admin-panel {
   max-width: 900px;
   margin: auto;
   padding: 20px;
+  color: var(--a-text);
+}
+
+.admin-panel h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
 }
 
 .subtitle {
-  color: #aaa;
-  margin-bottom: 20px;
+  color: var(--a-muted);
+  margin-bottom: 24px;
 }
 
+/* ---------- Tarjeta de usuario ---------- */
 .user-card {
-  background: rgba(0, 124, 191, 0.08);
-  border-left: 4px solid #1c1c1c;
-  border-radius: 6px;
-  padding: 15px;
-  margin-bottom: 15px;
+  background: var(--a-surface);
+  border: 1px solid var(--a-border);
+  border-left: 3px solid var(--a-accent);
+  border-radius: 10px;
+  padding: 15px 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.user-card:hover {
+  border-color: rgba(53, 196, 189, 0.45);
+  border-left-color: var(--a-accent);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
 }
 
 .user-view {
@@ -23,18 +61,45 @@
   align-items: center;
 }
 
-.user-id {
-  display: block;
-  font-size: 12px;
-  color: #888;
+.user-view strong {
+  color: var(--a-text);
+  font-weight: 600;
 }
 
+.user-id {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--a-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--a-muted);
+}
+
+/* ---------- Edición ---------- */
 .user-edit input {
+  display: block;
   width: 100%;
   margin-bottom: 10px;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--a-border);
+  background: var(--a-bg);
+  color: var(--a-text);
+  font-family: var(--a-sans);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.user-edit input::placeholder {
+  color: var(--a-muted);
+  opacity: 0.8;
+}
+
+.user-edit input:focus {
+  border-color: var(--a-accent);
+  box-shadow: 0 0 0 3px rgba(53, 196, 189, 0.15);
 }
 
 .actions {
@@ -42,33 +107,58 @@
   gap: 10px;
 }
 
-.edit-btn {
-  background: #1c1c1c;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
+/* ---------- Botones ---------- */
+.edit-btn,
+.save-btn,
+.cancel-btn {
+  padding: 7px 14px;
+  border-radius: 6px;
   cursor: pointer;
+  font-family: var(--a-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.edit-btn {
+  background: transparent;
+  color: var(--a-accent);
+  border: 1px solid rgba(53, 196, 189, 0.45);
+}
+
+.edit-btn:hover {
+  background: rgba(53, 196, 189, 0.14);
+  border-color: var(--a-accent);
 }
 
 .save-btn {
-  background: #2ecc71;
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 4px;
+  background: var(--a-accent-2);
+  color: var(--a-ink);
+  border: 1px solid var(--a-accent);
+}
+
+.save-btn:hover {
+  background: var(--a-accent);
+  transform: translateY(-1px);
 }
 
 .cancel-btn {
-  background: #e74c3c;
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 4px;
+  background: transparent;
+  color: var(--a-muted);
+  border: 1px solid var(--a-border);
+}
+
+.cancel-btn:hover {
+  border-color: var(--a-muted);
+  color: var(--a-text);
 }
 
 .hint {
-  font-size: 12px;
-  color: #777;
-  margin-top: 5px;
+  font-family: var(--a-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--a-muted);
+  margin-top: 10px;
 }
