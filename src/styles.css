@@ -31,27 +31,81 @@ body::-webkit-scrollbar {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.snackbar-progress {
+
+/* ==========================================================
+   SNACKBAR · TACTICAL (navy + teal)
+   ========================================================== */
+
+.snackbar-tactical {
+  --snack-bg: var(--surface, #0d1a21);
+  --snack-border: var(--border, #1d2f38);
+  --snack-text: var(--text, #e6eef0);
+  --snack-muted: var(--text-muted, #8aa1a8);
+  --snack-accent: var(--accent, #35c4bd);
+
+  /* Angular Material MDC */
+  --mdc-snackbar-container-color: var(--snack-bg);
+  --mdc-snackbar-supporting-text-color: var(--snack-text);
+  --mat-snack-bar-button-color: var(--snack-accent);
+  --mdc-snackbar-container-shape: 10px;
+
   position: relative;
   overflow: hidden;
+  border: 1px solid var(--snack-border);
+  border-radius: 10px;
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.45),
+    0 0 18px rgba(53, 196, 189, 0.07);
+  font-family: 'Orbitron', sans-serif;
 }
 
-.snackbar-progress::after {
+/* Fondo y texto del contenedor Material */
+.snackbar-tactical .mdc-snackbar__surface {
+  background-color: var(--snack-bg) !important;
+  border: 1px solid rgba(53, 196, 189, 0.2);
+  border-radius: 10px;
+}
+
+/* Mensaje */
+.snackbar-tactical .mdc-snackbar__label {
+  color: var(--snack-text);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.035em;
+  line-height: 1.6;
+}
+
+/* Botón de acción */
+.snackbar-tactical .mat-mdc-snack-bar-action {
+  color: var(--snack-accent) !important;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Hover del botón */
+.snackbar-tactical .mat-mdc-snack-bar-action:hover {
+  background: rgba(53, 196, 189, 0.12);
+}
+
+/* Barra de progreso */
+.snackbar-tactical.snackbar-progress::after {
   content: '';
   position: absolute;
+  z-index: 5;
   left: 0;
   bottom: 0;
-  height: 4px;
+  height: 3px;
   width: 100%;
-  background-color: #00527e; /* color de la barra */
+  background: var(--snack-accent);
+  box-shadow: 0 0 10px rgba(53, 196, 189, 0.55);
   animation: snackbar-progress 3s linear forwards;
+  pointer-events: none;
 }
 
 @keyframes snackbar-progress {
-  from {
-    width: 100%;
-  }
-  to {
-    width: 0%;
-  }
+  from { width: 100%; }
+  to { width: 0%; }
 }

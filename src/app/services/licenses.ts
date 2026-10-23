@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { ApiUrlService } from './apiurl';
 @Injectable({
   providedIn: 'root'
 })
 export class LicenseService {
 
   // Cambia esta URL por la de tu backend en Vercel
-  private apiUrl = 'https://sahp-backend.vercel.app/api/licenses';
+  private apiUrl = `${inject(ApiUrlService).getApiUrl()}/api/licenses`;
 
   constructor(private http: HttpClient) {}
 

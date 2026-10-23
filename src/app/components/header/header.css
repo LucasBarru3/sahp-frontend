@@ -216,3 +216,19 @@ nav a.active {
     margin-left: 0;
   }
 }
+
+.user-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--h-text);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.user-icon {
+  width: 17px;
+  height: 17px;
+  color: var(--h-accent);
+  flex-shrink: 0;
+}

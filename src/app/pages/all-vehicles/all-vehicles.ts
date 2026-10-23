@@ -238,9 +238,8 @@ export class AllVehiclesComponent implements OnInit, OnDestroy {
       this.translateService.instant('ALL_VEHICLES.SNACKBAR.CLOSE'),
       {
         duration: 3000,
-        horizontalPosition: 'center',
         verticalPosition: 'bottom',
-        panelClass: ['snackbar-progress']
+        panelClass: ['snackbar-tactical', 'snackbar-progress']
       }
     );
   }

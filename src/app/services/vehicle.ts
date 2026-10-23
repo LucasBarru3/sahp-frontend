@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { ApiUrlService } from './apiurl';
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
 
   // Cambia esta URL por la de tu backend en Vercel
-  private apiUrl = 'https://sahp-backend.vercel.app/api/vehicles';
+  private apiUrl = `${inject(ApiUrlService).getApiUrl()}/api/vehicles`;
 
   constructor(private http: HttpClient) {}
 

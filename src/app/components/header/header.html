@@ -73,9 +73,13 @@
     <!-- USER INFO -->
     <div class="user-box" *ngIf="isLoggedIn()">
       <span class="user-name">
-        👮 {{ getUsername() }}
+        <svg lucideShieldCheck class="user-icon"></svg>
+        {{ getUsername() }}
       </span>
-      <button class="logout-btn" (click)="logout()">{{ 'HEADER.LOGOUT' | translate }}</button>
+
+      <button class="logout-btn" (click)="logout()">
+        {{ 'HEADER.LOGOUT' | translate }}
+      </button>
     </div>
   </nav>
 </header>

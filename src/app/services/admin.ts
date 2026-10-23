@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { ApiUrlService } from './apiurl';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,7 @@ export class AdminService {
   }
 
   // Cambia esta URL por la de tu backend en Vercel
-  private apiUrl = 'https://sahp-backend.vercel.app/api/users';
+  private apiUrl = `${inject(ApiUrlService).getApiUrl()}/api/users`;
 
   constructor(private http: HttpClient) {}
 

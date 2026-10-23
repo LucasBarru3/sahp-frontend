@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { ApiUrlService } from './apiurl';
 @Injectable({
   providedIn: 'root'
 })
 export class ClassService {
 
-  private apiUrl = 'https://sahp-backend.vercel.app/api/classes';
+  private apiUrl = `${inject(ApiUrlService).getApiUrl()}/api/classes`;
 
   constructor(private http: HttpClient) {}
 
